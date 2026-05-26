@@ -1,10 +1,10 @@
 ﻿export default function Loading() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#fafafa]">
-      <div className="flex flex-col items-center gap-5">
-        <div className="h-14 w-14 animate-spin rounded-full border-4 border-blue-200 border-t-blue-600" />
-        <div className="text-lg font-medium text-gray-700">Loading AI Engineering Content...</div>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="text-center">
+        <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
+        <p className="text-gray-600 font-medium">Loading amazing content...</p>
       </div>
-    </main>
+    </div>
   )
 }

@@ -1,6 +1,4 @@
-﻿"use client"
-
-import { motion } from "framer-motion"
+"use client"
 
 export default function Page() {
   const vocab = [
@@ -17,7 +15,7 @@ export default function Page() {
   return (
     <main className="min-h-screen scroll-smooth bg-[#fafafa] bg-[linear-gradient(to_right,#e5e7eb22_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb22_1px,transparent_1px)] bg-[size:64px_64px] px-6 py-20">
       <div className="mx-auto max-w-6xl relative z-10">
-        
+
         {/* Sticky Navigation */}
         <div className="sticky top-6 z-50 mb-14 flex justify-center">
           <div className="flex flex-wrap items-center gap-3 rounded-full border border-white/70 bg-white/80 backdrop-blur-xl px-4 py-3 shadow-lg">
@@ -47,8 +45,19 @@ export default function Page() {
           <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-600">Tokenization, tensors, latent space, transformers, attention, and self-supervised learning systems.</p>
         </div>
 
+        {/* Reference Design Thumbnail */}
+        <div className="mb-10 flex justify-center">
+          <a href="/images/llm-ai.png" target="_blank" rel="noopener noreferrer" className="group relative block max-w-3xl w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-white/80 hover:scale-[1.02] transition-transform duration-300">
+            <img src="/images/llm-ai.png" alt="LLM Architecture Design Reference" className="w-full h-auto" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6">
+              <div className="bg-white/90 backdrop-blur-md rounded-full px-6 py-2 text-gray-900 font-semibold text-sm flex items-center gap-2">🔍 Click to view full design</div>
+            </div>
+            <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-white">Reference Design</div>
+          </a>
+        </div>
+
         {/* Panel 1: Tokenization */}
-        <motion.section initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="p1" className="rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+        <div id="p1" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
           <div className="relative mb-10 flex items-center gap-5">
             <div className="absolute right-0 top-[-40px] text-[140px] font-black leading-none text-gray-100">01</div>
             <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-blue-50 text-2xl font-semibold text-blue-600">01</div>
@@ -90,17 +99,10 @@ export default function Page() {
               </div>
             </div>
           </div>
-          <div className="mt-8 rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
-            <div className="grid gap-8 lg:grid-cols-3">
-              <div><p className="text-sm font-semibold text-[#11181C]">Raw Input</p><div className="mt-4 rounded-2xl bg-blue-50 p-5 text-center text-xl font-semibold text-blue-700">I Love AI</div></div>
-              <div className="flex items-center justify-center text-4xl text-gray-300">→</div>
-              <div><p className="text-sm font-semibold text-[#11181C]">Input IDs</p><div className="mt-4 rounded-2xl bg-green-50 p-5 text-center text-xl font-semibold text-green-700">[1, 2, 3]</div></div>
-            </div>
-          </div>
-        </motion.section>
+        </div>
 
         {/* Panel 2: Tensor Batching */}
-        <motion.section initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="p2" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+        <div id="p2" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
           <div className="relative mb-10 flex items-center gap-5">
             <div className="absolute right-0 top-[-40px] text-[140px] font-black leading-none text-gray-100">02</div>
             <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-violet-50 text-2xl font-semibold text-violet-600">02</div>
@@ -129,12 +131,12 @@ export default function Page() {
           <div className="mt-8 rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
             <p className="text-sm font-semibold text-[#11181C]">Attention Mask</p>
             <div className="mt-6 flex flex-wrap gap-3"><div className="rounded-xl bg-blue-50 px-5 py-3 font-medium text-blue-700">1</div><div className="rounded-xl bg-blue-50 px-5 py-3 font-medium text-blue-700">1</div><div className="rounded-xl bg-blue-50 px-5 py-3 font-medium text-blue-700">1</div><div className="rounded-xl bg-red-50 px-5 py-3 font-medium text-red-700">0</div></div>
-            <p className="mt-6 max-w-2xl text-sm leading-7 text-gray-600">1 means valid tokens. 0 blocks padding noise and prevents meaningless tensor calculations during attention computation.</p>
+            <p className="mt-6 max-w-2xl text-sm leading-7 text-gray-600">1 means valid tokens. 0 blocks padding noise and prevents meaningless tensor calculations.</p>
           </div>
-        </motion.section>
+        </div>
 
         {/* Panel 3: Latent Space */}
-        <motion.section initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="p3" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+        <div id="p3" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
           <div className="relative mb-10 flex items-center gap-5">
             <div className="absolute right-0 top-[-40px] text-[140px] font-black leading-none text-gray-100">03</div>
             <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-emerald-50 text-2xl font-semibold text-emerald-600">03</div>
@@ -170,10 +172,10 @@ export default function Page() {
               <p className="mt-8 text-sm leading-7 text-gray-600">Unlike older sequential systems, transformers process the entire context window simultaneously.</p>
             </div>
           </div>
-        </motion.section>
+        </div>
 
         {/* Panel 4: Multi-Head Attention */}
-        <motion.section initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="p4" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+        <div id="p4" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
           <div className="relative mb-10 flex items-center gap-5">
             <div className="absolute right-0 top-[-40px] text-[140px] font-black leading-none text-gray-100">04</div>
             <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-orange-50 text-2xl font-semibold text-orange-600">04</div>
@@ -214,10 +216,10 @@ export default function Page() {
               </div>
             </div>
           </div>
-        </motion.section>
+        </div>
 
         {/* Panel 5: Self-Supervised Learning */}
-        <motion.section initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="p5" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+        <div id="p5" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
           <div className="relative mb-10 flex items-center gap-5">
             <div className="absolute right-0 top-[-40px] text-[140px] font-black leading-none text-gray-100">05</div>
             <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-pink-50 text-2xl font-semibold text-pink-600">05</div>
@@ -272,11 +274,10 @@ export default function Page() {
               </div>
             </div>
           </footer>
-        </motion.section>
+        </div>
 
-      
         {/* Panel 6: Retrieval Systems */}
-        <motion.section initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="p6" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+        <div id="p6" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
           <div className="relative mb-10 flex items-center gap-5">
             <div className="absolute right-0 top-[-40px] text-[140px] font-black leading-none text-gray-100">06</div>
             <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-cyan-50 text-2xl font-semibold text-cyan-600">06</div>
@@ -324,16 +325,16 @@ export default function Page() {
               <div className="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-cyan-700">Reduces Hallucinations</div>
             </div>
           </footer>
-        </motion.section>
+        </div>
 
         {/* Panel 7: Optimization & Deployment */}
-        <motion.section initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="p7" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+        <div id="p7" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
           <div className="relative mb-10 flex items-center gap-5">
             <div className="absolute right-0 top-[-40px] text-[140px] font-black leading-none text-gray-100">07</div>
             <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-purple-50 text-2xl font-semibold text-purple-600">07</div>
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-purple-600">Production Ready</p>
-              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[#11181C]">LLM Optimization and Deployment</h2>
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[#11181C]">LLM Optimization &amp; Deployment</h2>
               <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600">Techniques to reduce latency, memory, and cost while maintaining quality.</p>
             </div>
           </div>
@@ -341,9 +342,9 @@ export default function Page() {
             <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
               <p className="text-sm font-semibold text-[#11181C]">Optimization Techniques</p>
               <div className="mt-6 space-y-3">
-                <div className="rounded-xl bg-blue-50 p-3"><p className="font-semibold">Quantization</p><p className="text-xs">FP32 to INT8/INT4 (4x smaller)</p></div>
-                <div className="rounded-xl bg-purple-50 p-3"><p className="font-semibold">Pruning</p><p className="text-xs">Remove unimportant weights (50 percent sparsity)</p></div>
-                <div className="rounded-xl bg-cyan-50 p-3"><p className="font-semibold">Distillation</p><p className="text-xs">Teacher to Student (10x smaller)</p></div>
+                <div className="rounded-xl bg-blue-50 p-3"><p className="font-semibold">Quantization</p><p className="text-xs">FP32 → INT8/INT4 (4x smaller)</p></div>
+                <div className="rounded-xl bg-purple-50 p-3"><p className="font-semibold">Pruning</p><p className="text-xs">Remove unimportant weights (50% sparsity)</p></div>
+                <div className="rounded-xl bg-cyan-50 p-3"><p className="font-semibold">Distillation</p><p className="text-xs">Teacher → Student (10x smaller)</p></div>
                 <div className="rounded-xl bg-orange-50 p-3"><p className="font-semibold">Flash Attention</p><p className="text-xs">IO-aware algorithm (2-4x faster)</p></div>
               </div>
             </div>
@@ -359,9 +360,9 @@ export default function Page() {
             </div>
           </div>
           <div className="mt-6 grid gap-3 md:grid-cols-3">
-            <div className="rounded-xl bg-white p-4 text-center shadow-sm"><div className="text-2xl">⏱️</div><p className="font-bold">TTFT</p><p className="text-xs text-gray-500">Target under 100ms</p></div>
-            <div className="rounded-xl bg-white p-4 text-center shadow-sm"><div className="text-2xl">⚡</div><p className="font-bold">Tokens per second</p><p className="text-xs text-gray-500">50-100 t/s</p></div>
-            <div className="rounded-xl bg-white p-4 text-center shadow-sm"><div className="text-2xl">💾</div><p className="font-bold">Memory</p><p className="text-xs text-gray-500">INT4 = 4GB per 7B parameters</p></div>
+            <div className="rounded-xl bg-white p-4 text-center shadow-sm"><div className="text-2xl">⏱️</div><p className="font-bold">TTFT</p><p className="text-xs text-gray-500">&lt; 100ms target</p></div>
+            <div className="rounded-xl bg-white p-4 text-center shadow-sm"><div className="text-2xl">⚡</div><p className="font-bold">Tokens/sec</p><p className="text-xs text-gray-500">50-100 t/s</p></div>
+            <div className="rounded-xl bg-white p-4 text-center shadow-sm"><div className="text-2xl">💾</div><p className="font-bold">Memory</p><p className="text-xs text-gray-500">INT4 = 4GB/7B</p></div>
           </div>
           <footer className="mt-6 rounded-3xl border border-purple-200 bg-gradient-to-r from-purple-50 to-pink-50 p-5">
             <div className="flex flex-col md:flex-row items-center justify-between gap-3">
@@ -369,16 +370,16 @@ export default function Page() {
               <div className="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-purple-700">Production Best Practices</div>
             </div>
           </footer>
-        </motion.section>
+        </div>
 
         {/* Panel 8: Security & Safety */}
-        <motion.section initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="p8" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+        <div id="p8" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
           <div className="relative mb-10 flex items-center gap-5">
             <div className="absolute right-0 top-[-40px] text-[140px] font-black leading-none text-gray-100">08</div>
             <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-red-50 text-2xl font-semibold text-red-600">08</div>
             <div>
-              <p className="text-sm font-medium uppercase tracking-[0.2em] text-red-600">Trust and Safety</p>
-              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[#11181C]">LLM Security and Safety</h2>
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-red-600">Trust &amp; Safety</p>
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[#11181C]">LLM Security &amp; Safety</h2>
               <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600">Protecting LLM systems from attacks and ensuring responsible AI deployment.</p>
             </div>
           </div>
@@ -386,386 +387,136 @@ export default function Page() {
             <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
               <p className="text-sm font-semibold text-[#11181C]">Common Attacks</p>
               <div className="mt-6 space-y-3">
-                <div className="rounded-xl border-l-4 border-red-500 bg-red-50/30 p-3">
-                  <p className="font-semibold text-red-700">Prompt Injection</p>
-                  <p className="text-xs text-gray-600">Malicious instructions that override system prompts</p>
-                </div>
-                <div className="rounded-xl border-l-4 border-orange-500 bg-orange-50/30 p-3">
-                  <p className="font-semibold text-orange-700">Jailbreaking</p>
-                  <p className="text-xs text-gray-600">Bypassing safety filters and content restrictions</p>
-                </div>
-                <div className="rounded-xl border-l-4 border-purple-500 bg-purple-50/30 p-3">
-                  <p className="font-semibold text-purple-700">Data Poisoning</p>
-                  <p className="text-xs text-gray-600">Malicious data during training or fine-tuning</p>
-                </div>
-                <div className="rounded-xl border-l-4 border-cyan-500 bg-cyan-50/30 p-3">
-                  <p className="font-semibold text-cyan-700">Model Inversion</p>
-                  <p className="text-xs text-gray-600">Extracting training data from model responses</p>
-                </div>
+                <div className="rounded-xl border-l-4 border-red-500 bg-red-50/30 p-3"><p className="font-semibold text-red-700">Prompt Injection</p><p className="text-xs">"Ignore previous instructions..."</p></div>
+                <div className="rounded-xl border-l-4 border-orange-500 bg-orange-50/30 p-3"><p className="font-semibold text-orange-700">Jailbreaking</p><p className="text-xs">Bypassing safety filters</p></div>
+                <div className="rounded-xl border-l-4 border-purple-500 bg-purple-50/30 p-3"><p className="font-semibold text-purple-700">Data Poisoning</p><p className="text-xs">Malicious training data</p></div>
               </div>
             </div>
             <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
               <p className="text-sm font-semibold text-[#11181C]">Defense Strategies</p>
               <div className="mt-6 space-y-3">
-                <div className="rounded-xl bg-green-50 p-3">
-                  <p className="font-semibold text-green-700">Input Filtering</p>
-                  <p className="text-xs text-gray-600">Sanitize and validate all user inputs</p>
-                </div>
-                <div className="rounded-xl bg-green-50 p-3">
-                  <p className="font-semibold text-green-700">Output Guardrails</p>
-                  <p className="text-xs text-gray-600">Validate and filter model responses</p>
-                </div>
-                <div className="rounded-xl bg-green-50 p-3">
-                  <p className="font-semibold text-green-700">Adversarial Testing</p>
-                  <p className="text-xs text-gray-600">Red teaming and penetration testing</p>
-                </div>
-                <div className="rounded-xl bg-green-50 p-3">
-                  <p className="font-semibold text-green-700">Rate Limiting and Auth</p>
-                  <p className="text-xs text-gray-600">API keys, JWT, OAuth, request quotas</p>
-                </div>
+                <div className="rounded-xl bg-green-50 p-3"><p className="font-semibold text-green-700">Input Filtering</p><p className="text-xs">Sanitize and validate inputs</p></div>
+                <div className="rounded-xl bg-green-50 p-3"><p className="font-semibold text-green-700">Output Guardrails</p><p className="text-xs">Filter model responses</p></div>
+                <div className="rounded-xl bg-green-50 p-3"><p className="font-semibold text-green-700">Rate Limiting</p><p className="text-xs">API keys, quotas, JWT</p></div>
               </div>
             </div>
           </div>
           <div className="mt-6 rounded-3xl bg-gradient-to-r from-blue-50 to-indigo-50 p-6">
             <p className="text-sm font-semibold text-center text-indigo-700">Responsible AI Principles</p>
             <div className="mt-3 grid grid-cols-5 gap-2 text-center text-xs">
-              <div><div className="text-xl">🎯</div><p>Fairness</p><p className="text-gray-500">No bias</p></div>
-              <div><div className="text-xl">📊</div><p>Transparency</p><p className="text-gray-500">Explainable</p></div>
-              <div><div className="text-xl">🔒</div><p>Privacy</p><p className="text-gray-500">Data protection</p></div>
-              <div><div className="text-xl">✅</div><p>Accountability</p><p className="text-gray-500">Human oversight</p></div>
-              <div><div className="text-xl">🔧</div><p>Robustness</p><p className="text-gray-500">Secure and reliable</p></div>
-            </div>
-          </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <div className="rounded-2xl border border-gray-200 bg-white p-5">
-              <p className="font-semibold text-gray-900">📊 Monitoring Metrics</p>
-              <div className="mt-3 space-y-2 text-sm">
-                <div className="flex justify-between"><span>Toxicity score</span><span className="text-red-600">Target under 0.1</span></div>
-                <div className="flex justify-between"><span>PII detection rate</span><span className="text-green-600">Target over 99 percent</span></div>
-                <div className="flex justify-between"><span>Jailbreak attempts</span><span className="text-orange-600">Blocked</span></div>
-              </div>
-            </div>
-            <div className="rounded-2xl border border-gray-200 bg-white p-5">
-              <p className="font-semibold text-gray-900">🔧 Security Tools</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                <span className="rounded-full bg-blue-100 px-3 py-1 text-xs">LangKit</span>
-                <span className="rounded-full bg-blue-100 px-3 py-1 text-xs">NeMo Guardrails</span>
-                <span className="rounded-full bg-blue-100 px-3 py-1 text-xs">Llama Guard</span>
-                <span className="rounded-full bg-blue-100 px-3 py-1 text-xs">Rebuff</span>
-                <span className="rounded-full bg-blue-100 px-3 py-1 text-xs">Protect AI</span>
-                <span className="rounded-full bg-blue-100 px-3 py-1 text-xs">Garak</span>
-              </div>
+              <div><div className="text-xl">🎯</div><p>Fairness</p></div>
+              <div><div className="text-xl">📊</div><p>Transparency</p></div>
+              <div><div className="text-xl">🔒</div><p>Privacy</p></div>
+              <div><div className="text-xl">✅</div><p>Accountability</p></div>
+              <div><div className="text-xl">🔧</div><p>Robustness</p></div>
             </div>
           </div>
           <footer className="mt-6 rounded-3xl border border-red-200 bg-gradient-to-r from-red-50 to-orange-50 p-5">
             <div className="flex flex-col md:flex-row items-center justify-between gap-3">
-              <div>
-                <p className="text-sm font-semibold text-red-700">Security is NOT Optional</p>
-                <p className="text-xs text-gray-600">Every LLM in production needs guardrails and monitoring</p>
-              </div>
+              <div><p className="text-sm font-semibold text-red-700">Security is NOT Optional</p></div>
               <div className="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-red-700">Trust = Adoption</div>
             </div>
           </footer>
-        </motion.section>
+        </div>
 
         {/* Panel 9: Evaluation & Monitoring */}
-        <motion.section initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="p9" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+        <div id="p9" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
           <div className="relative mb-10 flex items-center gap-5">
             <div className="absolute right-0 top-[-40px] text-[140px] font-black leading-none text-gray-100">09</div>
             <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-indigo-50 text-2xl font-semibold text-indigo-600">09</div>
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-indigo-600">Quality Assurance</p>
-              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[#11181C]">LLM Evaluation and Monitoring</h2>
-              <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600">Measuring, tracking, and improving LLM performance in production with comprehensive metrics.</p>
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[#11181C]">LLM Evaluation &amp; Monitoring</h2>
+              <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600">Measuring, tracking, and improving LLM performance in production.</p>
             </div>
           </div>
           <div className="grid gap-6 lg:grid-cols-2">
             <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
               <p className="text-sm font-semibold text-[#11181C]">Evaluation Metrics</p>
-              <div className="mt-6 space-y-3">
-                <div className="rounded-xl bg-white p-3 shadow-sm">
-                  <div className="flex justify-between items-center">
-                    <span className="font-semibold">ROUGE / BLEU</span>
-                    <span className="text-xs text-gray-500">N-gram overlap with references</span>
-                  </div>
-                </div>
-                <div className="rounded-xl bg-white p-3 shadow-sm">
-                  <div className="flex justify-between items-center">
-                    <span className="font-semibold">BERTScore</span>
-                    <span className="text-xs text-gray-500">Semantic similarity using BERT embeddings</span>
-                  </div>
-                </div>
-                <div className="rounded-xl bg-white p-3 shadow-sm">
-                  <div className="flex justify-between items-center">
-                    <span className="font-semibold">METEOR</span>
-                    <span className="text-xs text-gray-500">Synonyms and stemming aware</span>
-                  </div>
-                </div>
-                <div className="rounded-xl bg-white p-3 shadow-sm">
-                  <div className="flex justify-between items-center">
-                    <span className="font-semibold">LLM-as-Judge</span>
-                    <span className="text-xs text-gray-500">GPT-4 or Claude evaluating outputs</span>
-                  </div>
-                </div>
+              <div className="mt-6 space-y-2">
+                <div className="flex justify-between items-center rounded-xl bg-white p-3 shadow-sm"><span className="font-semibold">ROUGE / BLEU</span><span className="text-xs text-gray-500">N-gram overlap</span></div>
+                <div className="flex justify-between items-center rounded-xl bg-white p-3 shadow-sm"><span className="font-semibold">BERTScore</span><span className="text-xs text-gray-500">Semantic similarity</span></div>
+                <div className="flex justify-between items-center rounded-xl bg-white p-3 shadow-sm"><span className="font-semibold">LLM-as-Judge</span><span className="text-xs text-gray-500">GPT-4 evaluating outputs</span></div>
               </div>
             </div>
             <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
-              <p className="text-sm font-semibold text-[#11181C]">Production Monitoring Stack</p>
-              <div className="mt-6 space-y-3">
-                <div className="flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm">
-                  <div className="text-xl">📊</div>
-                  <div><p className="font-semibold">Prometheus + Grafana</p><p className="text-xs text-gray-500">Metrics, dashboards, alerts</p></div>
-                </div>
-                <div className="flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm">
-                  <div className="text-xl">🔍</div>
-                  <div><p className="font-semibold">LangSmith / LangFuse</p><p className="text-xs text-gray-500">LLM tracing and debugging</p></div>
-                </div>
-                <div className="flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm">
-                  <div className="text-xl">📝</div>
-                  <div><p className="font-semibold">Weights and Biases</p><p className="text-xs text-gray-500">Experiment tracking</p></div>
-                </div>
-                <div className="flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm">
-                  <div className="text-xl">⚠️</div>
-                  <div><p className="font-semibold">Sentry / Datadog</p><p className="text-xs text-gray-500">Error tracking and APM</p></div>
-                </div>
+              <p className="text-sm font-semibold text-[#11181C]">Monitoring Stack</p>
+              <div className="mt-6 space-y-2">
+                <div className="flex items-center gap-2 rounded-xl bg-white p-2 shadow-sm"><span className="text-lg">📊</span><span>Prometheus + Grafana</span></div>
+                <div className="flex items-center gap-2 rounded-xl bg-white p-2 shadow-sm"><span className="text-lg">🔍</span><span>LangSmith / LangFuse</span></div>
+                <div className="flex items-center gap-2 rounded-xl bg-white p-2 shadow-sm"><span className="text-lg">📝</span><span>Weights &amp; Biases</span></div>
               </div>
             </div>
           </div>
           <div className="mt-6 rounded-3xl bg-gradient-to-r from-indigo-50 to-blue-50 p-6">
             <p className="text-sm font-semibold text-center text-indigo-700">Industry Benchmarks (2026)</p>
-            <div className="mt-4 grid grid-cols-4 gap-4 text-center">
-              <div className="rounded-xl bg-white p-3">
-                <p className="font-bold text-indigo-600">MMLU</p>
-                <p className="text-2xl font-black">89.5%</p>
-                <p className="text-xs text-gray-500">GPT-5</p>
-              </div>
-              <div className="rounded-xl bg-white p-3">
-                <p className="font-bold text-indigo-600">GSM8K</p>
-                <p className="text-2xl font-black">96.2%</p>
-                <p className="text-xs text-gray-500">Math reasoning</p>
-              </div>
-              <div className="rounded-xl bg-white p-3">
-                <p className="font-bold text-indigo-600">HumanEval</p>
-                <p className="text-2xl font-black">88.7%</p>
-                <p className="text-xs text-gray-500">Code generation</p>
-              </div>
-              <div className="rounded-xl bg-white p-3">
-                <p className="font-bold text-indigo-600">HELM</p>
-                <p className="text-2xl font-black">86.3%</p>
-                <p className="text-xs text-gray-500">Holistic eval</p>
-              </div>
-            </div>
-          </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <div className="rounded-2xl border border-gray-200 bg-white p-4 text-center">
-              <div className="text-2xl mb-1">🎯</div>
-              <p className="font-semibold text-sm">Accuracy</p>
-              <p className="text-xs text-gray-500">Correctness of responses</p>
-            </div>
-            <div className="rounded-2xl border border-gray-200 bg-white p-4 text-center">
-              <div className="text-2xl mb-1">⚡</div>
-              <p className="font-semibold text-sm">Latency</p>
-              <p className="text-xs text-gray-500">Response time tracking</p>
-            </div>
-            <div className="rounded-2xl border border-gray-200 bg-white p-4 text-center">
-              <div className="text-2xl mb-1">💰</div>
-              <p className="font-semibold text-sm">Cost per token</p>
-              <p className="text-xs text-gray-500">API and compute costs</p>
+            <div className="mt-3 grid grid-cols-4 gap-3 text-center">
+              <div className="rounded-xl bg-white p-2"><p className="font-bold text-indigo-600">MMLU</p><p className="text-lg font-black">89.5%</p></div>
+              <div className="rounded-xl bg-white p-2"><p className="font-bold text-indigo-600">GSM8K</p><p className="text-lg font-black">96.2%</p></div>
+              <div className="rounded-xl bg-white p-2"><p className="font-bold text-indigo-600">HumanEval</p><p className="text-lg font-black">88.7%</p></div>
+              <div className="rounded-xl bg-white p-2"><p className="font-bold text-indigo-600">HELM</p><p className="text-lg font-black">86.3%</p></div>
             </div>
           </div>
           <footer className="mt-6 rounded-3xl border border-indigo-200 bg-gradient-to-r from-indigo-50 to-blue-50 p-5">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-3">
-              <div>
-                <p className="text-sm font-semibold text-indigo-700">Best Practice</p>
-                <p className="text-xs text-gray-600">Evaluate before deploy · Monitor during runtime · Continuously improve</p>
-              </div>
-              <div className="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-indigo-700">You cannot improve what you don't measure</div>
-            </div>
+            <div className="text-center"><p className="text-sm font-semibold text-indigo-700">You can't improve what you don't measure</p></div>
           </footer>
-        </motion.section>
+        </div>
 
-        {/* Panel 10: China vs US AI Race - May 2026 Special Edition */}
-        <motion.section initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="p10" className="mt-10 rounded-[32px] border-2 border-gradient-to-r from-red-500 to-blue-500 bg-gradient-to-br from-red-50 via-white to-blue-50 p-10 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+        {/* Panel 10: China vs US AI Race */}
+        <div id="p10" className="mt-10 rounded-[32px] border-2 border-gradient-to-r from-red-500 to-blue-500 bg-gradient-to-br from-red-50 via-white to-blue-50 p-10 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
           <div className="relative mb-10 flex items-center gap-5">
             <div className="absolute right-0 top-[-40px] text-[140px] font-black leading-none text-gray-200">10</div>
             <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-gradient-to-r from-red-500 to-blue-500 text-2xl font-semibold text-white shadow-lg">10</div>
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">Special Edition · May 2026</p>
               <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[#11181C]">The Global AI Race: China vs United States</h2>
-              <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600">Latest developments, strategic advantages, and what it means for the future of AI — updated May 2026.</p>
+              <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600">Latest developments, strategic advantages, and what it means for the future of AI.</p>
             </div>
           </div>
-          
           <div className="grid gap-6 lg:grid-cols-2">
-            {/* United States */}
-            <div className="rounded-3xl border border-blue-200 bg-gradient-to-br from-blue-50 to-white p-6 shadow-lg">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="text-5xl">🇺🇸</div>
-                <div>
-                  <h3 className="text-2xl font-bold text-blue-700">United States</h3>
-                  <p className="text-sm text-blue-600">Innovation and Scale Leader</p>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="rounded-xl bg-white p-3">
-                  <p className="font-semibold text-gray-900">🏆 Frontier Models (May 2026)</p>
-                  <div className="mt-2 space-y-1 text-sm">
-                    <div className="flex justify-between"><span>OpenAI GPT-5</span><span className="text-green-600 font-bold">Number 1 Overall</span></div>
-                    <div className="flex justify-between"><span>Google Gemini Ultra 2</span><span className="text-green-600">Number 2 Multimodal</span></div>
-                    <div className="flex justify-between"><span>Anthropic Claude 4</span><span className="text-green-600">Number 1 Safety</span></div>
-                    <div className="flex justify-between"><span>Meta Llama 4 (405B)</span><span className="text-green-600">Best Open Source</span></div>
-                    <div className="flex justify-between"><span>xAI Grok 3</span><span className="text-green-600">Real-time Data</span></div>
-                  </div>
-                </div>
-                <div className="rounded-xl bg-white p-3">
-                  <p className="font-semibold text-gray-900">💻 Hardware Dominance</p>
-                  <div className="mt-2 text-sm space-y-1">
-                    <p>• NVIDIA B200 "Blackwell Ultra" - 20 PetaFLOPS</p>
-                    <p>• TSMC 2nm process (2026)</p>
-                    <p>• 1.2 Million H100/B200 in US data centers</p>
-                    <p>• CHIPS Act delivering $52B in incentives</p>
-                  </div>
-                </div>
-                <div className="rounded-xl bg-white p-3">
-                  <p className="font-semibold text-gray-900">💰 Investment (2025-2026)</p>
-                  <div className="mt-2 text-sm">
-                    <p>• $150 Billion+ private AI investment</p>
-                    <p>• $30 Billion National AI Research Resource</p>
-                    <p>• 500+ AI unicorns</p>
-                  </div>
-                </div>
+            <div className="rounded-3xl border border-blue-200 bg-gradient-to-br from-blue-50 to-white p-6">
+              <div className="flex items-center gap-2 mb-4"><div className="text-4xl">🇺🇸</div><h3 className="text-xl font-bold text-blue-700">United States</h3></div>
+              <div className="space-y-2 text-sm">
+                <p><span className="font-semibold">Models:</span> GPT-5, Gemini Ultra 2, Claude 4, Llama 4</p>
+                <p><span className="font-semibold">Hardware:</span> NVIDIA B200, TSMC 2nm</p>
+                <p><span className="font-semibold">Investment:</span> $150B+ (2025-2026)</p>
+                <p><span className="font-semibold">Advantage:</span> Innovation &amp; Scale</p>
               </div>
             </div>
-            
-            {/* China */}
-            <div className="rounded-3xl border border-red-200 bg-gradient-to-br from-red-50 to-white p-6 shadow-lg">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="text-5xl">🇨🇳</div>
-                <div>
-                  <h3 className="text-2xl font-bold text-red-700">China</h3>
-                  <p className="text-sm text-red-600">Scale and Speed Leader</p>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="rounded-xl bg-white p-3">
-                  <p className="font-semibold text-gray-900">🏆 Frontier Models (May 2026)</p>
-                  <div className="mt-2 space-y-1 text-sm">
-                    <div className="flex justify-between"><span>DeepSeek-V4</span><span className="text-red-600 font-bold">Most Efficient</span></div>
-                    <div className="flex justify-between"><span>Alibaba Tongyi Qianwen 2.5</span><span className="text-red-600">Best Enterprise</span></div>
-                    <div className="flex justify-between"><span>ByteDance Doubao 2</span><span className="text-red-600">Best Consumer</span></div>
-                    <div className="flex justify-between"><span>Baidu ERNIE 5.0</span><span className="text-red-600">Best Chinese Language</span></div>
-                    <div className="flex justify-between"><span>Tencent Hunyuan 2</span><span className="text-red-600">Multimodal Leader</span></div>
-                  </div>
-                </div>
-                <div className="rounded-xl bg-white p-3">
-                  <p className="font-semibold text-gray-900">💻 Hardware Progress</p>
-                  <div className="mt-2 text-sm space-y-1">
-                    <p>• Huawei Ascend 920C - 1.5 PetaFLOPS (910C successor)</p>
-                    <p>• SMIC 5nm mass production (2026)</p>
-                    <p>• Domestic supply chain 80 percent self-sufficient</p>
-                    <p>• $50 Billion "Big Fund Phase IV" for AI chips</p>
-                  </div>
-                </div>
-                <div className="rounded-xl bg-white p-3">
-                  <p className="font-semibold text-gray-900">💰 Investment (2025-2026)</p>
-                  <div className="mt-2 text-sm">
-                    <p>• $100 Billion+ state-backed AI funding</p>
-                    <p>• 300+ AI unicorns</p>
-                    <p>• Fastest AI adoption rate globally</p>
-                  </div>
-                </div>
+            <div className="rounded-3xl border border-red-200 bg-gradient-to-br from-red-50 to-white p-6">
+              <div className="flex items-center gap-2 mb-4"><div className="text-4xl">🇨🇳</div><h3 className="text-xl font-bold text-red-700">China</h3></div>
+              <div className="space-y-2 text-sm">
+                <p><span className="font-semibold">Models:</span> DeepSeek-V4, Qwen 2.5, ERNIE 5.0</p>
+                <p><span className="font-semibold">Hardware:</span> Huawei Ascend 920C, SMIC 5nm</p>
+                <p><span className="font-semibold">Investment:</span> $100B+ (2025-2026)</p>
+                <p><span className="font-semibold">Advantage:</span> Speed &amp; Deployment</p>
               </div>
             </div>
           </div>
-          
-          {/* Head-to-Head Comparison */}
-          <div className="mt-6 rounded-3xl bg-white border border-gray-200 p-6 shadow-lg">
-            <p className="text-sm font-semibold text-center text-gray-900 mb-4">⚔️ Head-to-Head Comparison (May 2026) ⚔️</p>
-            <div className="grid gap-3 md:grid-cols-6">
-              <div className="text-center p-2 rounded-xl bg-blue-50"><p className="text-xs text-blue-600">Models</p><p className="font-bold text-blue-700">US Leads</p></div>
-              <div className="text-center p-2 rounded-xl bg-red-50"><p className="text-xs text-red-600">Deployment</p><p className="font-bold text-red-700">China Leads</p></div>
-              <div className="text-center p-2 rounded-xl bg-purple-50"><p className="text-xs text-purple-600">Hardware</p><p className="font-bold text-purple-700">US Leads</p></div>
-              <div className="text-center p-2 rounded-xl bg-green-50"><p className="text-xs text-green-600">Efficiency</p><p className="font-bold text-green-700">China Leads</p></div>
-              <div className="text-center p-2 rounded-xl bg-orange-50"><p className="text-xs text-orange-600">Open Source</p><p className="font-bold text-orange-700">Tie</p></div>
-              <div className="text-center p-2 rounded-xl bg-cyan-50"><p className="text-xs text-cyan-600">Investment</p><p className="font-bold text-cyan-700">US Leads</p></div>
+          <div className="mt-6 grid gap-3 md:grid-cols-4">
+            <div className="rounded-xl bg-white p-3 text-center"><p className="text-xs text-blue-600">Models</p><p className="font-bold text-blue-700">US Leads</p></div>
+            <div className="rounded-xl bg-white p-3 text-center"><p className="text-xs text-red-600">Deployment</p><p className="font-bold text-red-700">China Leads</p></div>
+            <div className="rounded-xl bg-white p-3 text-center"><p className="text-xs text-purple-600">Hardware</p><p className="font-bold text-purple-700">US Leads</p></div>
+            <div className="rounded-xl bg-white p-3 text-center"><p className="text-xs text-green-600">Efficiency</p><p className="font-bold text-green-700">China Leads</p></div>
+          </div>
+          <div className="mt-6 rounded-3xl bg-gradient-to-r from-yellow-50 to-orange-50 border border-orange-200 p-5">
+            <div className="flex items-center gap-2 mb-2"><span className="text-xl">📰</span><p className="font-bold text-orange-700">May 2026 Breaking</p><span className="rounded-full bg-red-500 px-2 py-0.5 text-xs text-white animate-pulse">NEW</span></div>
+            <div className="grid gap-2 md:grid-cols-2 text-sm">
+              <div className="rounded-lg bg-white p-2">🔴 DeepSeek-V4 releases with 1M context window</div>
+              <div className="rounded-lg bg-white p-2">🔵 OpenAI announces GPT-5 reasoning breakthrough</div>
+              <div className="rounded-lg bg-white p-2">🔴 Huawei unveils Ascend 920C with 1.5 PFLOPS</div>
+              <div className="rounded-lg bg-white p-2">🔵 Microsoft opens AI Sovereignty cloud in EU</div>
             </div>
           </div>
-          
-          {/* Key Battlegrounds */}
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <div className="rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 p-5 border border-purple-200">
-              <div className="text-3xl mb-2">🧬</div>
-              <p className="font-bold text-purple-700">AI Agents</p>
-              <p className="text-sm text-gray-600 mt-1">US: OpenAI Operator, Anthropic Computer Use</p>
-              <p className="text-sm text-gray-600">China: Alibaba MyEx, Baidu AgentBuilder</p>
-              <div className="mt-2 inline-block rounded-full bg-purple-200 px-2 py-1 text-xs font-semibold text-purple-700">US leads</div>
-            </div>
-            <div className="rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 p-5 border border-green-200">
-              <div className="text-3xl mb-2">🏭</div>
-              <p className="font-bold text-green-700">Manufacturing AI</p>
-              <p className="text-sm text-gray-600 mt-1">China dominates with 40 percent global AI-optimized factories</p>
-              <div className="mt-2 inline-block rounded-full bg-green-200 px-2 py-1 text-xs font-semibold text-green-700">China leads</div>
-            </div>
-            <div className="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 p-5 border border-blue-200">
-              <div className="text-3xl mb-2">⚕️</div>
-              <p className="font-bold text-blue-700">Healthcare AI</p>
-              <p className="text-sm text-gray-600 mt-1">US: FDA-approved AI diagnostics</p>
-              <p className="text-sm text-gray-600">China: Nationwide AI hospitals</p>
-              <div className="mt-2 inline-block rounded-full bg-blue-200 px-2 py-1 text-xs font-semibold text-blue-700">Competitive</div>
-            </div>
-          </div>
-          
-          {/* May 2026 Breaking News */}
-          <div className="mt-6 rounded-3xl bg-gradient-to-r from-yellow-50 to-orange-50 border border-orange-200 p-6">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-2xl">📰</span>
-              <p className="font-bold text-orange-700">May 2026 Breaking Developments</p>
-              <span className="rounded-full bg-red-500 px-2 py-0.5 text-xs text-white animate-pulse">NEW</span>
-            </div>
-            <div className="grid gap-3 md:grid-cols-2">
-              <div className="rounded-lg bg-white p-3 text-sm"><span className="font-semibold">🔴 China:</span> DeepSeek-V4 releases with 1M context window, surpassing GPT-4 on Chinese benchmarks</div>
-              <div className="rounded-lg bg-white p-3 text-sm"><span className="font-semibold">🔵 US:</span> OpenAI announces GPT-5 with reasoning breakthrough, 100x better at mathematical proofs</div>
-              <div className="rounded-lg bg-white p-3 text-sm"><span className="font-semibold">🔴 China:</span> Huawei unveils Ascend 920C with 1.5 PetaFLOPS, closing the gap with NVIDIA</div>
-              <div className="rounded-lg bg-white p-3 text-sm"><span className="font-semibold">🔵 US:</span> Microsoft opens first "AI Sovereignty" cloud in EU, countering China's Belt and Road AI initiative</div>
-            </div>
-          </div>
-          
-          {/* Strategic Implications */}
-          <div className="mt-6 rounded-3xl bg-gradient-to-r from-gray-900 to-gray-800 p-6 text-white shadow-xl">
-            <p className="text-sm font-semibold text-center uppercase tracking-wider text-gray-400 mb-4">Strategic Implications for 2026-2027</p>
-            <div className="grid gap-4 md:grid-cols-3">
-              <div className="text-center">
-                <div className="text-2xl mb-1">🌍</div>
-                <p className="font-semibold">Global Standards</p>
-                <p className="text-xs text-gray-300 mt-1">Two competing AI ecosystems emerging</p>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl mb-1">🔒</div>
-                <p className="font-semibold">Export Controls</p>
-                <p className="text-xs text-gray-300 mt-1">Tightening restrictions on both sides</p>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl mb-1">🤝</div>
-                <p className="font-semibold">Global South</p>
-                <p className="text-xs text-gray-300 mt-1">Both competing for influence and adoption</p>
-              </div>
-            </div>
-          </div>
-          
-          <footer className="mt-6 rounded-3xl border-2 border-gradient-to-r from-red-500 to-blue-500 bg-white p-5 shadow-lg">
+          <footer className="mt-6 rounded-3xl border-2 border-gradient-to-r from-red-500 to-blue-500 bg-white p-5">
             <div className="flex flex-col md:flex-row items-center justify-between gap-3">
-              <div>
-                <p className="text-sm font-medium uppercase tracking-[0.2em] bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">Expert Take - May 2026</p>
-                <p className="mt-1 text-lg font-semibold text-gray-900">"The race is now a sprint, not a marathon"</p>
-                <p className="text-xs text-gray-500 mt-1">Both nations are within 6-12 months of each other across most metrics</p>
-              </div>
-              <div className="rounded-xl bg-gradient-to-r from-red-500 to-blue-500 px-5 py-3 shadow-lg">
-                <p className="text-sm font-semibold text-white">Global AI Cold War 🔥</p>
-              </div>
+              <div><p className="text-sm font-semibold text-gray-900">"The race is now a sprint, not a marathon"</p><p className="text-xs text-gray-500">Both nations within 6-12 months of each other</p></div>
+              <div className="rounded-xl bg-gradient-to-r from-red-500 to-blue-500 px-4 py-2 text-sm font-semibold text-white">Global AI Cold War 🔥</div>
             </div>
           </footer>
-        </motion.section>
-</div>
+        </div>
+
+      </div>
     </main>
   )
 }
