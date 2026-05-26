@@ -1,4 +1,4 @@
-﻿import {
+import {
   Activity,
   Bot,
   CheckCircle2,
@@ -256,7 +256,7 @@ export default function WeekOnePage() {
 
       </div>
 
-    </main>
+    </div></main>
   )
 }
 

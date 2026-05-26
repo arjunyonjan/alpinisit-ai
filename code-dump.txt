@@ -1,3 +1,2947 @@
+=== C:\work\next-alpinist-ai-course\.vercel\project.json ===
+{"projectId":"prj_tTW4fgSAfey1c3igdmFr2lBmFVw8","orgId":"team_CIYn2CutxDxVwgLTOZarHuSs","projectName":"alpinisit-ai"}
+
+=== C:\work\next-alpinist-ai-course\app\llm-architecture-masterclass\page.tsx ===
+"use client"
+
+import { motion } from "framer-motion"
+
+export default function Page() {
+  const vocab = [
+    "0: <PAD>",
+    "1: I",
+    "2: Love",
+    "3: AI",
+    "4: My",
+    "5: Name",
+    "6: Is",
+    "7: Sagar",
+  ]
+
+  return (
+  <main className="min-h-screen scroll-smooth bg-[#fafafa] bg-[linear-gradient(to_right,#e5e7eb22_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb22_1px,transparent_1px)] bg-[size:64px_64px] px-6 py-20">
+
+    
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+
+        <div className="absolute left-[10%] top-[20%] h-2 w-2 animate-pulse rounded-full bg-blue-400"></div>
+
+        <div className="absolute left-[30%] top-[60%] h-3 w-3 animate-pulse rounded-full bg-violet-400"></div>
+
+        <div className="absolute right-[20%] top-[40%] h-2 w-2 animate-pulse rounded-full bg-pink-400"></div>
+
+        <div className="absolute bottom-[20%] left-[60%] h-3 w-3 animate-pulse rounded-full bg-emerald-400"></div>
+
+      </div>
+
+      <div className="pointer-events-none fixed inset-0 overflow-hidden">
+
+      <div className="absolute left-[-120px] top-[120px] h-[320px] w-[320px] rounded-full bg-blue-100/40 blur-3xl"></div>
+
+      <div className="absolute right-[-120px] top-[800px] h-[420px] w-[420px] rounded-full bg-violet-100/40 blur-3xl"></div>
+
+      <div className="absolute bottom-[120px] left-[20%] h-[280px] w-[280px] rounded-full bg-pink-100/30 blur-3xl"></div>
+
+    </div>
+
+    <div className="pointer-events-none fixed left-10 top-0 hidden h-full xl:block">
+
+      <div className="relative h-full w-[2px] bg-gradient-to-b from-blue-200 via-violet-200 to-pink-200">
+
+        <div className="absolute top-[180px] left-[-7px] h-4 w-4 rounded-full bg-blue-500 shadow-lg"></div>
+
+        <div className="absolute top-[780px] left-[-7px] h-4 w-4 rounded-full bg-violet-500 shadow-lg"></div>
+
+        <div className="absolute top-[1500px] left-[-7px] h-4 w-4 rounded-full bg-emerald-500 shadow-lg"></div>
+
+        <div className="absolute top-[2300px] left-[-7px] h-4 w-4 rounded-full bg-orange-500 shadow-lg"></div>
+
+        <div className="absolute top-[3100px] left-[-7px] h-4 w-4 rounded-full bg-pink-500 shadow-lg"></div>
+
+      </div>
+
+    </div>
+
+    <div className="mx-auto max-w-6xl relative z-10">
+
+        
+        <div className="sticky top-6 z-50 mb-14 flex justify-center">
+
+          <div className="flex flex-wrap items-center gap-3 rounded-full border border-white/70 bg-white/80 backdrop-blur-xl/80 px-4 py-3 shadow-lg backdrop-blur-xl">
+
+            <a href="#p1" className="rounded-full bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700">
+              01
+            </a>
+
+            <a href="#p2" className="rounded-full bg-violet-50 px-4 py-2 text-sm font-medium text-violet-700">
+              02
+            </a>
+
+            <a href="#p3" className="rounded-full bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-700">
+              03
+            </a>
+
+            <a href="#p4" className="rounded-full bg-orange-50 px-4 py-2 text-sm font-medium text-orange-700">
+              04
+            </a>
+
+            <a href="#p5" className="rounded-full bg-pink-50 px-4 py-2 text-sm font-medium text-pink-700">
+              05
+            </a>
+
+          </div>
+
+        </div>
+
+        <div className="mb-20 rounded-[40px] border border-white/60 bg-white/70 p-10 shadow-2xl backdrop-blur-xl">
+          <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-blue-600">
+            LLM Systems
+          </p>
+
+          
+        <div className="mb-10 flex gap-3">
+
+          <div className="h-3 w-3 animate-pulse rounded-full bg-blue-500"></div>
+
+          <div className="h-3 w-3 animate-pulse rounded-full bg-violet-500"></div>
+
+          <div className="h-3 w-3 animate-pulse rounded-full bg-pink-500"></div>
+
+          <div className="h-3 w-3 animate-pulse rounded-full bg-emerald-500"></div>
+
+        </div>
+
+          <h1 className="max-w-5xl text-5xl font-semibold tracking-tight text-[#11181C]">
+            Modern LLM Architecture
+          </h1>
+
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-600">
+            Tokenization, tensors, latent space, transformers,
+            attention, and self-supervised learning systems.
+          </p>
+        </div>
+
+        <motion.section initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="p1" className="rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+
+          <div className="relative mb-10 flex items-center gap-5">
+
+            <div className="absolute right-0 top-[-40px] text-[140px] font-black leading-none text-gray-100">01</div><div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-blue-50 text-2xl font-semibold text-blue-600">
+              01
+            </div>
+
+            <div>
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-600">
+                Processing Text
+              </p>
+
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[#11181C]">
+                Tokenization and OpenTokenizer Core
+              </h2>
+
+              <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600">
+                Raw language gets transformed into structured token IDs
+                that neural networks can mathematically process.
+              </p>
+            </div>
+
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-3">
+
+            <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-6">
+              <p className="text-sm font-semibold text-[#11181C]">
+                Word-Level Tokenizer
+              </p>
+
+              <p className="mt-2 text-sm text-gray-500">
+                Traditional splitting
+              </p>
+
+              <div className="mt-8 rounded-2xl bg-white p-4 text-center text-lg font-medium shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                unhappy people
+              </div>
+
+              <div className="mt-6 text-center text-2xl text-gray-300">
+                ?
+              </div>
+
+              <div className="mt-6 flex gap-3">
+                <div className="flex-1 rounded-2xl bg-white p-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                  unhappy
+                </div>
+
+                <div className="flex-1 rounded-2xl bg-white p-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                  people
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-6">
+              <p className="text-sm font-semibold text-[#11181C]">
+                Sub-Word Tokenizer
+              </p>
+
+              <p className="mt-2 text-sm text-gray-500">
+                Advanced WordPiece system
+              </p>
+
+              <div className="mt-8 rounded-2xl bg-white p-4 text-center text-lg font-medium shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                unhappy people
+              </div>
+
+              <div className="mt-6 text-center text-2xl text-gray-300">
+                ?
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <div className="rounded-2xl bg-green-50 px-4 py-3 font-medium text-green-700">
+                  [un]
+                </div>
+
+                <div className="rounded-2xl bg-violet-50 px-4 py-3 font-medium text-violet-700">
+                  [##happy]
+                </div>
+
+                <div className="rounded-2xl bg-blue-50 px-4 py-3 font-medium text-blue-700">
+                  [people]
+                </div>
+              </div>
+
+              <p className="mt-6 text-xs text-gray-500">
+                ## means continuation token
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-6">
+
+              <p className="text-sm font-semibold text-[#11181C]">
+                Vocabulary Collection
+              </p>
+
+              <div className="mt-6 space-y-3">
+
+                {vocab.map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-2xl bg-white px-4 py-3 text-sm shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100"
+                  >
+                    {item}
+                  </div>
+                ))}
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div className="mt-8 rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
+
+            <div className="grid gap-8 lg:grid-cols-3">
+
+              <div>
+                <p className="text-sm font-semibold text-[#11181C]">
+                  Raw Input
+                </p>
+
+                <div className="mt-4 rounded-2xl bg-blue-50 p-5 text-center text-xl font-semibold text-blue-700">
+                  I Love AI
+                </div>
+              </div>
+
+              <div className="flex items-center justify-center text-4xl text-gray-300">
+                ?
+              </div>
+
+              <div>
+                <p className="text-sm font-semibold text-[#11181C]">
+                  Input IDs
+                </p>
+
+                <div className="mt-4 rounded-2xl bg-green-50 p-5 text-center text-xl font-semibold text-green-700">
+                  [1, 2, 3]
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </motion.section>
+
+      </div>
+    
+        <motion.section initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="p2" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100 sticky top-24">
+
+          <div className="relative mb-10 flex items-center gap-5">
+
+            <div className="absolute right-0 top-[-40px] text-[140px] font-black leading-none text-gray-100">02</div><div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-violet-50 text-2xl font-semibold text-violet-600">
+              02
+            </div>
+
+            <div>
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-violet-600">
+                Batch Processing
+              </p>
+
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[#11181C]">
+                Tensor Alignment and Batching
+              </h2>
+
+              <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600">
+                Neural networks process uniform tensor shapes,
+                so shorter sequences require padding alignment.
+              </p>
+            </div>
+
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+
+            <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-6">
+
+              <p className="text-sm font-semibold text-[#11181C]">
+                Variable Length Sequences
+              </p>
+
+              <div className="mt-6 space-y-4">
+
+                <div className="flex items-center gap-3">
+                  <div className="w-20 text-sm text-gray-500">
+                    Row A
+                  </div>
+
+                  <div className="flex gap-2">
+                    <div className="rounded-xl bg-white px-4 py-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                      1
+                    </div>
+
+                    <div className="rounded-xl bg-white px-4 py-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                      2
+                    </div>
+
+                    <div className="rounded-xl bg-white px-4 py-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                      3
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-20 text-sm text-gray-500">
+                    Row B
+                  </div>
+
+                  <div className="flex gap-2">
+                    <div className="rounded-xl bg-white px-4 py-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                      4
+                    </div>
+
+                    <div className="rounded-xl bg-white px-4 py-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                      5
+                    </div>
+
+                    <div className="rounded-xl bg-white px-4 py-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                      6
+                    </div>
+
+                    <div className="rounded-xl bg-white px-4 py-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                      7
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-6">
+
+              <p className="text-sm font-semibold text-[#11181C]">
+                Padded Tensor
+              </p>
+
+              <div className="mt-6 space-y-4">
+
+                <div className="flex items-center gap-3">
+                  <div className="w-20 text-sm text-gray-500">
+                    Row A
+                  </div>
+
+                  <div className="flex gap-2">
+                    <div className="rounded-xl bg-green-50 px-4 py-2 font-medium text-green-700">
+                      1
+                    </div>
+
+                    <div className="rounded-xl bg-green-50 px-4 py-2 font-medium text-green-700">
+                      2
+                    </div>
+
+                    <div className="rounded-xl bg-green-50 px-4 py-2 font-medium text-green-700">
+                      3
+                    </div>
+
+                    <div className="rounded-xl bg-gray-200 px-4 py-2 font-medium text-gray-500">
+                      0
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-20 text-sm text-gray-500">
+                    Row B
+                  </div>
+
+                  <div className="flex gap-2">
+                    <div className="rounded-xl bg-green-50 px-4 py-2 font-medium text-green-700">
+                      4
+                    </div>
+
+                    <div className="rounded-xl bg-green-50 px-4 py-2 font-medium text-green-700">
+                      5
+                    </div>
+
+                    <div className="rounded-xl bg-green-50 px-4 py-2 font-medium text-green-700">
+                      6
+                    </div>
+
+                    <div className="rounded-xl bg-green-50 px-4 py-2 font-medium text-green-700">
+                      7
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div className="mt-8 rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
+
+            <p className="text-sm font-semibold text-[#11181C]">
+              Attention Mask
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+
+              <div className="rounded-xl bg-blue-50 px-5 py-3 font-medium text-blue-700">
+                1
+              </div>
+
+              <div className="rounded-xl bg-blue-50 px-5 py-3 font-medium text-blue-700">
+                1
+              </div>
+
+              <div className="rounded-xl bg-blue-50 px-5 py-3 font-medium text-blue-700">
+                1
+              </div>
+
+              <div className="rounded-xl bg-red-50 px-5 py-3 font-medium text-red-700">
+                0
+              </div>
+
+            </div>
+
+            <p className="mt-6 max-w-2xl text-sm leading-7 text-gray-600">
+              1 means valid tokens. 0 blocks padding noise and prevents
+              meaningless tensor calculations during attention computation.
+            </p>
+
+          </div>
+
+        </motion.section>
+
+    
+        <motion.section initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="p3" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100 sticky top-24">
+
+          <div className="relative mb-10 flex items-center gap-5">
+
+            <div className="absolute right-0 top-[-40px] text-[140px] font-black leading-none text-gray-100">03</div><div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-emerald-50 text-2xl font-semibold text-emerald-600">
+              03
+            </div>
+
+            <div>
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-emerald-600">
+                Semantic Geometry
+              </p>
+
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[#11181C]">
+                Latent Space and Vector Calculation
+              </h2>
+
+              <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600">
+                Words become vectors positioned inside a massive
+                mathematical semantic space.
+              </p>
+            </div>
+
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+
+            <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
+
+              <p className="text-sm font-semibold text-[#11181C]">
+                Semantic Vector Relationship
+              </p>
+
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-center">
+
+                <div className="rounded-2xl bg-blue-50 px-5 py-4 font-semibold text-blue-700 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                  King
+                </div>
+
+                <div className="text-3xl text-gray-300">
+                  -
+                </div>
+
+                <div className="rounded-2xl bg-gray-100 px-5 py-4 font-semibold text-gray-700 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                  Man
+                </div>
+
+                <div className="text-3xl text-gray-300">
+                  +
+                </div>
+
+                <div className="rounded-2xl bg-pink-50 px-5 py-4 font-semibold text-pink-700 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                  Woman
+                </div>
+
+                <div className="text-3xl text-gray-300">
+                  =
+                </div>
+
+                <div className="rounded-2xl bg-violet-50 px-5 py-4 font-semibold text-violet-700 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                  Queen
+                </div>
+
+              </div>
+
+              <div className="mt-10 rounded-3xl bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+
+                <div className="grid gap-4 md:grid-cols-3">
+
+                  <div className="rounded-2xl border border-gray-100 p-4">
+                    <p className="text-xs uppercase tracking-[0.2em] text-gray-400">
+                      Dimensions
+                    </p>
+
+                    <p className="mt-3 text-sm font-semibold text-[#11181C]">
+                      768D Hyper-Space
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-gray-100 p-4">
+                    <p className="text-xs uppercase tracking-[0.2em] text-gray-400">
+                      Metric
+                    </p>
+
+                    <p className="mt-3 text-sm font-semibold text-[#11181C]">
+                      Cosine Similarity
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-gray-100 p-4">
+                    <p className="text-xs uppercase tracking-[0.2em] text-gray-400">
+                      Optimization
+                    </p>
+
+                    <p className="mt-3 text-sm font-semibold text-[#11181C]">
+                      Semantic Closeness
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
+
+              <p className="text-sm font-semibold text-[#11181C]">
+                Transformer Context View
+              </p>
+
+              <div className="mt-8 rounded-3xl bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+
+                <div className="flex items-center justify-between gap-4">
+
+                  <div className="flex flex-col items-center gap-4">
+
+                    <div className="rounded-2xl bg-blue-50 px-5 py-3 font-medium text-blue-700">
+                      I
+                    </div>
+
+                    <div className="h-10 w-[2px] bg-gray-200"></div>
+
+                    <div className="rounded-2xl bg-blue-50 px-5 py-3 font-medium text-blue-700">
+                      Love
+                    </div>
+
+                    <div className="h-10 w-[2px] bg-gray-200"></div>
+
+                    <div className="rounded-2xl bg-blue-50 px-5 py-3 font-medium text-blue-700">
+                      AI
+                    </div>
+
+                  </div>
+
+                  <div className="text-center">
+
+                    <div className="rounded-3xl border border-violet-200 bg-violet-50 px-8 py-10">
+
+                      <p className="text-xs uppercase tracking-[0.2em] text-violet-500">
+                        Transformer
+                      </p>
+
+                      <p className="mt-4 text-lg font-semibold text-violet-700">
+                        Sees Entire Sequence
+                      </p>
+
+                    </div>
+
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-3">
+
+                    <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-blue-100 to-violet-100"></div>
+
+                    <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-violet-100 to-pink-100"></div>
+
+                    <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-pink-100 to-orange-100"></div>
+
+                    <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-green-100 to-emerald-100"></div>
+
+                    <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-cyan-100 to-blue-100"></div>
+
+                    <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-yellow-100 to-orange-100"></div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <p className="mt-8 text-sm leading-7 text-gray-600">
+                Unlike older sequential systems, transformers process
+                the entire context window simultaneously.
+              </p>
+
+            </div>
+
+          </div>
+
+        </motion.section>
+
+    
+        <motion.section initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="p4" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100 sticky top-24">
+
+          <div className="relative mb-10 flex items-center gap-5">
+
+            <div className="absolute right-0 top-[-40px] text-[140px] font-black leading-none text-gray-100">04</div><div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-orange-50 text-2xl font-semibold text-orange-600">
+              04
+            </div>
+
+            <div>
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-orange-600">
+                Transformer Core
+              </p>
+
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[#11181C]">
+                Multi-Head Self-Attention and Matrix Math
+              </h2>
+
+              <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600">
+                Transformers learn relationships between tokens using
+                parallel attention heads and tensor matrix operations.
+              </p>
+            </div>
+
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+
+            <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
+
+              <p className="text-sm font-semibold text-[#11181C]">
+                Input Embedding Pipeline
+              </p>
+
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+
+                <div className="rounded-2xl bg-blue-50 px-5 py-4 text-sm font-semibold text-blue-700 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                  Token Embedding
+                </div>
+
+                <div className="text-3xl text-gray-300">
+                  +
+                </div>
+
+                <div className="rounded-2xl bg-violet-50 px-5 py-4 text-sm font-semibold text-violet-700 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                  Positional Encoding
+                </div>
+
+                <div className="text-3xl text-gray-300">
+                  ?
+                </div>
+
+                <div className="rounded-2xl bg-emerald-50 px-5 py-4 text-sm font-semibold text-emerald-700 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+                  Dense Vector
+                </div>
+
+              </div>
+
+              <div className="mt-10 rounded-3xl bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+
+                <div className="flex flex-col items-center gap-6">
+
+                  <div className="rounded-3xl border border-orange-200 bg-orange-50 px-10 py-8 text-center">
+
+                    <p className="text-xs uppercase tracking-[0.2em] text-orange-500">
+                      Core Neural Layer
+                    </p>
+
+                    <p className="mt-3 text-xl font-semibold text-orange-700">
+                      Transformer Block
+                    </p>
+
+                  </div>
+
+                  <div className="grid w-full gap-4 md:grid-cols-2">
+
+                    <div className="rounded-2xl border border-gray-100 bg-[#fafafa] p-5">
+                      <p className="text-sm font-semibold text-[#11181C]">
+                        Feed Forward Network
+                      </p>
+
+                      <p className="mt-2 text-sm leading-6 text-gray-600">
+                        Non-linear neural transformation layers.
+                      </p>
+                    </div>
+
+                    <div className="rounded-2xl border border-gray-100 bg-[#fafafa] p-5">
+                      <p className="text-sm font-semibold text-[#11181C]">
+                        Add and Normalize
+                      </p>
+
+                      <p className="mt-2 text-sm leading-6 text-gray-600">
+                        Residual stability and gradient preservation.
+                      </p>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
+
+              <p className="text-sm font-semibold text-[#11181C]">
+                Multi-Head Attention System
+              </p>
+
+              <div className="mt-8 grid gap-4">
+
+                <div className="rounded-2xl bg-blue-50 p-5">
+                  <p className="text-sm font-semibold text-blue-700">
+                    Head 1 — Syntax
+                  </p>
+                </div>
+
+                <div className="rounded-2xl bg-violet-50 p-5">
+                  <p className="text-sm font-semibold text-violet-700">
+                    Head 2 — Pronouns
+                  </p>
+                </div>
+
+                <div className="rounded-2xl bg-pink-50 p-5">
+                  <p className="text-sm font-semibold text-pink-700">
+                    Head 3 — Adjectives
+                  </p>
+                </div>
+
+              </div>
+
+              <div className="mt-10 rounded-3xl bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+
+                <p className="text-sm font-semibold text-[#11181C]">
+                  Query / Key / Value Computation
+                </p>
+
+                <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+
+                  <div className="rounded-2xl bg-cyan-50 px-5 py-4 font-semibold text-cyan-700">
+                    Q
+                  </div>
+
+                  <div className="rounded-2xl bg-orange-50 px-5 py-4 font-semibold text-orange-700">
+                    K
+                  </div>
+
+                  <div className="rounded-2xl bg-emerald-50 px-5 py-4 font-semibold text-emerald-700">
+                    V
+                  </div>
+
+                </div>
+
+                <div className="mt-10 overflow-x-auto rounded-2xl bg-[#11181C] p-6">
+
+                  <code className="text-sm leading-8 text-green-400">
+                    Attention(Q,K,V) = softmax(QK? / vd?)V
+                  </code>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </motion.section>
+
+    
+        <motion.section initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="p5" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100 sticky top-24">
+
+          <div className="relative mb-10 flex items-center gap-5">
+
+            <div className="absolute right-0 top-[-40px] text-[140px] font-black leading-none text-gray-100">05</div><div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-pink-50 text-2xl font-semibold text-pink-600">
+              05
+            </div>
+
+            <div>
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-pink-600">
+                Foundational Training
+              </p>
+
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[#11181C]">
+                Self-Supervised Learning Architectures
+              </h2>
+
+              <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600">
+                Modern LLMs learn language patterns through massive-scale
+                self-supervised training objectives.
+              </p>
+            </div>
+
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+
+            <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
+
+              <div className="flex items-center justify-between">
+
+                <div>
+                  <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-600">
+                    Encoder Pipeline
+                  </p>
+
+                  <h3 className="mt-2 text-2xl font-semibold text-[#11181C]">
+                    BERT
+                  </h3>
+                </div>
+
+                <div className="rounded-2xl bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700">
+                  Discriminative
+                </div>
+
+              </div>
+
+              <div className="mt-8 rounded-3xl bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+
+                <p className="text-sm font-semibold text-[#11181C]">
+                  Masked LM Bi-Directional Learning
+                </p>
+
+                <div className="mt-8 flex flex-wrap items-center gap-4">
+
+                  <div className="rounded-2xl bg-gray-100 px-5 py-3 font-medium">
+                    I
+                  </div>
+
+                  <div className="rounded-2xl bg-yellow-100 px-5 py-3 font-semibold text-yellow-800">
+                    [MASK]
+                  </div>
+
+                  <div className="rounded-2xl bg-gray-100 px-5 py-3 font-medium">
+                    AI
+                  </div>
+
+                  <div className="text-3xl text-gray-300">
+                    ?
+                  </div>
+
+                  <div className="rounded-2xl bg-blue-50 px-5 py-3 font-semibold text-blue-700">
+                    Love
+                  </div>
+
+                </div>
+
+                <p className="mt-8 text-sm leading-7 text-gray-600">
+                  BERT predicts missing masked words using left and right context simultaneously.
+                </p>
+
+              </div>
+
+            </div>
+
+            <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
+
+              <div className="flex items-center justify-between">
+
+                <div>
+                  <p className="text-sm font-medium uppercase tracking-[0.2em] text-violet-600">
+                    Decoder Pipeline
+                  </p>
+
+                  <h3 className="mt-2 text-2xl font-semibold text-[#11181C]">
+                    GPT
+                  </h3>
+                </div>
+
+                <div className="rounded-2xl bg-violet-50 px-4 py-2 text-sm font-medium text-violet-700">
+                  Generative
+                </div>
+
+              </div>
+
+              <div className="mt-8 rounded-3xl bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+
+                <p className="text-sm font-semibold text-[#11181C]">
+                  Causal Auto-Regressive Generation
+                </p>
+
+                <div className="mt-8 space-y-5">
+
+                  <div className="rounded-2xl border border-gray-100 p-5">
+
+                    <p className="text-xs uppercase tracking-[0.2em] text-gray-400">
+                      Step 1
+                    </p>
+
+                    <p className="mt-3 text-sm font-medium text-[#11181C]">
+                      &lt;SOS&gt; ? I
+                    </p>
+
+                  </div>
+
+                  <div className="rounded-2xl border border-gray-100 p-5">
+
+                    <p className="text-xs uppercase tracking-[0.2em] text-gray-400">
+                      Step 2
+                    </p>
+
+                    <p className="mt-3 text-sm font-medium text-[#11181C]">
+                      &lt;SOS&gt; I ? Love
+                    </p>
+
+                  </div>
+
+                  <div className="rounded-2xl border border-gray-100 p-5">
+
+                    <p className="text-xs uppercase tracking-[0.2em] text-gray-400">
+                      Step 3
+                    </p>
+
+                    <p className="mt-3 text-sm font-medium text-[#11181C]">
+                      &lt;SOS&gt; I Love ? AI ? &lt;EOS&gt;
+                    </p>
+
+                  </div>
+
+                </div>
+
+                <p className="mt-8 text-sm leading-7 text-gray-600">
+                  GPT predicts the next token sequentially from left to right.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <footer className="mt-12 rounded-3xl relative overflow-hidden relative overflow-hidden border border-gray-200 bg-[#fcfcfc] p-8">
+
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-100/20 via-violet-100/20 to-pink-100/20"></div><div className="relative flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+
+              <div>
+
+                <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-400">
+                  Ecosystem
+                </p>
+
+                <h3 className="mt-3 text-2xl font-semibold tracking-tight text-[#11181C]">
+                  Hugging Face + Transformers + PyTorch
+                </h3>
+
+              </div>
+
+              <div className="rounded-3xl border border-orange-200 bg-orange-50 px-6 py-4">
+
+                <p className="text-sm font-semibold text-orange-700">
+                  Foundation Model Infrastructure
+                </p>
+
+              </div>
+
+            </div>
+
+          </footer>
+
+        </motion.section>
+
+    
+        <motion.section initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="p2" className="mt-10 rounded-[32px] border border-white/70 bg-white/80 backdrop-blur-xl p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100 sticky top-24">
+
+          <div className="relative mb-10 flex items-center gap-5">
+
+            <div className="absolute right-0 top-[-40px] text-[140px] font-black leading-none text-gray-100">01</div><div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-pink-50 text-2xl font-semibold text-pink-600">
+              05
+            </div>
+
+            <div>
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-pink-600">
+                Foundational Training
+              </p>
+
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[#11181C]">
+                Self-Supervised Learning Architectures
+              </h2>
+
+              <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600">
+                Modern LLMs learn language patterns through massive-scale
+                self-supervised training objectives.
+              </p>
+            </div>
+
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+
+            <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
+
+              <div className="flex items-center justify-between">
+
+                <div>
+                  <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-600">
+                    Encoder Pipeline
+                  </p>
+
+                  <h3 className="mt-2 text-2xl font-semibold text-[#11181C]">
+                    BERT
+                  </h3>
+                </div>
+
+                <div className="rounded-2xl bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700">
+                  Discriminative
+                </div>
+
+              </div>
+
+              <div className="mt-8 rounded-3xl bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+
+                <p className="text-sm font-semibold text-[#11181C]">
+                  Masked LM Bi-Directional Learning
+                </p>
+
+                <div className="mt-8 flex flex-wrap items-center gap-4">
+
+                  <div className="rounded-2xl bg-gray-100 px-5 py-3 font-medium">
+                    I
+                  </div>
+
+                  <div className="rounded-2xl bg-yellow-100 px-5 py-3 font-semibold text-yellow-800">
+                    [MASK]
+                  </div>
+
+                  <div className="rounded-2xl bg-gray-100 px-5 py-3 font-medium">
+                    AI
+                  </div>
+
+                  <div className="text-3xl text-gray-300">
+                    ?
+                  </div>
+
+                  <div className="rounded-2xl bg-blue-50 px-5 py-3 font-semibold text-blue-700">
+                    Love
+                  </div>
+
+                </div>
+
+                <p className="mt-8 text-sm leading-7 text-gray-600">
+                  BERT predicts missing masked words using left and right context simultaneously.
+                </p>
+
+              </div>
+
+            </div>
+
+            <div className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-8">
+
+              <div className="flex items-center justify-between">
+
+                <div>
+                  <p className="text-sm font-medium uppercase tracking-[0.2em] text-violet-600">
+                    Decoder Pipeline
+                  </p>
+
+                  <h3 className="mt-2 text-2xl font-semibold text-[#11181C]">
+                    GPT
+                  </h3>
+                </div>
+
+                <div className="rounded-2xl bg-violet-50 px-4 py-2 text-sm font-medium text-violet-700">
+                  Generative
+                </div>
+
+              </div>
+
+              <div className="mt-8 rounded-3xl bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-1 hover:ring-blue-100">
+
+                <p className="text-sm font-semibold text-[#11181C]">
+                  Causal Auto-Regressive Generation
+                </p>
+
+                <div className="mt-8 space-y-5">
+
+                  <div className="rounded-2xl border border-gray-100 p-5">
+
+                    <p className="text-xs uppercase tracking-[0.2em] text-gray-400">
+                      Step 1
+                    </p>
+
+                    <p className="mt-3 text-sm font-medium text-[#11181C]">
+                      &lt;SOS&gt; ? I
+                    </p>
+
+                  </div>
+
+                  <div className="rounded-2xl border border-gray-100 p-5">
+
+                    <p className="text-xs uppercase tracking-[0.2em] text-gray-400">
+                      Step 2
+                    </p>
+
+                    <p className="mt-3 text-sm font-medium text-[#11181C]">
+                      &lt;SOS&gt; I ? Love
+                    </p>
+
+                  </div>
+
+                  <div className="rounded-2xl border border-gray-100 p-5">
+
+                    <p className="text-xs uppercase tracking-[0.2em] text-gray-400">
+                      Step 3
+                    </p>
+
+                    <p className="mt-3 text-sm font-medium text-[#11181C]">
+                      &lt;SOS&gt; I Love ? AI ? &lt;EOS&gt;
+                    </p>
+
+                  </div>
+
+                </div>
+
+                <p className="mt-8 text-sm leading-7 text-gray-600">
+                  GPT predicts the next token sequentially from left to right.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <footer className="mt-12 rounded-3xl relative overflow-hidden relative overflow-hidden border border-gray-200 bg-[#fcfcfc] p-8">
+
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-100/20 via-violet-100/20 to-pink-100/20"></div><div className="relative flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+
+              <div>
+
+                <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-400">
+                  Ecosystem
+                </p>
+
+                <h3 className="mt-3 text-2xl font-semibold tracking-tight text-[#11181C]">
+                  Hugging Face + Transformers + PyTorch
+                </h3>
+
+              </div>
+
+              <div className="rounded-3xl border border-orange-200 bg-orange-50 px-6 py-4">
+
+                <p className="text-sm font-semibold text-orange-700">
+                  Foundation Model Infrastructure
+                </p>
+
+              </div>
+
+            </div>
+
+          </footer>
+
+        </motion.section>
+
+    </main>
+  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=== C:\work\next-alpinist-ai-course\app\orientation-day-2\page.backup.tsx ===
+export default function OrientationDay2Page() {
+  return (
+    <main className="min-h-screen bg-neutral-100 p-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="rounded-3xl border border-neutral-200 bg-white p-10 shadow-sm">
+          <span className="rounded-full bg-violet-100 px-4 py-1 text-sm font-medium text-violet-700">
+            Orientation Day 2
+          </span>
+
+          <h1 className="mt-6 text-5xl font-black tracking-tight">
+            LLM Architecture Overview
+          </h1>
+
+          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-neutral-600">
+            Tokenization, embeddings, transformer attention,
+            batching, retrieval systems, and AI infrastructure.
+          </p>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <InfoCard
+              title="Tokenization"
+              description="Convert raw text into token IDs."
+            />
+
+            <InfoCard
+              title="Tensor Batching"
+              description="Align variable sequences into tensors."
+            />
+
+            <InfoCard
+              title="Self Attention"
+              description="Transformer attention mechanism."
+            />
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+type InfoCardProps = {
+  title: string;
+  description: string;
+};
+
+function InfoCard({
+  title,
+  description,
+}: InfoCardProps) {
+  return (
+    <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
+      <div className="aspect-video rounded-xl border-2 border-dashed border-neutral-300 bg-white" />
+
+      <h2 className="mt-4 text-xl font-semibold">
+        {title}
+      </h2>
+
+      <p className="mt-2 text-sm leading-relaxed text-neutral-600">
+        {description}
+      </p>
+    </div>
+  );
+}
+
+=== C:\work\next-alpinist-ai-course\app\orientation-day-2\page.tsx ===
+export default function OrientationDay2Page() {
+  return (
+    <main className="min-h-screen bg-neutral-100 p-8">
+      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[260px_1fr]">
+
+        <aside className="hidden lg:block">
+          <div className="sticky top-8 rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
+            <p className="text-sm font-semibold uppercase tracking-wider text-neutral-500">
+              Sections
+            </p>
+
+            <nav className="mt-6 space-y-2">
+              <SidebarItem label="01 Tokenization" />
+              <SidebarItem label="02 Tensor Batching" />
+              <SidebarItem label="03 Self Attention" />
+              <SidebarItem label="04 Latent Space" />
+              <SidebarItem label="05 RAG Systems" />
+              <SidebarItem label="06 Global AI Race" />
+            </nav>
+          </div>
+        </aside>
+
+        <section className="rounded-3xl border border-neutral-200 bg-white p-10 shadow-sm">
+          <span className="rounded-full bg-violet-100 px-4 py-1 text-sm font-medium text-violet-700">
+            Orientation Day 2
+          </span>
+
+          <h1 className="mt-6 text-5xl font-black tracking-tight">
+            LLM Architecture Overview
+          </h1>
+
+          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-neutral-600">
+            Tokenization, embeddings, transformer attention,
+            batching, retrieval systems, and AI infrastructure.
+          </p>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+
+            <InfoCard
+              title="Tokenization"
+              description="Convert raw text into token IDs."
+            />
+
+            <InfoCard
+              title="Tensor Batching"
+              description="Align variable sequences into tensors."
+            />
+
+            <InfoCard
+              title="Self Attention"
+              description="Transformer attention mechanism."
+            />
+
+            <InfoCard
+              title="Latent Space"
+              description="Semantic vector relationships."
+            />
+
+            <InfoCard
+              title="RAG Systems"
+              description="Retrieval augmented generation."
+            />
+
+            <InfoCard
+              title="Global AI Race"
+              description="US vs China AI ecosystem."
+            />
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+  );
+}
+
+type InfoCardProps = {
+  title: string;
+  description: string;
+};
+
+function InfoCard({
+  title,
+  description,
+}: InfoCardProps) {
+  return (
+    <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
+      <div className="aspect-video rounded-xl border-2 border-dashed border-neutral-300 bg-white" />
+
+      <h2 className="mt-4 text-xl font-semibold">
+        {title}
+      </h2>
+
+      <p className="mt-2 text-sm leading-relaxed text-neutral-600">
+        {description}
+      </p>
+    </div>
+  );
+}
+
+type SidebarItemProps = {
+  label: string;
+};
+
+function SidebarItem({
+  label,
+}: SidebarItemProps) {
+  return (
+    <button
+      className="
+        block w-full rounded-xl
+        border border-neutral-200
+        bg-neutral-50 px-4 py-3
+        text-left text-sm font-medium
+        transition hover:bg-violet-50
+      "
+    >
+      {label}
+    </button>
+  );
+}
+
+
+=== C:\work\next-alpinist-ai-course\app\week-one-ai-systems-setup\page.tsx ===
+import {
+  Activity,
+  Bot,
+  CheckCircle2,
+  Code2,
+  Cpu,
+  Database,
+  FileCode2,
+  Layers3,
+  Network,
+  ShieldCheck,
+  Terminal,
+  Workflow,
+} from "lucide-react"
+
+const topics = [
+  "Role of an AI Engineer and end to end AI system lifecycle",
+  "Python for building scalable AI applications",
+  "Asynchronous programming for concurrent LLM workloads",
+  "REST APIs and streaming APIs for real time AI applications",
+  "Designing modular production ready AI architecture",
+  "Environment setup and dependency management using uv",
+  "HTTP client fundamentals using httpx",
+  "Logging strategies for observability and debugging",
+  "Configuration management using env variables",
+  "Data validation using Pydantic schemas",
+  "Tokenization fundamentals and LLM text processing",
+  "Debugging workflows for AI applications and APIs",
+]
+
+const tasks = [
+  {
+    title: "T1 System Architecture and Project Scaffold",
+    icon: Layers3,
+    items: [
+      "Design AI system architecture diagram",
+      "Setup project structure using uv",
+      "Configure env logging and config loader",
+      "Define module boundaries",
+    ],
+  },
+
+  {
+    title: "T2 Multi Provider Async API Layer",
+    icon: Network,
+    items: [
+      "Build async client using httpx",
+      "Support Groq Gemini and Ollama",
+      "Unified request and response schema",
+      "Handle retries and timeouts",
+    ],
+  },
+
+  {
+    title: "T3 Streaming and Async Execution",
+    icon: Activity,
+    items: [
+      "Implement streaming LLM responses",
+      "Async token streaming pipeline",
+      "Measure latency and token timing",
+      "Handle partial stream failures",
+    ],
+  },
+
+  {
+    title: "T4 Structured Data and Validation",
+    icon: ShieldCheck,
+    items: [
+      "Implement Pydantic schemas",
+      "Validate outputs strictly",
+      "Recover malformed JSON",
+      "Enforce structured contracts",
+    ],
+  },
+
+  {
+    title: "T5 Observability and Debugging",
+    icon: Cpu,
+    items: [
+      "Build structured logging system",
+      "Add request tracing and metrics",
+      "Simulate API failures",
+      "Runtime provider switching",
+    ],
+  },
+]
+
+export default function WeekOnePage() {
+  return (
+    <main className="min-h-screen bg-[#fafafa] px-6 py-10">
+
+      <div className="mx-auto max-w-7xl">
+
+        <div className="mb-10 rounded-[32px] border border-gray-200 bg-white p-10 shadow-sm">
+
+          <div className="mb-5 flex items-center gap-4">
+
+            <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-gradient-to-br from-blue-500 to-violet-600 text-white shadow-lg">
+
+              <Bot className="h-8 w-8" />
+
+            </div>
+
+            <div>
+
+              <h1 className="text-5xl font-black tracking-tight text-gray-900">
+                Week 1
+              </h1>
+
+              <p className="mt-1 text-xl text-blue-600">
+                AI Systems and Engineering Setup
+              </p>
+
+            </div>
+
+          </div>
+
+          <p className="max-w-4xl text-lg leading-8 text-gray-600">
+            Foundations for production ready AI engineering systems including
+            async APIs architecture validation observability debugging and
+            multi provider LLM integration.
+          </p>
+
+        </div>
+
+        <div className="mb-10 grid gap-6 md:grid-cols-3">
+
+          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+            <div className="mb-3 text-sm font-semibold uppercase tracking-wide text-blue-600">
+              Planning
+            </div>
+
+            <div className="text-2xl font-bold text-gray-900">
+              Monday
+            </div>
+          </div>
+
+          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+            <div className="mb-3 text-sm font-semibold uppercase tracking-wide text-blue-600">
+              Learning and Implementation
+            </div>
+
+            <div className="text-2xl font-bold text-gray-900">
+              Tuesday to Thursday
+            </div>
+          </div>
+
+          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+            <div className="mb-3 text-sm font-semibold uppercase tracking-wide text-blue-600">
+              Preparation and Demo
+            </div>
+
+            <div className="text-2xl font-bold text-gray-900">
+              Friday
+            </div>
+          </div>
+
+        </div>
+
+        <div className="mb-10 rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
+
+          <div className="mb-6 flex items-center gap-3">
+
+            <BookIcon />
+
+            <h2 className="text-3xl font-bold text-gray-900">
+              Topics
+            </h2>
+
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+
+            {topics.map((topic) => (
+              <div
+                key={topic}
+                className="flex items-start gap-3 rounded-2xl border border-gray-100 bg-gray-50 p-4"
+              >
+
+                <CheckCircle2 className="mt-1 h-5 w-5 text-blue-600" />
+
+                <p className="text-gray-700">
+                  {topic}
+                </p>
+
+              </div>
+            ))}
+
+          </div>
+
+        </div>
+
+        <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
+
+          <div className="mb-8 flex items-center gap-3">
+
+            <Workflow className="h-8 w-8 text-violet-600" />
+
+            <h2 className="text-3xl font-bold text-gray-900">
+              Team Tasks
+            </h2>
+
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+
+            {tasks.map((task) => {
+              const Icon = task.icon
+
+              return (
+                <div
+                  key={task.title}
+                  className="rounded-3xl border border-gray-200 bg-[#fcfcfc] p-6"
+                >
+
+                  <div className="mb-5 flex items-center gap-4">
+
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-100 text-blue-600">
+
+                      <Icon className="h-7 w-7" />
+
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-gray-900">
+                      {task.title}
+                    </h3>
+
+                  </div>
+
+                  <div className="space-y-3">
+
+                    {task.items.map((item) => (
+                      <div
+                        key={item}
+                        className="flex items-start gap-3"
+                      >
+
+                        <div className="mt-2 h-2 w-2 rounded-full bg-blue-600" />
+
+                        <p className="text-gray-700">
+                          {item}
+                        </p>
+
+                      </div>
+                    ))}
+
+                  </div>
+
+                </div>
+              )
+            })}
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+  )
+}
+
+function BookIcon() {
+  return (
+    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-100 text-blue-600">
+      <FileCode2 className="h-6 w-6" />
+    </div>
+  )
+}
+
+
+=== C:\work\next-alpinist-ai-course\app\week-one-t1-system-architecture-project-scaffold\page.tsx ===
+import {
+  Blocks,
+  BrainCircuit,
+  Building2,
+  ChevronRight,
+  Cpu,
+  FolderTree,
+  Layers3,
+  Rocket,
+  ShieldCheck,
+  Wrench,
+  Bot,
+  Globe,
+  Sparkles,
+} from "lucide-react"
+
+const lowLevel = [
+  "Setup uv project",
+  "Create folder structure",
+  "Configure env files",
+  "Setup logging",
+  "Create utility helpers",
+  "Define API routes",
+  "Setup provider clients",
+  "Create config loader",
+  "Add error handlers",
+  "Run local testing",
+]
+
+const midLevel = [
+  "Separate services and providers",
+  "Build reusable modules",
+  "Design async workflows",
+  "Create unified schemas",
+  "Add retry systems",
+  "Implement streaming architecture",
+  "Add structured validation",
+  "Centralize configurations",
+  "Build observability flows",
+  "Prepare scalable architecture",
+]
+
+const highLevel = [
+  "Multi provider AI orchestration",
+  "Production AI system architecture",
+  "Scalable async infrastructure",
+  "Real time streaming systems",
+  "Fault tolerant AI pipelines",
+  "Distributed observability systems",
+  "Structured AI data contracts",
+  "Runtime provider switching",
+  "Production deployment planning",
+  "Enterprise AI engineering workflows",
+]
+
+function SectionCard({
+  title,
+  description,
+  items,
+  icon: Icon,
+  color,
+}: {
+  title: string
+  description: string
+  items: string[]
+  icon: any
+  color: string
+}) {
+  return (
+    <div className="group rounded-3xl border border-gray-200 bg-white p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+
+      <div className="mb-4 flex items-center gap-4">
+
+        <div className={`flex h-12 w-12 items-center justify-center rounded-3xl ${color}`}>
+
+          <Icon className="h-6 w-6 text-white" />
+
+        </div>
+
+        <div>
+
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+            {title}
+          </h2>
+
+          <p className="mt-1 text-gray-500">
+            {description}
+          </p>
+
+        </div>
+
+      </div>
+
+      <div className="space-y-2">
+
+        {items.map((item) => (
+          <div
+            key={item}
+            className="flex items-start gap-3 rounded-2xl border border-gray-100 bg-[#fcfcfc] px-3 py-3 transition-all duration-200 hover:border-blue-100 hover:bg-blue-50/40"
+          >
+
+            <ChevronRight className="mt-0.5 h-5 w-5 text-blue-600" />
+
+            <div className="flex items-center gap-3 flex-wrap">
+
+              <p className="text-sm leading-6 text-gray-700">
+                {item}
+              </p>
+
+              <div className="ml-2 flex items-center gap-1.5">
+
+                <a
+                  href={`https://chatgpt.com/?q=${encodeURIComponent("Week 1 T1 AI Systems Engineering challenge: " + item + " for scalable AI applications basics beginner explanation")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 transition-all border-[#10A37F]/20 bg-[#10A37F]/5 text-[#10A37F] hover:bg-[#10A37F]/10 hover:border-[#10A37F]/40"
+                  title="Open in ChatGPT"
+                >
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT" className="h-4 w-4" />
+                </a>
+
+                <a
+                  href={`https://www.google.com/search?udm=50&q=${encodeURIComponent("Week 1 T1 AI Systems Engineering challenge: " + item + " for scalable AI applications basics beginner explanation")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 transition-all border-[#4285F4]/20 bg-[#4285F4]/5 text-[#4285F4] hover:bg-[#4285F4]/10 hover:border-[#4285F4]/40"
+                  title="Open in Google AI"
+                >
+                  <img src="https://cdn.simpleicons.org/googlegemini/4285F4" alt="Gemini" className="h-4 w-4" />
+                </a>
+
+                <a
+                  href={`https://chat.deepseek.com/search?q=${encodeURIComponent("Week 1 T1 AI Systems Engineering challenge: " + item + " for scalable AI applications basics beginner explanation")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 transition-all border-[#5661F6]/20 bg-[#5661F6]/5 text-[#5661F6] hover:bg-[#5661F6]/10 hover:border-[#5661F6]/40"
+                  title="Open in DeepSeek"
+                >
+                  <img src="https://cdn.simpleicons.org/deepseek/5661F6" alt="DeepSeek" className="h-4 w-4" />
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+        ))}
+
+      </div>
+
+    </div>
+  )
+}
+
+export default function T1Page() {
+  return (
+    <main className="min-h-screen bg-[#fafafa] px-5 py-6">
+
+      <div className="mx-auto max-w-6xl">
+
+        <div className="mb-6 overflow-hidden rounded-[40px] border border-gray-200 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+
+          <div className="relative p-7">
+
+            <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-blue-100 blur-3xl" />
+
+            <div className="relative z-10">
+
+              <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-blue-100 bg-blue-50 px-5 py-2 text-sm font-semibold text-blue-700">
+
+                <Rocket className="h-4 w-4" />
+
+                Week 1 — Task 1
+
+              </div>
+
+              <h1 className="max-w-5xl text-4xl font-black tracking-tight text-gray-900">
+
+                System Architecture and Project Scaffold
+
+              </h1>
+
+              <p className="mt-4 max-w-3xl text-base leading-7 text-gray-600">
+
+                Learn how professional AI systems are structured from basic setup
+                to scalable enterprise architecture using modular design async
+                systems observability and production engineering practices.
+
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-2">
+
+                <div className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700">
+                  AI Systems
+                </div>
+
+                <div className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700">
+                  Async Architecture
+                </div>
+
+                <div className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700">
+                  Observability
+                </div>
+
+                <div className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700">
+                  Production Engineering
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div className="mb-6 grid gap-4 lg:grid-cols-3">
+
+          <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
+
+            <FolderTree className="mb-3 h-8 w-8 text-blue-600" />
+
+            <h3 className="text-lg font-bold text-gray-900">
+              Project Structure
+            </h3>
+
+            <p className="mt-2 text-sm leading-6 text-gray-600">
+              Organise scalable AI systems into reusable maintainable modules.
+            </p>
+
+          </div>
+
+          <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
+
+            <Cpu className="mb-3 h-8 w-8 text-violet-600" />
+
+            <h3 className="text-lg font-bold text-gray-900">
+              Async AI Systems
+            </h3>
+
+            <p className="mt-2 text-sm leading-6 text-gray-600">
+              Build concurrent AI workflows capable of handling real time loads.
+            </p>
+
+          </div>
+
+          <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
+
+            <ShieldCheck className="mb-3 h-8 w-8 text-emerald-600" />
+
+            <h3 className="text-lg font-bold text-gray-900">
+              Production Ready
+            </h3>
+
+            <p className="mt-2 text-sm leading-6 text-gray-600">
+              Add logging retries validation and scalable infrastructure planning.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div className="grid gap-5">
+
+          <SectionCard
+            title="Low Level"
+            description="Foundational engineering setup and local development."
+            items={lowLevel}
+            icon={Wrench}
+            color="bg-gradient-to-br from-blue-500 to-cyan-500"
+          />
+
+          <SectionCard
+            title="Mid Level"
+            description="Reusable architecture and scalable engineering patterns."
+            items={midLevel}
+            icon={Layers3}
+            color="bg-gradient-to-br from-violet-500 to-purple-500"
+          />
+
+          <SectionCard
+            title="High Level"
+            description="Enterprise grade AI systems and production infrastructure."
+            items={highLevel}
+            icon={BrainCircuit}
+            color="bg-gradient-to-br from-emerald-500 to-green-500"
+          />
+
+        </div>
+
+        <div className="mt-10 rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
+
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+
+            <div>
+
+              <div className="mb-3 flex items-center gap-3">
+
+                <Building2 className="h-6 w-6 text-blue-600" />
+
+                <h3 className="text-2xl font-bold text-gray-900">
+                  AI Engineering Direction
+                </h3>
+
+              </div>
+
+              <p className="max-w-3xl leading-8 text-gray-600">
+                Start with simple project scaffolding then evolve toward modular
+                scalable observable enterprise AI systems incrementally.
+              </p>
+
+            </div>
+
+            <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-blue-500 to-violet-600 text-white shadow-lg">
+
+              <Blocks className="h-10 w-10" />
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=== C:\work\next-alpinist-ai-course\app\globals.css ===
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  overflow-x:hidden;
+}
+
+
+
+=== C:\work\next-alpinist-ai-course\app\layout.tsx ===
+import type { Metadata } from "next"
+import "./globals.css"
+import Sidebar from "@/components/sidebar"
+
+export const metadata: Metadata = {
+  title: "Alpinist AI",
+  description: "AI Engineering Training Platform",
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html lang="en">
+
+      <body className="bg-[#fafafa]">
+
+        <Sidebar />
+
+        <div className="lg:ml-72">
+          {children}
+        </div>
+
+      </body>
+
+    </html>
+  )
+}
+
+
+=== C:\work\next-alpinist-ai-course\app\loading.tsx ===
+export default function Loading() {
+  return (
+    <main className="flex min-h-screen items-center justify-center bg-[#fafafa]">
+
+      <div className="flex flex-col items-center gap-5">
+
+        <div className="h-14 w-14 animate-spin rounded-full border-4 border-blue-200 border-t-blue-600" />
+
+        <div className="text-lg font-medium text-gray-700">
+          Loading AI Engineering Content...
+        </div>
+
+      </div>
+
+    </main>
+  )
+}
+
+
+=== C:\work\next-alpinist-ai-course\app\page.backup.tsx ===
+import {
+  Activity,
+  BookOpen,
+  Bot,
+  Braces,
+  FileCode2,
+  FolderTree,
+  GitBranch,
+  Globe,
+  Layers3,
+  Lock,
+  Network,
+  ShieldCheck,
+  Terminal,
+  Type,
+  Zap,
+} from "lucide-react"
+
+const courseTopics = [
+  {
+    number: "1",
+    title: "Async Await in Python",
+    description:
+      "Write non blocking code using Python async and await syntax so multiple API calls can run concurrently. This is critical for performant LLM applications that make many network and database operations simultaneously.",
+    color: "from-blue-500 to-cyan-400",
+    iconBg: "bg-blue-100",
+    iconColor: "text-blue-600",
+    icon: Zap,
+  },
+
+  {
+    number: "2",
+    title: "Pydantic Models and Validation",
+    description:
+      "Define structured schemas with Python type hints and automatically validate parse and serialize data safely. This is the standard approach for making AI outputs and API responses reliable and type safe.",
+    color: "from-green-500 to-emerald-400",
+    iconBg: "bg-green-100",
+    iconColor: "text-green-600",
+    icon: ShieldCheck,
+  },
+
+  {
+    number: "3",
+    title: "HTTPX Async HTTP Clients",
+    description:
+      "Use HTTPX as a modern async alternative to requests. Supports retries connection pooling timeout handling and scalable communication with AI APIs and external services.",
+    color: "from-violet-500 to-purple-400",
+    iconBg: "bg-violet-100",
+    iconColor: "text-violet-600",
+    icon: Globe,
+  },
+
+  {
+    number: "4",
+    title: "Environment Management",
+    description:
+      "Store configuration and secrets inside env files and load them safely during runtime. This allows different settings between local development staging and production environments.",
+    color: "from-cyan-500 to-sky-400",
+    iconBg: "bg-cyan-100",
+    iconColor: "text-cyan-600",
+    icon: FileCode2,
+  },
+
+  {
+    number: "5",
+    title: "Secret Management",
+    description:
+      "Avoid hardcoding API keys inside source code because secrets can leak through git history and public repositories. Learn runtime secret injection and repository auditing practices.",
+    color: "from-orange-500 to-amber-400",
+    iconBg: "bg-orange-100",
+    iconColor: "text-orange-600",
+    icon: Lock,
+  },
+
+  {
+    number: "6",
+    title: "Modular Code Structure",
+    description:
+      "Organise AI applications into separated concerns such as clients chains tools models and utilities. This allows each component to be tested replaced and reused independently.",
+    color: "from-emerald-500 to-green-400",
+    iconBg: "bg-emerald-100",
+    iconColor: "text-emerald-600",
+    icon: Layers3,
+  },
+
+  {
+    number: "7",
+    title: "Git Branching and PR Etiquette",
+    description:
+      "Use feature branches meaningful commits and clear pull request descriptions. These workflows improve collaboration code review speed and engineering consistency.",
+    color: "from-purple-500 to-fuchsia-400",
+    iconBg: "bg-purple-100",
+    iconColor: "text-purple-600",
+    icon: GitBranch,
+  },
+
+  {
+    number: "8",
+    title: "README Writing Standards",
+    description:
+      "Create high quality project documentation including architecture summaries setup instructions usage examples environment references and onboarding information.",
+    color: "from-indigo-500 to-blue-400",
+    iconBg: "bg-indigo-100",
+    iconColor: "text-indigo-600",
+    icon: BookOpen,
+  },
+
+  {
+    number: "9",
+    title: "Env Example and Gitignore",
+    description:
+      "Use env example files to document required variables without exposing secrets. Configure gitignore properly to avoid committing caches credentials and build artefacts.",
+    color: "from-pink-500 to-rose-400",
+    iconBg: "bg-pink-100",
+    iconColor: "text-pink-600",
+    icon: Braces,
+  },
+
+  {
+    number: "10",
+    title: "AI Project Folder Structure",
+    description:
+      "Adopt scalable folder layouts for source code tests prompts scripts and datasets. Consistent project structure reduces onboarding friction and improves maintainability.",
+    color: "from-lime-500 to-green-400",
+    iconBg: "bg-lime-100",
+    iconColor: "text-lime-600",
+    icon: FolderTree,
+  },
+
+  {
+    number: "11",
+    title: "Virtual Environments",
+    description:
+      "Isolate project dependencies using uv or venv so packages do not conflict across projects. This improves reproducibility portability and deployment stability.",
+    color: "from-amber-500 to-yellow-400",
+    iconBg: "bg-amber-100",
+    iconColor: "text-amber-600",
+    icon: Terminal,
+  },
+
+  {
+    number: "12",
+    title: "Type Hints and Docstrings",
+    description:
+      "Annotate parameters return types and function intent using Python typing and docstrings. This improves editor tooling readability debugging and AI coding assistant support.",
+    color: "from-sky-500 to-blue-400",
+    iconBg: "bg-sky-100",
+    iconColor: "text-sky-600",
+    icon: Type,
+  },
+]
+
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-[#f5f7fb] px-6 py-10">
+
+      <div className="mx-auto max-w-7xl">
+
+        <div className="mb-10 rounded-[32px] border border-gray-200 bg-white p-8 shadow-sm">
+
+          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+
+            <div>
+
+              <div className="mb-4 inline-flex items-center gap-3 rounded-full bg-black px-5 py-2 text-sm font-semibold text-white">
+
+                <Bot className="h-5 w-5" />
+
+                <span>
+                  Alpinist Studio Nepal
+                </span>
+
+              </div>
+
+              <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
+                Week 1 Python for AI Engineering
+              </h1>
+
+              <p className="mt-3 max-w-3xl text-lg leading-8 text-gray-600">
+                Engineering hygiene and production foundations for scalable AI systems.
+              </p>
+
+            </div>
+
+            <div className="flex h-28 w-28 items-center justify-center rounded-3xl bg-gradient-to-br from-blue-500 to-violet-600 text-white shadow-xl">
+
+              <Network className="h-14 w-14" />
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <section className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+
+          {courseTopics.map((topic) => {
+            const Icon = topic.icon
+
+            return (
+              <div
+                key={topic.number}
+                className="rounded-3xl border border-gray-200 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              >
+
+                <div className="mb-6 flex items-start justify-between">
+
+                  <div
+                    className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${topic.color} text-2xl font-bold text-white shadow-lg`}
+                  >
+                    {topic.number}
+                  </div>
+
+                  <div
+                    className={`flex h-16 w-16 items-center justify-center rounded-2xl ${topic.iconBg} ${topic.iconColor}`}
+                  >
+                    <Icon className="h-9 w-9" />
+                  </div>
+
+                </div>
+
+                <h2 className="mb-4 text-2xl font-bold tracking-tight text-gray-900">
+                  {topic.title}
+                </h2>
+
+                <p className="text-[15px] leading-8 text-gray-600">
+                  {topic.description}
+                </p>
+
+              </div>
+            )
+          })}
+
+        </section>
+
+        <div className="mt-10 rounded-3xl border border-blue-100 bg-white p-6 shadow-sm">
+
+          <div className="flex items-center justify-center gap-3 text-center">
+
+            <Activity className="h-6 w-6 text-blue-600" />
+
+            <p className="text-lg font-medium text-gray-700">
+              Build clean secure scalable production ready AI engineering systems.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+  )
+}
+
+
+=== C:\work\next-alpinist-ai-course\app\page.tsx ===
+import dynamic from "next/dynamic";
+
+const Panel06Retrieval = dynamic(
+  () => import("@/components/panels/Panel06Retrieval"),
+  { ssr: false }
+);
+
+export default function Page() {
+  return (
+    <main className="w-full min-h-screen">
+      <Panel06Retrieval />
+    </main>
+  );
+}
+
+
+=== C:\work\next-alpinist-ai-course\components\course\course-card.tsx ===
+interface CourseCardProps {
+  number: string
+  title: string
+  description: string
+  color: string
+}
+
+export default function CourseCard({
+  number,
+  title,
+  description,
+  color,
+}: CourseCardProps) {
+  return (
+    <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+
+      <div className="mb-4 flex items-center gap-3">
+
+        <div
+          className={`flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold text-white ${color}`}
+        >
+          {number}
+        </div>
+
+        <h2 className="text-lg font-bold text-gray-900">
+          {title}
+        </h2>
+
+      </div>
+
+      <p className="text-sm leading-7 text-gray-600 whitespace-pre-line">
+        {description}
+      </p>
+
+    </div>
+  )
+}
+
+
+=== C:\work\next-alpinist-ai-course\components\panels\Panel06Retrieval.tsx ===
+import React from "react";
+
+export default function Panel06Retrieval() {
+  return (
+    <section className="w-full min-h-screen bg-white flex items-center justify-center px-10 py-24">
+      
+      <div className="max-w-6xl w-full space-y-16">
+
+        {/* HEADER */}
+        <div className="space-y-2">
+          <h2 className="text-sm tracking-[0.3em] text-gray-400 uppercase">
+            06 / Retrieval Systems, Latency Tradeoffs & Cognitive Analogy
+          </h2>
+          <h1 className="text-4xl font-semibold text-gray-900">
+            Retrieval-Augmented Intelligence Architecture
+          </h1>
+        </div>
+
+        {/* RAG PIPELINE */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
+
+          <div className="md:col-span-5 bg-gray-50 border border-gray-100 rounded-2xl p-6 shadow-sm">
+            <p className="text-sm text-gray-700 font-mono">
+              User Query ? Retriever ? Vector DB ? Context Injection ? LLM Response
+            </p>
+          </div>
+
+        </div>
+
+        {/* MEMORY GRAPH VISUAL BLOCK */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+          <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm">
+            <h3 className="text-lg font-medium text-gray-900 mb-4">
+              Semantic Memory Graph
+            </h3>
+            <div className="h-64 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center">
+              <p className="text-sm text-gray-500">
+                Neural retrieval nodes connecting contextual embeddings
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm">
+            <h3 className="text-lg font-medium text-gray-900 mb-4">
+              Vector Database Links
+            </h3>
+            <div className="h-64 rounded-xl bg-gradient-to-br from-purple-50 to-pink-50 flex items-center justify-center">
+              <p className="text-sm text-gray-500">
+                High-dimensional similarity search space
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        {/* LATENCY VS QUALITY */}
+        <div className="bg-white border border-gray-100 rounded-2xl p-10 shadow-sm space-y-6">
+
+          <h3 className="text-xl font-medium text-gray-900">
+            Quality vs Latency Tradeoff
+          </h3>
+
+          <div className="flex items-center justify-between text-sm text-gray-600 font-mono">
+            <span>Fast Response</span>
+            <span className="text-gray-400">?</span>
+            <span>Deep Reasoning</span>
+          </div>
+
+          <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+            <div className="w-2/3 h-full bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full"></div>
+          </div>
+
+        </div>
+
+        {/* OPTIMIZATION STACK */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+          {[
+            "KV Cache",
+            "Quantization",
+            "Speculative Decoding",
+            "MoE Routing"
+          ].map((item) => (
+            <div
+              key={item}
+              className="bg-white border border-gray-100 rounded-xl p-4 text-center shadow-sm"
+            >
+              <p className="text-sm text-gray-700 font-medium">{item}</p>
+            </div>
+          ))}
+
+        </div>
+
+        {/* COGNITIVE ANALOGY */}
+        <div className="bg-gray-50 border border-gray-100 rounded-2xl p-10 space-y-4">
+
+          <h3 className="text-xl font-medium text-gray-900">
+            Human Cognitive Analogy
+          </h3>
+
+          <div className="space-y-2 text-sm text-gray-700 font-mono">
+            <p>System 1: Fast Reflex Thinking</p>
+            <p>System 2: Slow Reflective Reasoning</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+
+=== C:\work\next-alpinist-ai-course\components\sidebar.backup.tsx ===
+"use client"
+
+import Link from "next/link"
+import { Bot, Cpu, Home, Layers3 } from "lucide-react"
+import { usePathname } from "next/navigation"
+
+const links = [
+  {
+    name: "Home",
+    href: "/",
+    icon: Home,
+  },
+
+  {
+    name: "Week 1 — AI Systems & Engineering Setup",
+    href: "/week-one-ai-systems-setup",
+    icon: Layers3,
+  },
+
+  {
+    name: "T1 — System Architecture",
+    href: "/week-one-t1-system-architecture-project-scaffold",
+    icon: Cpu,
+  },
+]
+
+export default function Sidebar() {
+  const pathname = usePathname()
+
+  return (
+    <aside className="fixed left-0 top-0 hidden h-screen w-72 border-r border-gray-200 bg-white lg:flex lg:flex-col">
+
+      <div className="border-b border-gray-200 p-6">
+
+        <div className="flex items-center gap-4">
+
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-violet-600 text-white shadow-lg">
+
+            <Bot className="h-7 w-7" />
+
+          </div>
+
+          <div>
+
+            <h1 className="text-lg font-bold text-gray-900">
+              Alpinist AI
+            </h1>
+
+            <p className="text-sm text-gray-500">
+              Training Platform
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <nav className="flex-1 space-y-2 p-4">
+
+        {links.map((link) => {
+          const Icon = link.icon
+
+          const active = pathname === link.href
+
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`flex items-center gap-4 rounded-2xl px-4 py-4 transition-all duration-200 ${
+                active
+                  ? "bg-blue-50 text-blue-700"
+                  : "text-gray-600 hover:bg-gray-100"
+              }`}
+            >
+
+              <Icon className="h-5 w-5" />
+
+              <span className="font-medium">
+                {link.name}
+              </span>
+
+            </Link>
+          )
+        })}
+
+      </nav>
+
+    </aside>
+  )
+}
+
+
+=== C:\work\next-alpinist-ai-course\components\sidebar.tsx ===
+"use client"
+
+import Link from "next/link"
+import { Bot, Cpu, Home, Layers3 } from "lucide-react"
+import { usePathname } from "next/navigation"
+
+const links = [
+  {
+    name: "Home",
+    href: "/",
+    icon: Home,
+  },
+
+  {
+  name: "Week 1 — AI Systems & Engineering Setup",
+  href: "/week-one-ai-systems-setup",
+  icon: Layers3,
+
+  children: [
+    {
+      name: "T1 — System Architecture",
+      href: "/week-one-t1-system-architecture-project-scaffold",
+      icon: Cpu,
+    },
+  ],
+},
+]
+
+export default function Sidebar() {
+  const pathname = usePathname()
+
+  return (
+    <aside className="fixed left-0 top-0 hidden h-screen w-72 border-r border-gray-200 bg-white lg:flex lg:flex-col">
+
+      <div className="border-b border-gray-200 p-6">
+
+        <div className="flex items-center gap-4">
+
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-violet-600 text-white shadow-lg">
+
+            <Bot className="h-7 w-7" />
+
+          </div>
+
+          <div>
+
+            <h1 className="text-lg font-bold text-gray-900">
+              Alpinist AI
+            </h1>
+
+            <p className="text-sm text-gray-500">
+              Training Platform
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <nav className="flex-1 space-y-2 p-4">
+
+        {links.map((link) => {
+  const Icon = link.icon
+
+  const active = pathname === link.href
+
+  return (
+    <div key={link.href}>
+
+      <Link
+        href={link.href}
+        className={`flex items-center gap-4 rounded-2xl px-4 py-4 transition-all duration-200 ${
+          active
+            ? "bg-blue-50 text-blue-700"
+            : "text-gray-600 hover:bg-gray-100"
+        }`}
+      >
+
+        <Icon className="h-5 w-5" />
+
+        <span className="font-medium">
+          {link.name}
+        </span>
+
+      </Link>
+
+      {link.children?.map((child) => {
+        const ChildIcon = child.icon
+
+        return (
+          <Link
+            key={child.href}
+            href={child.href}
+            className="ml-8 mt-2 flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-gray-500 transition-all hover:bg-gray-100"
+          >
+
+            <ChildIcon className="h-4 w-4" />
+
+            <span>
+              {child.name}
+            </span>
+
+          </Link>
+        )
+      })}
+
+    </div>
+  )
+})}
+
+      </nav>
+
+    </aside>
+  )
+}
+
+
+
+
+
+
+
+
+
+=== C:\work\next-alpinist-ai-course\components\week-card.tsx ===
+import { ReactNode } from "react"
+
+interface WeekCardProps {
+  number: string
+  title: string
+  description: string
+  icon: ReactNode
+  color: string
+}
+
+export default function WeekCard({
+  number,
+  title,
+  description,
+  icon,
+  color,
+}: WeekCardProps) {
+  return (
+    <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+      <div className="mb-5 flex items-start justify-between">
+        <div
+          className={`flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold text-white ${color}`}
+        >
+          {number}
+        </div>
+
+        <div className="rounded-2xl bg-gray-50 p-3 text-gray-700">
+          {icon}
+        </div>
+      </div>
+
+      <h2 className="mb-3 text-xl font-bold tracking-tight text-gray-900">
+        {title}
+      </h2>
+
+      <p className="text-sm leading-7 text-gray-600">
+        {description}
+      </p>
+    </div>
+  )
+}
+
+
+=== C:\work\next-alpinist-ai-course\data\course-data.ts ===
+export const courseTopics = [
+  {
+    number: "1",
+    title: "Async Await in Python",
+    description:
+      "Write non blocking code using Python async and await syntax so multiple API calls can run concurrently. This is critical for performant LLM applications that make many network and database operations simultaneously.",
+    color: "bg-blue-500",
+  },
+
+  {
+    number: "2",
+    title: "Pydantic Models and Validation",
+    description:
+      "Define structured schemas with Python type hints and automatically validate parse and serialize data safely. This is the standard approach for making AI outputs and API responses reliable and type safe.",
+    color: "bg-green-500",
+  },
+
+  {
+    number: "3",
+    title: "HTTPX Async HTTP Clients",
+    description:
+      "Use HTTPX as a modern async alternative to requests. Supports retries connection pooling timeout handling and scalable communication with AI APIs and external services.",
+    color: "bg-violet-500",
+  },
+
+  {
+    number: "4",
+    title: "Environment Management",
+    description:
+      "Store configuration and secrets inside env files and load them safely during runtime. This allows different settings between local development staging and production environments.",
+    color: "bg-cyan-500",
+  },
+
+  {
+    number: "5",
+    title: "Secret Management",
+    description:
+      "Avoid hardcoding API keys inside source code because secrets can leak through git history and public repositories. Learn runtime secret injection and repository auditing practices.",
+    color: "bg-orange-500",
+  },
+
+  {
+    number: "6",
+    title: "Modular Code Structure",
+    description:
+      "Organise AI applications into separated concerns such as clients chains tools models and utilities. This allows each component to be tested replaced and reused independently.",
+    color: "bg-emerald-500",
+  },
+
+  {
+    number: "7",
+    title: "Git Branching and PR Etiquette",
+    description:
+      "Use feature branches meaningful commits and clear pull request descriptions. These workflows improve collaboration code review speed and engineering consistency.",
+    color: "bg-purple-500",
+  },
+
+  {
+    number: "8",
+    title: "README Writing Standards",
+    description:
+      "Create high quality project documentation including architecture summaries setup instructions usage examples environment references and onboarding information.",
+    color: "bg-indigo-500",
+  },
+
+  {
+    number: "9",
+    title: "Env Example and Gitignore",
+    description:
+      "Use env example files to document required variables without exposing secrets. Configure gitignore properly to avoid committing caches credentials and build artefacts.",
+    color: "bg-pink-500",
+  },
+
+  {
+    number: "10",
+    title: "AI Project Folder Structure",
+    description:
+      "Adopt scalable folder layouts for source code tests prompts scripts and datasets. Consistent project structure reduces onboarding friction and improves maintainability.",
+    color: "bg-lime-500",
+  },
+
+  {
+    number: "11",
+    title: "Virtual Environments",
+    description:
+      "Isolate project dependencies using uv or venv so packages do not conflict across projects. This improves reproducibility portability and deployment stability.",
+    color: "bg-amber-500",
+  },
+
+  {
+    number: "12",
+    title: "Type Hints and Docstrings",
+    description:
+      "Annotate parameters return types and function intent using Python typing and docstrings. This improves editor tooling readability debugging and AI coding assistant support.",
+    color: "bg-sky-500",
+  },
+]
+
+
+=== C:\work\next-alpinist-ai-course\next-env.d.ts ===
+/// <reference types="next" />
+/// <reference types="next/image-types/global" />
+import "./.next/dev/types/routes.d.ts";
+
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/app/api-reference/config/typescript for more information.
+
+
+=== C:\work\next-alpinist-ai-course\next.config.ts ===
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+};
+
+export default nextConfig;
+
+
+=== C:\work\next-alpinist-ai-course\package-lock.json ===
 {
   "name": "ai-course-ui",
   "version": "0.1.0",
@@ -6816,3 +9760,74 @@
     }
   }
 }
+
+
+=== C:\work\next-alpinist-ai-course\package.json ===
+{
+  "name": "ai-course-ui",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@swc/helpers": "^0.5.21",
+    "framer-motion": "^12.40.0",
+    "lucide-react": "^1.16.0",
+    "next": "16.2.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
+
+
+=== C:\work\next-alpinist-ai-course\tsconfig.json ===
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts"
+  ],
+  "exclude": ["node_modules"]
+}
+
+
