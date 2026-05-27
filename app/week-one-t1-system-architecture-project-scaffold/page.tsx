@@ -1,4 +1,6 @@
-﻿import {
+﻿"use client"
+import React, { useState } from 'react';
+import {
   Blocks,
   BrainCircuit,
   Building2,
@@ -13,6 +15,19 @@
   Globe,
   Sparkles,
 } from "lucide-react"
+
+const uvSubskills = [
+  "Install uv via pip or brew",
+  "Initialize project with uv init",
+  "Create virtual environment with uv venv",
+  "Lock dependencies with uv lock",
+  "Add dev dependencies via uv add --dev",
+  "Configure Python version in pyproject.toml",
+  "Set up uv run for script execution",
+  "Integrate with CI using uv sync",
+  "Cache dependencies in Docker layer",
+  "Use uv tool install for global CLI tools"
+]
 
 const lowLevel = [
   "Setup uv project",
@@ -53,19 +68,11 @@ const highLevel = [
   "Enterprise AI engineering workflows",
 ]
 
-function SectionCard({
-  title,
-  description,
-  items,
-  icon: Icon,
-  color,
-}: {
-  title: string
-  description: string
-  items: string[]
-  icon: any
-  color: string
-}) {
+function SectionCard({ title, description, items, icon: Icon, color }: any) {
+  const [openItems, setOpenItems] = useState<number[]>([]);
+  const toggleItem = (idx: number) => {
+    setOpenItems(prev => prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]);
+  };
   return (
     <div className="group rounded-3xl border border-gray-200 bg-white p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
       <div className="mb-4 flex items-center gap-4">
@@ -78,46 +85,24 @@ function SectionCard({
         </div>
       </div>
       <div className="space-y-2">
-        {items.map((item) => (
-          <div key={item} className="flex items-start gap-3 rounded-2xl border border-gray-100 bg-[#fcfcfc] px-3 py-3 transition-all duration-200 hover:border-blue-100 hover:bg-blue-50/40">
-            <ChevronRight className="mt-0.5 h-5 w-5 text-blue-600" />
-            <div className="flex items-center gap-3 flex-wrap">
+        {items.map((item: string, idx: number) => (
+          <div key={item} className="rounded-2xl border border-gray-100 bg-[#fcfcfc]">
+            <div className="flex items-start gap-3 px-3 py-3 cursor-pointer hover:bg-blue-50/40" onClick={() => toggleItem(idx)}>
+              <ChevronRight className={`mt-0.5 h-5 w-5 text-blue-600 transition-transform ${openItems.includes(idx) ? "rotate-90" : ""}`} />
               <p className="text-sm leading-6 text-gray-700">{item}</p>
-              <div className="ml-2 flex items-center gap-1.5">
-                <a
-                  href={`https://chatgpt.com/?q=${encodeURIComponent("Week 1 T1 AI Systems Engineering challenge: " + item + " for scalable AI applications basics beginner explanation")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 transition-all border-[#10A37F]/20 bg-[#10A37F]/5 text-[#10A37F] hover:bg-[#10A37F]/10 hover:border-[#10A37F]/40"
-                  title="Open in ChatGPT"
-                >
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT" className="h-4 w-4" />
-                </a>
-                <a
-                  href={`https://www.google.com/search?udm=50&q=${encodeURIComponent("Week 1 T1 AI Systems Engineering challenge: " + item + " for scalable AI applications basics beginner explanation")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 transition-all border-[#4285F4]/20 bg-[#4285F4]/5 text-[#4285F4] hover:bg-[#4285F4]/10 hover:border-[#4285F4]/40"
-                  title="Open in Google AI"
-                >
-                  <img src="https://cdn.simpleicons.org/googlegemini/4285F4" alt="Gemini" className="h-4 w-4" />
-                </a>
-                <a
-                  href={`https://chat.deepseek.com/search?q=${encodeURIComponent("Week 1 T1 AI Systems Engineering challenge: " + item + " for scalable AI applications basics beginner explanation")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 transition-all border-[#5661F6]/20 bg-[#5661F6]/5 text-[#5661F6] hover:bg-[#5661F6]/10 hover:border-[#5661F6]/40"
-                  title="Open in DeepSeek"
-                >
-                  <img src="https://cdn.simpleicons.org/deepseek/5661F6" alt="DeepSeek" className="h-4 w-4" />
-                </a>
-              </div>
             </div>
+            {openItems.includes(idx) && title === "Low Level" && idx === 0 && (
+              <div className="px-3 pb-3 pl-10 space-y-1">
+                {uvSubskills.map((sub: string, i: number) => (
+                  <div key={i} className="text-xs text-gray-500">• {sub}</div>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default function T1Page() {
