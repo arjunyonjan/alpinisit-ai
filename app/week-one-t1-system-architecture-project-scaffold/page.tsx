@@ -1,4 +1,4 @@
-﻿"use client"
+﻿e client"
 import React, { useState } from 'react';
 import {
   Blocks,
@@ -85,21 +85,93 @@ function SectionCard({ title, description, items, icon: Icon, color }: any) {
         </div>
       </div>
       <div className="space-y-2">
-        {items.map((item: string, idx: number) => (
-          <div key={item} className="rounded-2xl border border-gray-100 bg-[#fcfcfc]">
-            <div className="flex items-start gap-3 px-3 py-3 cursor-pointer hover:bg-blue-50/40" onClick={() => toggleItem(idx)}>
-              <ChevronRight className={`mt-0.5 h-5 w-5 text-blue-600 transition-transform ${openItems.includes(idx) ? "rotate-90" : ""}`} />
-              <p className="text-sm leading-6 text-gray-700">{item}</p>
-            </div>
-            {openItems.includes(idx) && title === "Low Level" && idx === 0 && (
-              <div className="px-3 pb-3 pl-10 space-y-1">
-                {uvSubskills.map((sub: string, i: number) => (
-                  <div key={i} className="text-xs text-gray-500">• {sub}</div>
-                ))}
+                            {items.map((item: string, idx: number) => (
+            <div key={item} className="rounded-2xl border border-gray-100 bg-[#fcfcfc]">
+              <div className="flex items-center justify-between px-3 py-3 cursor-pointer hover:bg-blue-50/40" onClick={() => toggleItem(idx)}>
+                <div className="flex items-center gap-3">
+                  <ChevronRight className={`mt-0.5 h-5 w-5 text-blue-600 transition-transform ${openItems.includes(idx) ? "rotate-90" : ""}`} />
+                  <p className="text-sm leading-6 text-gray-700">{item}</p>
+                </div>
+                {idx === 0 && title === "Low Level" && (
+                  <div className="flex gap-2 mr-2" onClick={(e) => e.stopPropagation()}>
+                    <a
+                      href={`https://chatgpt.com/?q=${encodeURIComponent("AI Engineering Training > System Architecture and Project Scaffold - " + item)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:scale-110 transition"
+                      title="Ask ChatGPT about this skill"
+                    >
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT" className="w-5 h-5" />
+                    </a>
+                    <a
+                      href={`https://www.google.com/search?udm=50&q=${encodeURIComponent("AI Engineering Training > System Architecture and Project Scaffold - " + item)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:scale-110 transition"
+                      title="Search with Google AI"
+                    >
+                      <img src="https://cdn.simpleicons.org/googlegemini/4285F4" alt="Gemini" className="w-5 h-5" />
+                    </a>
+                    <a
+                      href={`https://chat.deepseek.com/search?q=${encodeURIComponent("AI Engineering Training > System Architecture and Project Scaffold - " + item)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:scale-110 transition"
+                      title="Ask DeepSeek"
+                    >
+                      <img src="https://cdn.simpleicons.org/deepseek/5661F6" alt="DeepSeek" className="w-5 h-5" />
+                    </a>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        ))}
+              {openItems.includes(idx) && title === "Low Level" && idx === 0 && (
+                <div className="px-3 pb-4 pl-10 space-y-2 border-t border-gray-100 mt-1">
+                  {uvSubskills.map((sub: string, i: number) => {
+                    const parentSkill = lowLevel[0];
+                    const pageHeading = "System Architecture and Project Scaffold";
+                    const fullContext = `AI Engineering Training > ${pageHeading} - ${parentSkill} - ${sub} - beginner friendly short and concise`;
+                    return (
+                      <div key={i} className="flex items-center justify-between text-sm text-gray-700 bg-gray-50 rounded-lg px-3 py-2 hover:bg-white hover:shadow-sm transition">
+                        <span className="flex items-center gap-2">
+                          <span className="text-cyan-500">▹</span>
+                          {sub}
+                        </span>
+                        <div className="flex gap-2">
+                          <a
+                            href={`https://chatgpt.com/?q=${encodeURIComponent(fullContext)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:scale-110 transition"
+                            title="Ask ChatGPT"
+                          >
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT" className="w-5 h-5" />
+                          </a>
+                          <a
+                            href={`https://www.google.com/search?udm=50&q=${encodeURIComponent(fullContext)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:scale-110 transition"
+                            title="Search with Google AI"
+                          >
+                            <img src="https://cdn.simpleicons.org/googlegemini/4285F4" alt="Gemini" className="w-5 h-5" />
+                          </a>
+                          <a
+                            href={`https://chat.deepseek.com/search?q=${encodeURIComponent(fullContext)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:scale-110 transition"
+                            title="Ask DeepSeek"
+                          >
+                            <img src="https://cdn.simpleicons.org/deepseek/5661F6" alt="DeepSeek" className="w-5 h-5" />
+                          </a>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          ))}
       </div>
     </div>
   );

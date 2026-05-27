@@ -33,3 +33,7 @@ body{
   overflow-x:hidden;
 }
 
+/* Smooth transitions for expandable subskills */
+.rounded-2xl {
+  transition: all 0.2s ease;
+}
