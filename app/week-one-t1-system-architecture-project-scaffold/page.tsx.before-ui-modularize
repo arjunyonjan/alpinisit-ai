@@ -68,15 +68,15 @@ const highLevel = [
   "Enterprise AI engineering workflows",
 ]
 
-function SectionCard({ title, description, skills, icon: Icon, color }: any) {
+function SectionCard({ title, description, items, icon: Icon, color }: any) {
   const [openItems, setOpenItems] = useState<number[]>([]);
   const toggleItem = (idx: number) => {
     setOpenItems(prev => prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]);
   };
   return (
     <div className="group rounded-3xl border border-gray-200 bg-white p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
-      <div className="mb-4 flex skills-center gap-4">
-        <div className={`flex h-12 w-12 skills-center justify-center rounded-3xl ${color}`}>
+      <div className="mb-4 flex items-center gap-4">
+        <div className={`flex h-12 w-12 items-center justify-center rounded-3xl ${color}`}>
           <Icon className="h-6 w-6 text-white" />
         </div>
         <div>
@@ -85,10 +85,10 @@ function SectionCard({ title, description, skills, icon: Icon, color }: any) {
         </div>
       </div>
       <div className="space-y-2">
-        {skills.map((item: string, idx: number) => (
+        {items.map((item: string, idx: number) => (
           <div key={item} className="rounded-2xl border border-gray-100 bg-[#fcfcfc]">
-            <div className="flex skills-center justify-between px-3 py-3 cursor-pointer hover:bg-blue-50/40" onClick={() => toggleItem(idx)}>
-              <div className="flex skills-center gap-3">
+            <div className="flex items-center justify-between px-3 py-3 cursor-pointer hover:bg-blue-50/40" onClick={() => toggleItem(idx)}>
+              <div className="flex items-center gap-3">
                 <ChevronRight className={`mt-0.5 h-5 w-5 text-blue-600 transition-transform ${openItems.includes(idx) ? "rotate-90" : ""}`} />
                 <p className="text-sm leading-6 text-gray-700">{item}</p>
               </div>
@@ -113,8 +113,8 @@ function SectionCard({ title, description, skills, icon: Icon, color }: any) {
                   const pageHeading = "System Architecture and Project Scaffold";
                   const fullContext = `AI Engineering Training > ${pageHeading} - ${parentSkill} - ${sub} - beginner friendly short and concise`;
                   return (
-                    <div key={i} className="flex skills-center justify-between text-sm text-gray-700 bg-gray-50 rounded-lg px-3 py-2 hover:bg-white hover:shadow-sm transition">
-                      <span className="flex skills-center gap-2">
+                    <div key={i} className="flex items-center justify-between text-sm text-gray-700 bg-gray-50 rounded-lg px-3 py-2 hover:bg-white hover:shadow-sm transition">
+                      <span className="flex items-center gap-2">
                         <span className="text-cyan-500">▹</span>
                         {sub}
                       </span>
@@ -149,7 +149,7 @@ export default function T1Page() {
           <div className="relative p-7">
             <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-blue-100 blur-3xl" />
             <div className="relative z-10">
-              <div className="mb-5 inline-flex skills-center gap-3 rounded-full border border-blue-100 bg-blue-50 px-5 py-2 text-sm font-semibold text-blue-700">
+              <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-blue-100 bg-blue-50 px-5 py-2 text-sm font-semibold text-blue-700">
                 <Rocket className="h-4 w-4" />
                 Week 1 — Task 1
               </div>
@@ -170,17 +170,17 @@ export default function T1Page() {
           <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm"><ShieldCheck className="mb-3 h-8 w-8 text-emerald-600" /><h3 className="text-lg font-bold text-gray-900">Production Ready</h3><p className="mt-2 text-sm leading-6 text-gray-600">Add logging retries validation and scalable infrastructure planning.</p></div>
         </div>
         <div className="grid gap-5">
-          <SectionCard title="Low Level" description="Foundational engineering setup and local development." skills={lowLevel} icon={Wrench} color="bg-gradient-to-br from-blue-500 to-cyan-500" />
-          <SectionCard title="Mid Level" description="Reusable architecture and scalable engineering patterns." skills={midLevel} icon={Layers3} color="bg-gradient-to-br from-violet-500 to-purple-500" />
-          <SectionCard title="High Level" description="Enterprise grade AI systems and production infrastructure." skills={highLevel} icon={BrainCircuit} color="bg-gradient-to-br from-emerald-500 to-green-500" />
+          <SectionCard title="Low Level" description="Foundational engineering setup and local development." items={lowLevel} icon={Wrench} color="bg-gradient-to-br from-blue-500 to-cyan-500" />
+          <SectionCard title="Mid Level" description="Reusable architecture and scalable engineering patterns." items={midLevel} icon={Layers3} color="bg-gradient-to-br from-violet-500 to-purple-500" />
+          <SectionCard title="High Level" description="Enterprise grade AI systems and production infrastructure." items={highLevel} icon={BrainCircuit} color="bg-gradient-to-br from-emerald-500 to-green-500" />
         </div>
         <div className="mt-10 rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
-          <div className="flex flex-col gap-5 lg:flex-row lg:skills-center lg:justify-between">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <div className="mb-3 flex skills-center gap-3"><Building2 className="h-6 w-6 text-blue-600" /><h3 className="text-2xl font-bold text-gray-900">AI Engineering Direction</h3></div>
+              <div className="mb-3 flex items-center gap-3"><Building2 className="h-6 w-6 text-blue-600" /><h3 className="text-2xl font-bold text-gray-900">AI Engineering Direction</h3></div>
               <p className="max-w-3xl leading-8 text-gray-600">Start with simple project scaffolding then evolve toward modular scalable observable enterprise AI systems incrementally.</p>
             </div>
-            <div className="flex h-20 w-20 skills-center justify-center rounded-3xl bg-gradient-to-br from-blue-500 to-violet-600 text-white shadow-lg"><Blocks className="h-10 w-10" /></div>
+            <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-blue-500 to-violet-600 text-white shadow-lg"><Blocks className="h-10 w-10" /></div>
           </div>
         </div>
       </div>
