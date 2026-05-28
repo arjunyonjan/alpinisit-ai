@@ -1,7 +1,7 @@
 ﻿"use client"
 
 import Link from "next/link"
-import { Bot, Cpu, Home, Layers3, BookOpen, Shield, Zap, BarChart, Globe } from "lucide-react"
+import { Bot, Cpu, Home, Layers3, BookOpen, Shield, Zap, BarChart, Globe, FolderTree } from "lucide-react"
 import { usePathname } from "next/navigation"
 
 const links = [
@@ -9,6 +9,11 @@ const links = [
     name: "Home",
     href: "/",
     icon: Home,
+  },
+  {
+    name: "Chatbot Project Structure",
+    href: "/llmchat-project-structure",
+    icon: FolderTree,
   },
   {
     name: "Week 1 — AI Systems & Engineering Setup",
@@ -87,14 +92,15 @@ export default function Sidebar() {
   return (
     <aside className="fixed left-0 top-0 hidden h-screen w-72 border-r border-gray-200 bg-white lg:flex lg:flex-col overflow-y-auto">
       <div className="border-b border-gray-200 p-6">
-        <div className="flex items-center gap-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-violet-600 text-white shadow-lg">
-            <Bot className="h-7 w-7" />
-          </div>
-          <div>
-            <h1 className="text-lg font-bold text-gray-900">Alpinist AI</h1>
-            <p className="text-sm text-gray-500">Training Platform</p>
-          </div>
+        <div className="flex flex-col items-center gap-2">
+          <img
+            src="/alpinistlogo.png"
+            alt="Alpinist AI Logo"
+            className="h-10 w-full object-contain"
+          />
+          <h1 className="text-base font-bold text-gray-900">Alpinist AI</h1>
+          <p className="text-xs text-gray-500">Training Platform</p>
+          <p className="-mt-1 text-[10px] tracking-widest uppercase text-indigo-400 font-semibold">Nepal</p>
         </div>
       </div>
       <nav className="flex-1 space-y-2 p-4">

@@ -250,6 +250,6 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
-    <div className="fixed bottom-6 right-6 z-50"><a href="/images/llm-ai.png" target="_blank" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center gap-2">📸 View Design</a></div><div className="fixed bottom-6 right-6 z-50"><a href="/images/llm-ai.png" target="_blank" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-semibold shadow-2xl hover:scale-105 transition-transform flex items-center gap-2">📐 View Design</a></div></main>
+    </main>
   )
 }
