@@ -1,7 +1,8 @@
 ﻿"use client"
 
+import { useState } from "react"
 import Link from "next/link"
-import { Bot, Cpu, Home, Layers3, BookOpen, Shield, Zap, BarChart, Globe, FolderTree } from "lucide-react"
+import { Bot, Cpu, Home, Layers3, BookOpen, Shield, Zap, BarChart, Globe, FolderTree, Menu, X } from "lucide-react"
 import { usePathname } from "next/navigation"
 
 const links = [
@@ -86,11 +87,23 @@ const links = [
   },
 ]
 
-export default function Sidebar() {
+export function MobileMenuButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className="fixed top-4 left-4 z-50 flex h-10 w-10 items-center justify-center rounded-xl bg-white/90 shadow-lg backdrop-blur-md border border-gray-200 lg:hidden"
+      aria-label="Open menu"
+    >
+      <Menu className="h-5 w-5 text-gray-700" />
+    </button>
+  )
+}
+
+export default function Sidebar({ open = false, onClose }: { open?: boolean; onClose?: () => void }) {
   const pathname = usePathname()
 
-  return (
-    <aside className="fixed left-0 top-0 hidden h-screen w-72 border-r border-gray-200 bg-white lg:flex lg:flex-col overflow-y-auto">
+  const navContent = (
+    <>
       <div className="border-b border-gray-200 p-6">
         <div className="flex flex-col items-center gap-2">
           <img
@@ -103,7 +116,7 @@ export default function Sidebar() {
           <p className="-mt-1 text-[10px] tracking-widest uppercase text-indigo-400 font-semibold">Nepal</p>
         </div>
       </div>
-      <nav className="flex-1 space-y-2 p-4">
+      <nav className="flex-1 space-y-2 p-4 overflow-y-auto pb-20">
         {links.map((link) => {
           const Icon = link.icon
           const active = pathname === link.href || (link.children && pathname?.startsWith(link.href))
@@ -111,6 +124,7 @@ export default function Sidebar() {
             <div key={link.href}>
               <Link
                 href={link.href}
+                onClick={onClose}
                 className={`flex items-center gap-4 rounded-2xl px-4 py-4 transition-all duration-200 ${
                   active ? "bg-blue-50 text-blue-700" : "text-gray-600 hover:bg-gray-100"
                 }`}
@@ -125,6 +139,7 @@ export default function Sidebar() {
                   <Link
                     key={child.href}
                     href={child.href}
+                    onClick={onClose}
                     className={`ml-8 mt-2 flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition-all hover:bg-gray-100 ${
                       isChildActive ? "bg-blue-50 text-blue-700" : "text-gray-500"
                     }`}
@@ -138,6 +153,35 @@ export default function Sidebar() {
           )
         })}
       </nav>
-    </aside>
+    </>
+  )
+
+  return (
+    <>
+      {/* Desktop sidebar - unchanged */}
+      <aside className="fixed left-0 top-0 hidden h-screen w-72 border-r border-gray-200 bg-white lg:flex lg:flex-col overflow-y-auto">
+        {navContent}
+      </aside>
+
+      {/* Mobile drawer */}
+      {open && (
+        <>
+          <div
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
+            onClick={onClose}
+          />
+          <aside className="fixed inset-y-0 left-0 z-50 flex w-72 flex-col bg-white shadow-2xl lg:hidden overflow-y-auto">
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-lg hover:bg-gray-100"
+              aria-label="Close menu"
+            >
+              <X className="h-5 w-5 text-gray-600" />
+            </button>
+            {navContent}
+          </aside>
+        </>
+      )}
+    </>
   )
 }

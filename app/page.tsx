@@ -70,12 +70,12 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative overflow-hidden px-6 pt-32 pb-20 lg:pt-40 lg:pb-32 min-h-[90vh] flex items-center">
         <div className="absolute inset-0 z-0">
-          <img 
+          <img
             src="https://res.cloudinary.com/dpnxmo8ak/image/upload/v1779824074/alpinist/file_00000000af10720bb2b3b6418d424fbd_h6andc.png"
             alt="Hero Background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-black/25 md:from-black/40 md:via-black/30 md:to-black/35"></div>
         </div>
         
         <div className="relative max-w-7xl mx-auto text-center z-10">
