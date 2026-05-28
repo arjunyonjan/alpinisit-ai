@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Bot, Cpu, Home, Layers3, BookOpen, Shield, Zap, BarChart, Globe, FolderTree, Menu, X } from "lucide-react"
+import { Bot, Cpu, Home, Layers3, BookOpen, Shield, Zap, BarChart, Globe, FolderTree, Menu, X, Cloud } from "lucide-react"
 import { usePathname } from "next/navigation"
 
 const links = [
@@ -15,6 +15,11 @@ const links = [
     name: "Chatbot Project Structure",
     href: "/llmchat-project-structure",
     icon: FolderTree,
+  },
+  {
+    name: "Ollama Cloud",
+    href: "/ollama-cloud",
+    icon: Cloud,
   },
   {
     name: "Week 1 — AI Systems & Engineering Setup",
