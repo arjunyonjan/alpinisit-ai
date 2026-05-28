@@ -71,8 +71,8 @@ export default function HomePage() {
       <section className="relative overflow-hidden px-6 pt-32 pb-20 lg:pt-40 lg:pb-32 min-h-[90vh] flex items-center">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://res.cloudinary.com/dpnxmo8ak/image/upload/v1779824074/alpinist/file_00000000af10720bb2b3b6418d424fbd_h6andc.png"
-            alt="Hero Background"
+            src="https://res.cloudinary.com/dpnxmo8ak/image/upload/v1779958958/alpinist/ai-classroom_mroyuv.png"
+            alt="AI Classroom"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-black/25 md:from-black/40 md:via-black/30 md:to-black/35"></div>
@@ -112,6 +112,56 @@ export default function HomePage() {
               </button>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section className="px-6 py-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              <Camera className="w-4 h-4" />
+              GALLERY
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Spaces</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">World-class AI training facilities</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="group relative overflow-hidden rounded-3xl shadow-xl aspect-video"
+            >
+              <img
+                src="https://res.cloudinary.com/dpnxmo8ak/image/upload/v1779958958/alpinist/ai-classroom_mroyuv.png"
+                alt="AI Classroom"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                <span className="text-white font-semibold text-lg">AI Training Lab</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="group relative overflow-hidden rounded-3xl shadow-xl aspect-video"
+            >
+              <img
+                src="https://res.cloudinary.com/dpnxmo8ak/image/upload/v1779824074/alpinist/file_00000000af10720bb2b3b6418d424fbd_h6andc.png"
+                alt="Alpinist AI Facility"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                <span className="text-white font-semibold text-lg">Alpinist AI Campus</span>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
