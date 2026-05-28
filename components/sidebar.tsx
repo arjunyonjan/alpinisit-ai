@@ -91,10 +91,10 @@ export function MobileMenuButton({ onClick }: { onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      className="fixed top-4 left-4 z-50 flex h-10 w-10 items-center justify-center rounded-xl bg-white/90 shadow-lg backdrop-blur-md border border-gray-200 lg:hidden"
+      className="fixed top-4 right-4 z-[100] flex h-11 w-11 items-center justify-center rounded-xl bg-white shadow-xl backdrop-blur-md border border-gray-200 lg:hidden active:scale-95 transition-transform"
       aria-label="Open menu"
     >
-      <Menu className="h-5 w-5 text-gray-700" />
+      <Menu className="h-6 w-6 text-gray-800" />
     </button>
   )
 }
@@ -167,10 +167,10 @@ export default function Sidebar({ open = false, onClose }: { open?: boolean; onC
       {open && (
         <>
           <div
-            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-[90] bg-black/40 backdrop-blur-sm lg:hidden"
             onClick={onClose}
           />
-          <aside className="fixed inset-y-0 left-0 z-50 flex w-72 flex-col bg-white shadow-2xl lg:hidden overflow-y-auto">
+          <aside className="fixed inset-y-0 left-0 z-[100] flex w-72 flex-col bg-white shadow-2xl lg:hidden overflow-y-auto">
             <button
               onClick={onClose}
               className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-lg hover:bg-gray-100"
