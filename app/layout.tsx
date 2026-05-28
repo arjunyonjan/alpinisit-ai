@@ -1,10 +1,7 @@
-﻿"use client"
-
-import type { Metadata } from "next"
+﻿import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import Sidebar, { MobileMenuButton } from "@/components/sidebar"
-import { useState } from "react"
+import ClientLayout from "./client-layout"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,16 +19,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const [menuOpen, setMenuOpen] = useState(false)
-
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans bg-[#f8fafc]`}>
-        <Sidebar open={menuOpen} onClose={() => setMenuOpen(false)} />
-        <MobileMenuButton onClick={() => setMenuOpen(true)} />
-        <div className="lg:ml-72">
-          {children}
-        </div>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   )
