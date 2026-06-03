@@ -4,7 +4,6 @@ import { notFound, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import ReactMarkdown from "react-markdown";
-import TwoColumnLayout from "@/components/TwoColumnLayout";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import LayoutSwitcher from "@/components/LayoutSwitcher";
 import AIThemeButton from "@/components/AIThemeButton";
@@ -27,11 +26,10 @@ export default function ReadNotePage() {
   const [loading, setLoading] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [aiPanelOpen, setAiPanelOpen] = useState(false);
-  const [noteContent, setNoteContent] = useState("");
-  const [isHtmlContent, setIsHtmlContent] = useState(false);
-  const [viewMode, setViewMode] = useState<"markdown" | "html">("markdown");
+  const [markdownContent, setMarkdownContent] = useState("");
+  const [htmlContent, setHtmlContent] = useState("");
+  const [viewMode, setViewMode] = useState<"markdown">("markdown");
 
-  // Load saved layout for this note
   useEffect(() => {
     if (!slug) return;
     const saved = localStorage.getItem(`layout-${slug}`);
@@ -40,7 +38,6 @@ export default function ReadNotePage() {
     }
   }, [slug, setLayout]);
 
-  // Save layout when changed
   const saveLayout = (newLayout: string) => {
     setLayout(newLayout as any);
     if (slug) {
@@ -54,7 +51,7 @@ export default function ReadNotePage() {
       .then(res => res.json())
       .then(data => {
         setNote(data);
-        setNoteContent(data.content);
+        setMarkdownContent(data.content);
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -65,30 +62,42 @@ export default function ReadNotePage() {
   if (!note) notFound();
 
   const tags = note.tags || [];
-  const layoutClass = layout === "one-col" 
-    ? "max-w-5xl mx-auto"
-    : layout === "two-col-alt"
-    ? "w-full"
-    : "max-w-4xl mx-auto";
+
+  // Split content for two-column layout
+  const paragraphs = markdownContent.split(/\n\s*\n/);
+  const midPoint = Math.ceil(paragraphs.length / 2);
+  const leftContent = paragraphs.slice(0, midPoint).join("\n\n");
+  const rightContent = paragraphs.slice(midPoint).join("\n\n");
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 layout-${layout}`}>
-      <div className="p-6 md:p-8">
+    <div className={`w-full min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 layout-${layout}`}>
+      <div className="p-4 md:p-6 w-full">
         {/* Desktop Toolbar */}
-        <div className="hidden md:flex justify-end gap-2 mb-6 flex-wrap">
-          <div className="text-xs text-slate-400 self-center mr-auto bg-slate-100 px-2 py-1 rounded-full">
-            📐 {layout === "document" ? "Document" : layout === "one-col" ? "1 Column" : "2 Column Alternate"}
+        <div className="hidden md:flex justify-between items-center mb-6">
+          <div className="flex gap-2">
+            <button
+              onClick={() => setViewMode("markdown")}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+                viewMode === "markdown"
+                  ? "bg-indigo-600 text-white"
+                  : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
+              }`}
+            >
+              📝 Markdown
+            </button>
+            
           </div>
-          <AIThemeButton onToggle={() => setAiPanelOpen(!aiPanelOpen)} />
-          <div className="theme-selector"><ThemeSwitcher /></div>
-          <LayoutSwitcher layout={layout} setLayout={saveLayout} />
+          <div className="flex gap-2">
+            
+            <AIThemeButton onToggle={() => setAiPanelOpen(!aiPanelOpen)} />
+            <div className="theme-selector"><ThemeSwitcher /></div>
+            <LayoutSwitcher layout={layout} setLayout={saveLayout} />
+          </div>
         </div>
 
         {/* Mobile Toolbar */}
         <div className="md:hidden flex justify-between items-center mb-4">
-          <div className="text-xs text-slate-400 bg-slate-100 px-2 py-1 rounded-full">
-            📐 {layout === "document" ? "Document" : layout === "one-col" ? "1 Column" : "2 Column Alternate"}
-          </div>
+          
           <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 rounded-lg bg-white shadow-sm border border-slate-200">
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -103,40 +112,51 @@ export default function ReadNotePage() {
           </div>
         )}
 
-        {/* Content */}
-        <div className={layoutClass}>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-slate-200 shadow-sm">
-            <div className="mb-8">
-              <h1 className="text-3xl font-bold text-slate-800">{note.title || slug}</h1>
-              <div className="text-sm text-slate-500 mt-2">{note.date} · {note.status}</div>
-              {tags.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {tags.map((tag: string) => (
-                    <span key={tag} className="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-full">
-                      #{tag.trim()}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-            {layout === "two-col-alt" ? (
-              <TwoColumnLayout content={noteContent} />
-            ) : (
-              <div className="note-content prose prose-slate max-w-none prose-headings:mt-8 prose-headings:mb-4 prose-headings:pb-2 prose-headings:border-b prose-headings:border-slate-200 prose-h1:mt-0 prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:mb-4 prose-ul:my-4 prose-li:my-2">            {isHtmlContent ? (
-              <div dangerouslySetInnerHTML={{ __html: noteContent }} />
-            ) : (
-              <ReactMarkdown>{noteContent}</ReactMarkdown>
-            )}</div>
+        {/* Content Area */}
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200 w-full">
+          {/* Title and metadata */}
+          <div className="px-6 py-4 border-b border-slate-200">
+            <h1 className="text-2xl font-bold text-slate-800">{note.title || slug}</h1>
+            <div className="text-sm text-slate-500 mt-1">{note.date} · {note.status}</div>
+            {tags.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-2">
+                {tags.map((tag: string) => (
+                  <span key={tag} className="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-full">
+                    #{tag.trim()}
+                  </span>
+                ))}
+              </div>
             )}
           </div>
-        </div>
+
+          {/* Markdown View */}
+          {viewMode === "markdown" && layout !== "two-col-alt" && (
+            <div className="note-content prose prose-slate max-w-none px-6 py-4">
+              <ReactMarkdown>{markdownContent}</ReactMarkdown>
+            </div>
+          )}
+
+          {/* Two Column Markdown View */}
+          {viewMode === "markdown" && layout === "two-col-alt" && (
+            <div className="grid md:grid-cols-2 gap-6 px-6 py-4">
+              <div className="note-content prose prose-slate max-w-none">
+                <ReactMarkdown>{leftContent}</ReactMarkdown>
+              </div>
+              <div className="note-content prose prose-slate max-w-none">
+                <ReactMarkdown>{rightContent}</ReactMarkdown>
+              </div>
+            </div>
+          )}
+
+          {/* HTML Preview View */}\n\n        </div>
       </div>
 
       <AIPreviewPanel
         isOpen={aiPanelOpen}
         onClose={() => setAiPanelOpen(false)}
-        originalContent={noteContent}
-        onApply={(newContent) => setNoteContent(newContent)}
+        originalContent={markdownContent}
+        onApply={(newContent) => setHtmlContent(newContent)}
+        currentLayout={layout}
       />
     </div>
   );
