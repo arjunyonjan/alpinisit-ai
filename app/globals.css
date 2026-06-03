@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 @theme inline {
   --font-sans: var(--font-geist-sans);
@@ -53,3 +53,57 @@ body {
 .blob-delay-1 { animation-delay: -3s; }
 .blob-delay-2 { animation-delay: -6s; }
 .blob-delay-3 { animation-delay: -9s; }
+
+/* Layout mode styles */
+.layout-document .prose {
+  max-width: 65ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.layout-one-col .prose {
+  max-width: 90ch;
+  font-size: 1.125rem;
+}
+
+.layout-two-col-alt .prose {
+  max-width: 100%;
+}
+
+.layout-two-col-alt .content-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.layout-two-col-alt .content-block:nth-child(even) .text {
+  order: 2;
+}
+
+.layout-two-col-alt .content-block:nth-child(even) .media {
+  order: 1;
+}
+
+@media (max-width: 768px) {
+  .layout-two-col-alt .content-block {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .layout-two-col-alt .content-block:nth-child(even) .text {
+    order: 1;
+  }
+}
+/* AI Theme dim effect */
+.ai-theme-active .theme-selector {
+  opacity: 0.4;
+  filter: blur(1px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.ai-theme-active .theme-selector:hover {
+  opacity: 0.4;
+  filter: blur(1px);
+}
