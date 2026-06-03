@@ -1,148 +1,220 @@
+"use client"
+
+import { motion } from "framer-motion"
+import { Target, ArrowRight, Brain, Zap, Eye, Volume2, ArrowLeftRight, CircleDot, TrendingUp, TrendingDown } from "lucide-react"
+
 export default function WeightBiasActivationPage() {
   return (
-    <main className="min-h-screen bg-white overflow-y-auto">
-      <div className="max-w-4xl mx-auto p-6 md:p-12">
+    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <div className="max-w-4xl mx-auto px-6 py-12 md:py-20">
 
-        {/* Title from image */}
-        <div className="min-h-screen flex flex-col justify-center mb-16">
-          <h1 className="text-3xl text-black font-bold mb-2 text-center">
-            Your score decides: HIT or MISS!
+        {/* Hero Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
+            <Target className="w-4 h-4" />
+            NEURAL NETWORK BASICS
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-4">
+            Weight, Bias & Activation
           </h1>
-          <p className="text-xl text-black mb-8 text-center">
-            तपाईको स्कोरले तय गर्छ: हिट कि मिस!
+          <p className="text-xl text-gray-500 max-w-2xl mx-auto">
+            Your score decides: HIT or MISS!
           </p>
-          {/* CLOUDINARY_IMG: title-hit-or-miss */}
-        </div>
+          <p className="text-lg text-gray-400 mt-2"></p>
+        </motion.div>
 
-        {/* 1. Power */}
-        <div className="min-h-screen flex flex-col justify-center mb-16">
-          <h2 className="text-2xl text-black font-medium mb-4">
-            1. Power शक्ति (फिक्ने बल)
-          </h2>
-          <p className="text-black text-xl mb-2">0.7</p>
-          <p className="text-black">× 0.6 (Power matters)</p>
-          <p className="text-black">(शक्तिको महत्व)</p>
-          {/* CLOUDINARY_IMG: power-boy-marble */}
-        </div>
-
-        {/* 2. Angle */}
-        <div className="min-h-screen flex flex-col justify-center mb-16">
-          <h2 className="text-2xl text-black font-medium mb-4">
-            2. Angle कोण (निशानाको दिशा)
-          </h2>
-          <p className="text-black text-xl mb-2">0.3</p>
-          <p className="text-black">× 0.3 (Angle matters)</p>
-          <p className="text-black">(कोणको महत्व)</p>
-          {/* CLOUDINARY_IMG: angle-diagram */}
-        </div>
-
-        {/* 3. Luck (Bias) */}
-        <div className="min-h-screen flex flex-col justify-center mb-16">
-          <h2 className="text-2xl text-black font-medium mb-4">
-            3. Luck (Bias) भाग्य (बेस मान)
-          </h2>
-          <p className="text-black text-xl mb-2">0.2</p>
-          {/* CLOUDINARY_IMG: luck-clover */}
-        </div>
-
-        {/* Your Score */}
-        <div className="min-h-screen flex flex-col justify-center mb-16">
-          <h2 className="text-2xl text-black font-medium mb-4">
-            Your Score तपाईको स्कोर
-          </h2>
-          <p className="text-black text-3xl font-bold mb-4">= 0.71</p>
-          <p className="text-black font-mono">
-            (0.7×0.6) + (0.3×0.3) + 0.2
-          </p>
-          <p className="text-black font-mono">
-            = 0.42 + 0.09 + 0.20
-          </p>
-          <p className="text-black font-mono">
-            = 0.71
-          </p>
-          {/* CLOUDINARY_IMG: score-calculation */}
-        </div>
-
-        {/* Decision: Is score > 0.5? */}
-        <div className="min-h-screen flex flex-col justify-center mb-16">
-          <div className="border-2 border-yellow-500 p-4 mb-8">
-            <p className="text-black text-xl">Is score &gt; 0.5 ?</p>
-            <p className="text-black">के स्कोर 0.5 भन्दा ठूलो छ ?</p>
+        {/* The Marble Analogy - Hero Image Area */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 mb-16 text-center shadow-2xl"
+        >
+          <div className="text-8xl mb-4">🎯 🧠 🎯</div>
+          <p className="text-white text-xl font-semibold mb-2">Forward Propagation = Marble rolls through your brain</p>
+          <p className="text-slate-300"></p>
+          <div className="flex justify-center gap-8 mt-6 text-sm">
+            <div className="text-center"><div className="w-3 h-3 rounded-full bg-blue-400 mx-auto mb-1"></div><span className="text-slate-300">Eyes (Input)</span></div>
+            <ArrowRight className="text-slate-500" />
+            <div className="text-center"><div className="w-3 h-3 rounded-full bg-purple-400 mx-auto mb-1 animate-pulse"></div><span className="text-slate-300">Thinking (Hidden)</span></div>
+            <ArrowRight className="text-slate-500" />
+            <div className="text-center"><div className="w-3 h-3 rounded-full bg-green-400 mx-auto mb-1"></div><span className="text-slate-300">Mouth (Output)</span></div>
           </div>
-          <div className="flex gap-8 justify-center">
-            <div className="text-green-600">
-              <p className="text-xl font-bold">Yes! हो!</p>
-              <p className="text-xl">✓ HIT हिट</p>
+        </motion.div>
+
+        {/* 1. Power = Weight */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="bg-white rounded-3xl border border-gray-200 p-8 mb-8 shadow-lg hover:shadow-xl transition-all"
+        >
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-md">
+              <Zap className="w-6 h-6 text-white" />
             </div>
-            <div className="text-red-600">
-              <p className="text-xl font-bold">No! होइन!</p>
-              <p className="text-xl">✗ MISS मिस</p>
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900">1. Power (Weight)</h2>
+              <p className="text-gray-500"></p>
             </div>
           </div>
-          {/* CLOUDINARY_IMG: decision-tree */}
-        </div>
-
-        {/* HIT vs MISS visual */}
-        <div className="min-h-screen flex flex-col justify-center mb-16">
-          <div className="flex gap-16 justify-center items-center">
-            <div className="text-center">
-              <p className="text-green-600 text-xl font-bold">HIT</p>
-              <p className="text-green-600">हिट</p>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-blue-50 rounded-2xl p-6 text-center">
+              <div className="text-5xl font-bold text-blue-600 mb-2">0.7</div>
+              <p className="text-blue-700 font-medium">Power Value</p>
+              <p className="text-sm text-blue-500">(Flick strength)</p>
             </div>
-            <div className="text-center">
-              <p className="text-red-600 text-xl font-bold">MISS</p>
-              <p className="text-red-600">मिस</p>
+            <div className="bg-cyan-50 rounded-2xl p-6 text-center">
+              <div className="text-5xl font-bold text-cyan-600 mb-2">0.6</div>
+              <p className="text-cyan-700 font-medium">Power Matters</p>
+              <p className="text-sm text-cyan-500"></p>
             </div>
           </div>
-          <p className="text-black text-center mt-8">Inside = Hit. Outside = Miss.</p>
-          {/* CLOUDINARY_IMG: hit-miss-circles */}
-        </div>
+          <div className="mt-6 p-4 bg-gray-50 rounded-xl text-center">
+            <p className="text-gray-600">📌 <strong class="text-blue-600">Weight</strong> = How much influence this input has on the final decision</p>
+          </div>
+        </motion.div>
 
-        {/* Remember box */}
-        <div className="min-h-screen flex flex-col justify-center mb-16">
-          <div className="border-2 border-yellow-500 p-6">
-            <p className="text-black font-bold mb-2">Remember: याद राख्नुहोस्:</p>
-            <p className="text-black mb-2">
+        {/* 2. Angle = Activation */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="bg-white rounded-3xl border border-gray-200 p-8 mb-8 shadow-lg hover:shadow-xl transition-all"
+        >
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-md">
+              <ArrowLeftRight className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900">2. Angle (Activation)</h2>
+              <p className="text-gray-500"></p>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-purple-50 rounded-2xl p-6 text-center">
+              <div className="text-5xl font-bold text-purple-600 mb-2">0.3</div>
+              <p className="text-purple-700 font-medium">Angle Value</p>
+              <p className="text-sm text-purple-500">(Aim direction)</p>
+            </div>
+            <div className="bg-pink-50 rounded-2xl p-6 text-center">
+              <div className="text-5xl font-bold text-pink-600 mb-2">0.3</div>
+              <p className="text-pink-700 font-medium">Angle Matters</p>
+              <p className="text-sm text-pink-500"></p>
+            </div>
+          </div>
+          <div className="mt-6 p-4 bg-gray-50 rounded-xl text-center">
+            <p className="text-gray-600">📌 <strong class="text-purple-600">Activation Function</strong> = Decides how much signal passes through the neuron</p>
+          </div>
+        </motion.div>
+
+        {/* 3. Luck = Bias */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="bg-white rounded-3xl border border-gray-200 p-8 mb-8 shadow-lg hover:shadow-xl transition-all"
+        >
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center shadow-md">
+              <CircleDot className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900">3. Luck (Bias)</h2>
+              <p className="text-gray-500"></p>
+            </div>
+          </div>
+          <div className="bg-green-50 rounded-2xl p-6 text-center max-w-xs mx-auto">
+            <div className="text-5xl font-bold text-green-600 mb-2">0.2</div>
+            <p className="text-green-700 font-medium">Bias Value</p>
+            <p className="text-sm text-green-500"></p>
+          </div>
+          <div className="mt-6 p-4 bg-gray-50 rounded-xl text-center">
+            <p className="text-gray-600">📌 <strong class="text-green-600">Bias</strong> = Base score that shifts the decision threshold</p>
+          </div>
+        </motion.div>
+
+        {/* Score Calculation */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-3xl border border-indigo-200 p-8 mb-8 shadow-lg"
+        >
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">🎯 Your Score Calculation</h2>
+          <div className="bg-white rounded-2xl p-6 mb-4">
+            <p className="font-mono text-lg text-center mb-4">
               Score = (Power × Power matters) + (Angle × Angle matters) + Luck
             </p>
-            <p className="text-black">
-              स्कोर = (शक्ति × शक्तिको महत्व) + (कोण × कोणको महत्व) + भाग्य
+            <p className="font-mono text-center text-gray-500 mb-6">
+              स्कोर = (Weight × ) + (Angle × ) + Luck
             </p>
-          </div>
-          {/* CLOUDINARY_IMG: remember-box */}
-        </div>
-
-        {/* Forward Propagation */}
-        <div className="min-h-screen flex flex-col justify-center mb-16">
-          <p className="text-black text-center text-xl">
-            Forward Propagation = Marble rolls through your brain
-          </p>
-          <div className="flex justify-between items-center mt-8 text-center">
-            <div>
-              <p className="text-black font-bold">Eyes</p>
-              <p className="text-black">(Input)</p>
-            </div>
-            <div>
-              <p className="text-black font-bold">Thinking</p>
-              <p className="text-black">(Hidden)</p>
-              <p className="text-3xl">?</p>
-            </div>
-            <div>
-              <p className="text-black font-bold">Mouth</p>
-              <p className="text-black">(Output)</p>
-              <p className="text-xl">"HIT!"</p>
+            <div className="bg-gray-100 rounded-xl p-4 font-mono text-center space-y-2">
+              <p>= (0.7 × 0.6) + (0.3 × 0.3) + 0.2</p>
+              <p>= 0.42 + 0.09 + 0.20</p>
+              <p className="text-2xl font-bold text-indigo-600">= 0.71</p>
             </div>
           </div>
-          {/* CLOUDINARY_IMG: forward-prop-brain */}
-        </div>
+        </motion.div>
 
-        {/* Flick = Weight. Angle = Bias */}
-        <div className="min-h-screen flex flex-col justify-center mb-16">
-          <p className="text-black text-xl">Flick = Weight</p>
-          <p className="text-black text-xl mt-4">Angle = Bias</p>
-          <p className="text-black mt-8">In circle = Correct Prediction</p>
-          {/* CLOUDINARY_IMG: chalk-neural-net */}
-        </div>
+        {/* Decision */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl border-2 border-yellow-300 p-8 mb-8 shadow-lg"
+        >
+          <div className="text-center mb-8">
+            <p className="text-2xl font-bold text-gray-800 mb-2">Is score &gt; 0.5?</p>
+            <p className="text-lg text-gray-600"></p>
+          </div>
+          <div className="flex flex-wrap gap-8 justify-center">
+            <div className="bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl p-6 text-center text-white shadow-lg min-w-[150px]">
+              <TrendingUp className="w-8 h-8 mx-auto mb-2" />
+              <p className="text-2xl font-bold">Yes! </p>
+              <p className="text-xl">✓ HIT </p>
+            </div>
+            <div className="bg-gradient-to-br from-red-500 to-rose-500 rounded-2xl p-6 text-center text-white shadow-lg min-w-[150px]">
+              <TrendingDown className="w-8 h-8 mx-auto mb-2" />
+              <p className="text-2xl font-bold">No! </p>
+              <p className="text-xl">✗ MISS </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Summary Box */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-3xl p-8 text-white shadow-2xl"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <Brain className="w-8 h-8 text-purple-400" />
+            <h3 className="text-2xl font-bold">Remember: Remember</h3>
+          </div>
+          <div className="space-y-4">
+            <div className="border-l-4 border-blue-500 pl-4">
+              <p className="font-mono text-blue-300">Weight (Weight)</p>
+              <p className="text-gray-300 text-sm">How hard you flick / कति बलले फ्याँक्ने</p>
+            </div>
+            <div className="border-l-4 border-purple-500 pl-4">
+              <p className="font-mono text-purple-300">Activation (Angle)</p>
+              <p className="text-gray-300 text-sm">Direction of flick / कुन दिशामा फ्याँक्ने</p>
+            </div>
+            <div className="border-l-4 border-green-500 pl-4">
+              <p className="font-mono text-green-300">Bias (Luck)</p>
+              <p className="text-gray-300 text-sm">Base luck / पूर्वाग्रह मान</p>
+            </div>
+          </div>
+          <div className="mt-6 pt-6 border-t border-gray-700 text-center">
+            <p className="text-lg font-semibold text-cyan-400">Inside = HIT | बाहिर = </p>
+          </div>
+        </motion.div>
 
       </div>
     </main>

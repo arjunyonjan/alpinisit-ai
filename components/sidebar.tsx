@@ -1,15 +1,38 @@
-﻿"use client"
+"use client"
 
 import { useState } from "react"
 import Link from "next/link"
-import { Bot, Cpu, Home, Layers3, BookOpen, Shield, Zap, BarChart, Globe, FolderTree, Menu, X, Cloud } from "lucide-react"
+import { 
+  Bot, Cpu, Home, Layers3, BookOpen, Shield, Zap, BarChart, Globe, 
+  FolderTree, Menu, X, Cloud, ChevronDown, ChevronRight, Brain, Target,
+  ChevronUp
+} from "lucide-react"
 import { usePathname } from "next/navigation"
 
-const links = [
+interface NavItem {
+  name: string
+  href: string
+  icon: any
+  children?: NavItem[]
+}
+
+const links: NavItem[] = [
   {
     name: "Home",
     href: "/",
     icon: Home,
+  },
+  {
+    name: "Deep Learning",
+    href: "/deep-learning/weight-bias-activation",
+    icon: Brain,
+    children: [
+      {
+        name: "Weight, Bias & Activation",
+        href: "/deep-learning/weight-bias-activation",
+        icon: Target,
+      },
+    ],
   },
   {
     name: "Chatbot Project Structure",
@@ -92,6 +115,68 @@ const links = [
   },
 ]
 
+interface NavItemRendererProps {
+  item: NavItem
+  depth?: number
+  pathname: string
+  onClose?: () => void
+}
+
+function NavItemRenderer({ item, depth = 0, pathname, onClose }: NavItemRendererProps) {
+  const [isOpen, setIsOpen] = useState(depth === 0)
+  const Icon = item.icon
+  const hasChildren = item.children && item.children.length > 0
+  const isActive = pathname === item.href || (item.href.includes('#') && pathname === item.href.split('#')[0])
+  const isChildActive = hasChildren && item.children?.some(child => 
+    pathname === child.href || (child.href.includes('#') && pathname === child.href.split('#')[0])
+  )
+
+  const handleToggle = () => {
+    if (hasChildren) setIsOpen(!isOpen)
+  }
+
+  return (
+    <div>
+      <div
+        className={`flex items-center justify-between rounded-2xl px-4 py-3 transition-all duration-200 ${
+          isActive || isChildActive ? "bg-blue-50 text-blue-700" : "text-gray-600 hover:bg-gray-100"
+        } ${depth > 0 ? "ml-6" : ""}`}
+      >
+        <Link
+          href={item.href}
+          onClick={onClose}
+          className="flex items-center gap-3 flex-1"
+        >
+          <Icon className="h-5 w-5" />
+          <span className="font-medium text-sm">{item.name}</span>
+        </Link>
+        {hasChildren && (
+          <button
+            onClick={handleToggle}
+            className="p-1 hover:bg-gray-200 rounded-lg transition-colors"
+            aria-label={isOpen ? "Collapse" : "Expand"}
+          >
+            {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+          </button>
+        )}
+      </div>
+      {hasChildren && isOpen && (
+        <div className="ml-2 mt-1 space-y-1">
+          {item.children!.map((child) => (
+            <NavItemRenderer
+              key={child.href}
+              item={child}
+              depth={depth + 1}
+              pathname={pathname}
+              onClose={onClose}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export function MobileMenuButton({ onClick }: { onClick: () => void }) {
   return (
     <button
@@ -121,50 +206,23 @@ export default function Sidebar({ open = false, onClose }: { open?: boolean; onC
           <p className="-mt-1 text-[10px] tracking-widest uppercase text-indigo-400 font-semibold">Nepal</p>
         </div>
       </div>
-      <nav className="flex-1 space-y-2 p-4 overflow-y-auto pb-20">
-        {links.map((link) => {
-          const Icon = link.icon
-          const active = pathname === link.href || (link.children && pathname?.startsWith(link.href))
-          return (
-            <div key={link.href}>
-              <Link
-                href={link.href}
-                onClick={onClose}
-                className={`flex items-center gap-4 rounded-2xl px-4 py-4 transition-all duration-200 ${
-                  active ? "bg-blue-50 text-blue-700" : "text-gray-600 hover:bg-gray-100"
-                }`}
-              >
-                <Icon className="h-5 w-5" />
-                <span className="font-medium">{link.name}</span>
-              </Link>
-              {link.children?.map((child) => {
-                const ChildIcon = child.icon
-                const isChildActive = pathname === child.href || (child.href.includes('#') && pathname === child.href.split('#')[0])
-                return (
-                  <Link
-                    key={child.href}
-                    href={child.href}
-                    onClick={onClose}
-                    className={`ml-8 mt-2 flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition-all hover:bg-gray-100 ${
-                      isChildActive ? "bg-blue-50 text-blue-700" : "text-gray-500"
-                    }`}
-                  >
-                    <ChildIcon className="h-4 w-4" />
-                    <span>{child.name}</span>
-                  </Link>
-                )
-              })}
-            </div>
-          )
-        })}
+      <nav className="flex-1 space-y-1 p-4 overflow-y-auto pb-20">
+        {links.map((link) => (
+          <NavItemRenderer
+            key={link.href}
+            item={link}
+            pathname={pathname}
+            onClose={onClose}
+          />
+        ))}
       </nav>
     </>
   )
 
   return (
     <>
-      {/* Desktop sidebar - unchanged */}
-      <aside className="fixed left-0 top-0 hidden h-screen w-72 border-r border-gray-200 bg-white lg:flex lg:flex-col overflow-y-auto">
+      {/* Desktop sidebar */}
+      <aside className="fixed left-0 top-0 hidden h-screen w-72 border-r border-gray-200 bg-white lg:flex lg:flex-col overflow-y-auto z-40">
         {navContent}
       </aside>
 
