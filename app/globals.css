@@ -185,3 +185,134 @@ body {
   border-radius: 0.75rem;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
 }
+/* ============================================
+   THEME STYLES - Next.js vs Gemini
+   ============================================ */
+
+/* Default / Next.js theme */
+.theme-next {
+  --primary: 37, 99, 235;
+  --primary-gradient: linear-gradient(135deg, #2563eb, #1d4ed8);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --border: 229, 231, 235;
+  --text-primary: 15, 23, 42;
+  --text-secondary: 71, 85, 105;
+}
+
+/* Gemini theme */
+.theme-gemini {
+  --primary: 139, 92, 246;
+  --primary-gradient: linear-gradient(135deg, #4285f4, #ea4335, #fbbc05, #34a853);
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --border: 167, 139, 250;
+  --text-primary: 15, 23, 42;
+  --text-secondary: 71, 85, 105;
+}
+
+/* Apply theme styles */
+.theme-next .bg-white\/80 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.theme-gemini .bg-white\/80 {
+  background: linear-gradient(135deg, rgba(66, 133, 244, 0.05), rgba(52, 168, 83, 0.05)) !important;
+  backdrop-filter: blur(8px);
+}
+
+.theme-gemini .border-slate-200 {
+  border-color: rgba(139, 92, 246, 0.2) !important;
+}
+
+.theme-gemini .from-blue-600, .theme-gemini .via-indigo-600, .theme-gemini .to-purple-600 {
+  background: linear-gradient(135deg, #4285f4, #ea4335, #fbbc05, #34a853) !important;
+}
+
+.theme-gemini button.bg-blue-600 {
+  background: linear-gradient(135deg, #4285f4, #34a853) !important;
+}
+
+.theme-gemini .bg-indigo-100 {
+  background: linear-gradient(135deg, rgba(66, 133, 244, 0.1), rgba(52, 168, 83, 0.1)) !important;
+}
+
+.theme-gemini .text-indigo-600 {
+  color: #4285f4 !important;
+}
+
+.theme-gemini .hover\:bg-indigo-50:hover {
+  background: linear-gradient(135deg, rgba(66, 133, 244, 0.15), rgba(52, 168, 83, 0.15)) !important;
+}
+/* Stronger Gemini theme styling */
+.theme-gemini {
+  --gemini-blue: #4285f4;
+  --gemini-red: #ea4335;
+  --gemini-yellow: #fbbc05;
+  --gemini-green: #34a853;
+}
+
+/* Hero section - Gemini rainbow gradient */
+.theme-gemini .bg-gradient-to-r.from-blue-600,
+.theme-gemini .bg-gradient-to-r.from-blue-600.via-indigo-600,
+.theme-gemini [class*="from-blue-600"] {
+  background: linear-gradient(135deg, #4285f4, #ea4335, #fbbc05, #34a853) !important;
+}
+
+/* Buttons - Gemini style */
+.theme-gemini button.bg-blue-600,
+.theme-gemini .bg-blue-600 {
+  background: linear-gradient(135deg, #4285f4, #34a853) !important;
+  border: none !important;
+}
+
+.theme-gemini button.bg-blue-600:hover,
+.theme-gemini .bg-blue-600:hover {
+  background: linear-gradient(135deg, #34a853, #4285f4) !important;
+  transform: scale(1.02);
+}
+
+/* Cards - Gemini soft gradient */
+.theme-gemini .bg-white\/80,
+.theme-gemini .bg-white\/70 {
+  background: linear-gradient(135deg, rgba(66, 133, 244, 0.08), rgba(52, 168, 83, 0.08)) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Borders - Gemini colored */
+.theme-gemini .border-slate-200,
+.theme-gemini .border-gray-200 {
+  border-color: rgba(66, 133, 244, 0.3) !important;
+}
+
+/* Links and accents - Gemini colors */
+.theme-gemini a,
+.theme-gemini .text-blue-600,
+.theme-gemini .text-indigo-600 {
+  background: linear-gradient(135deg, #4285f4, #34a853);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+
+/* Badges - Gemini rainbow */
+.theme-gemini .rounded-full.bg-blue-50,
+.theme-gemini .bg-indigo-50 {
+  background: linear-gradient(135deg, rgba(66, 133, 244, 0.15), rgba(52, 168, 83, 0.15)) !important;
+}
+
+/* Next.js theme - clean blue */
+.theme-next .bg-gradient-to-r.from-blue-600 {
+  background: linear-gradient(135deg, #0070f3, #0060d0) !important;
+}
+
+.theme-next .bg-white\/80 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(8px);
+}
+
+.theme-next button.bg-blue-600 {
+  background: #0070f3 !important;
+}
+
+.theme-next button.bg-blue-600:hover {
+  background: #0060d0 !important;
+}

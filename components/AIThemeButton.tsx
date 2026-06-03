@@ -3,7 +3,11 @@
 import { Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 
-export default function AIThemeButton() {
+interface AIThemeButtonProps {
+  onToggle?: () => void;
+}
+
+export default function AIThemeButton({ onToggle }: AIThemeButtonProps) {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
@@ -16,6 +20,7 @@ export default function AIThemeButton() {
     setIsActive(newState);
     sessionStorage.setItem("aiThemeActive", String(newState));
     document.documentElement.classList.toggle("ai-theme-active", newState);
+    if (onToggle) onToggle();
   };
 
   return (
