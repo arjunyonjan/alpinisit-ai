@@ -2,7 +2,9 @@
 
 import { notFound, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import TwoColumnLayout from "@/components/TwoColumnLayout";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import LayoutSwitcher from "@/components/LayoutSwitcher";
 import AIThemeButton from "@/components/AIThemeButton";
@@ -22,6 +24,24 @@ export default function ReadNotePage() {
   const { layout, setLayout } = useTheme();
   const [note, setNote] = useState<NoteData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Load saved layout for this note
+  useEffect(() => {
+    if (!slug) return;
+    const saved = localStorage.getItem(`layout-${slug}`);
+    if (saved === "document" || saved === "one-col" || saved === "two-col-alt") {
+      setLayout(saved);
+    }
+  }, [slug, setLayout]);
+
+  // Save layout when changed
+  const saveLayout = (newLayout: string) => {
+    setLayout(newLayout as any);
+    if (slug) {
+      localStorage.setItem(`layout-${slug}`, newLayout);
+    }
+  };
 
   useEffect(() => {
     if (!slug) return;
@@ -42,19 +62,42 @@ export default function ReadNotePage() {
   const layoutClass = layout === "one-col" 
     ? "max-w-4xl mx-auto"
     : layout === "two-col-alt"
-    ? "grid md:grid-cols-2 gap-8 items-start"
+    ? "w-full"
     : "max-w-3xl mx-auto";
 
   return (
     <div className={`min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 layout-${layout}`}>
       <div className="p-6">
-        <div className="flex justify-end gap-2 mb-4">
-          <AIThemeButton />
-          <div className="theme-selector">
-            <ThemeSwitcher />
+        {/* Desktop Toolbar */}
+        <div className="hidden md:flex justify-end gap-2 mb-4 flex-wrap">
+          <div className="text-xs text-slate-400 self-center mr-auto bg-slate-100 px-2 py-1 rounded-full">
+            📐 {layout === "document" ? "Document" : layout === "one-col" ? "1 Column" : "2 Column Alternate"}
           </div>
-          <LayoutSwitcher layout={layout} setLayout={setLayout} />
+          <AIThemeButton />
+          <div className="theme-selector"><ThemeSwitcher /></div>
+          <LayoutSwitcher layout={layout} setLayout={saveLayout} />
         </div>
+
+        {/* Mobile Toolbar */}
+        <div className="md:hidden flex justify-between items-center mb-4">
+          <div className="text-xs text-slate-400 bg-slate-100 px-2 py-1 rounded-full">
+            📐 {layout === "document" ? "Document" : layout === "one-col" ? "1 Column" : "2 Column Alternate"}
+          </div>
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 rounded-lg bg-white shadow-sm border border-slate-200">
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+
+        {/* Mobile Menu Dropdown */}
+        {mobileMenuOpen && (
+          <div className="md:hidden flex flex-col gap-2 bg-white rounded-xl shadow-lg p-3 mb-4 border border-slate-200">
+            <AIThemeButton />
+            <div className="theme-selector"><ThemeSwitcher /></div>
+            <LayoutSwitcher layout={layout} setLayout={saveLayout} />
+          </div>
+        )}
+
+        {/* Content */}
         <div className={layoutClass}>
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-slate-200 shadow-sm">
             <div className="mb-6">
@@ -70,9 +113,13 @@ export default function ReadNotePage() {
                 </div>
               )}
             </div>
-            <div className="prose prose-slate max-w-none">
-              <ReactMarkdown>{note.content}</ReactMarkdown>
-            </div>
+            {layout === "two-col-alt" ? (
+              <TwoColumnLayout content={note.content} />
+            ) : (
+              <div className="prose prose-slate max-w-none">
+                <ReactMarkdown>{note.content}</ReactMarkdown>
+              </div>
+            )}
           </div>
         </div>
       </div>
