@@ -1,0 +1,146 @@
+=== C:\Work\next-alpinist-ai-course\app\notes\[slug]\page.tsx ===
+
+
+=== C:\Work\next-alpinist-ai-course\app\notes\read\page.tsx ===
+"use client"
+
+import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
+
+export default function NoteReader() {
+  const searchParams = useSearchParams()
+  const slug = searchParams.get("slug")
+  const [content, setContent] = useState("")
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (slug) {
+      fetch(`/notes-content/${slug}.md`)
+        .then(res => res.text())
+        .then(text => setContent(text))
+        .catch(err => setContent("# Note not found"))
+        .finally(() => setLoading(false))
+    }
+  }, [slug])
+
+  if (loading) return <div className="p-8">Loading...</div>
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+          <div className="prose prose-slate max-w-none whitespace-pre-wrap">
+            {content}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+=== C:\Work\next-alpinist-ai-course\app\notes\layout.tsx ===
+import { BookOpen } from "lucide-react"
+
+export default function NotesLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <div className="max-w-5xl mx-auto px-6 py-8">
+        <div className="mb-6 flex items-center gap-3">
+          <BookOpen className="w-6 h-6 text-indigo-600" />
+          <h1 className="text-2xl font-bold text-gray-900">Course Notes</h1>
+          <span className="text-xs text-gray-400 ml-auto">📝 Draft • Interactive coming soon</span>
+        </div>
+        <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+          {children}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+=== C:\Work\next-alpinist-ai-course\app\notes\page.tsx ===
+"use client"
+
+import Link from "next/link"
+import { Brain, Cpu, Zap, FileText, Clock } from "lucide-react"
+
+export default function NotesDashboard() {
+  const notes = [
+    {
+      title: "Weight, Bias, and Activation",
+      path: "/notes/neural-networks/weight-bias-activation",
+      category: "Neural Networks",
+      date: "2024-06-03",
+      status: "draft",
+      icon: Brain,
+      description: "y = w·x + b — The fundamental neuron equation explained with marble analogy"
+    },
+    {
+      title: "LLM Architecture",
+      path: "/notes/llm-architecture",
+      category: "Transformers",
+      date: "2024-06-03",
+      status: "draft",
+      icon: Zap,
+      description: "Tokenization, embeddings, multi-head attention, and transformer layers"
+    },
+    {
+      title: "Training & Optimization",
+      path: "/notes/optimization",
+      category: "Performance",
+      date: "2024-06-03",
+      status: "draft",
+      icon: Cpu,
+      description: "Quantization, pruning, distillation, and production deployment stack"
+    }
+  ]
+
+  return (
+    <main className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <div className="max-w-5xl mx-auto px-6 py-12">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Course Notes</h1>
+          <p className="text-gray-500">Raw notes → Interactive visualizations (in progress)</p>
+        </div>
+
+        <div className="grid gap-4">
+          {notes.map((note) => {
+            const Icon = note.icon
+            return (
+              <Link key={note.path} href={note.path}>
+                <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all border border-gray-200 hover:border-indigo-300 cursor-pointer">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-indigo-100 rounded-xl">
+                      <Icon className="w-6 h-6 text-indigo-600" />
+                    </div>
+                    <div className="flex-1">
+                      <h2 className="text-xl font-semibold text-gray-900">{note.title}</h2>
+                      <p className="text-sm text-gray-500 mt-1">{note.category}</p>
+                      <p className="text-sm text-gray-600 mt-2">{note.description}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xs text-gray-400">{note.date}</p>
+                      <span className="inline-block mt-2 px-2 py-1 bg-yellow-100 text-yellow-700 text-xs rounded-full">{note.status}</span>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            )
+          })}
+        </div>
+
+        <div className="mt-12 p-6 bg-indigo-50 rounded-2xl border border-indigo-200">
+          <h3 className="font-semibold text-indigo-800 mb-2">📝 Notes Workflow</h3>
+          <p className="text-sm text-indigo-700">✅ Phase 1: Quick capture (3 notes so far)</p>
+          <p className="text-sm text-indigo-700 mt-1">🔄 Phase 2: Add diagrams and visualizations</p>
+          <p className="text-sm text-indigo-700 mt-1">📅 Phase 3: Interactive MDX components (planned)</p>
+        </div>
+      </div>
+    </main>
+  )
+}
+

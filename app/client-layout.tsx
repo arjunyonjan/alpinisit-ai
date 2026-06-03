@@ -1,15 +1,12 @@
 "use client"
 
-import Sidebar, { MobileMenuButton } from "@/components/sidebar"
-import { useState } from "react"
+import Sidebar from "@/components/sidebar/index"
+import { MobileMenuButton } from "@/components/sidebar/MobileMenu"
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
-  const [menuOpen, setMenuOpen] = useState(false)
-
   return (
     <>
-      <Sidebar open={menuOpen} onClose={() => setMenuOpen(false)} />
-      <MobileMenuButton onClick={() => setMenuOpen(true)} />
+      <Sidebar />
       <div className="lg:ml-72">{children}</div>
     </>
   )
