@@ -115,7 +115,7 @@ function ReadNotePageContent() {
                   <p className="text-gray-500">Click the <strong>AI Theme</strong> button to generate.</p>
                 </div>
               )
-            ) : layout === "two-col" ? (
+            ) : layout === "two-col-alt" ? (
               <div className="grid md:grid-cols-2 gap-16">
                 <div className="prose prose-lg max-w-none leading-relaxed text-gray-800 prose-headings:font-bold prose-headings:tracking-tight prose-h1:text-4xl prose-h2:text-2xl prose-h3:text-xl prose-p:mb-5 prose-ul:my-4 prose-li:my-2 prose-code:bg-gray-100 prose-code:px-1 prose-code:rounded"><ReactMarkdown components={{ h1: ({node, ...props}) => <h1 className="text-3xl font-bold mt-8 mb-4" {...props} />, h2: ({node, ...props}) => <h2 className="text-2xl font-semibold mt-6 mb-3 pb-2 border-b border-gray-200" {...props} />, h3: ({node, ...props}) => <h3 className="text-xl font-semibold mt-5 mb-2" {...props} /> }}>{leftCol}</ReactMarkdown></div>
                 <div className="prose prose-lg max-w-none leading-relaxed text-gray-800 prose-headings:font-bold prose-headings:tracking-tight prose-h1:text-4xl prose-h2:text-2xl prose-h3:text-xl prose-p:mb-5 prose-ul:my-4 prose-li:my-2 prose-code:bg-gray-100 prose-code:px-1 prose-code:rounded"><ReactMarkdown components={{ h1: ({node, ...props}) => <h1 className="text-3xl font-bold mt-8 mb-4" {...props} />, h2: ({node, ...props}) => <h2 className="text-2xl font-semibold mt-6 mb-3 pb-2 border-b border-gray-200" {...props} />, h3: ({node, ...props}) => <h3 className="text-xl font-semibold mt-5 mb-2" {...props} /> }}>{rightCol}</ReactMarkdown></div>
