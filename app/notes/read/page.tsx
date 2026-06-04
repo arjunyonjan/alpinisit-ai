@@ -94,14 +94,14 @@ function ReadNotePageContent() {
       </div>
 
       {/* Content */}
-      <div className="max-w-5xl mx-auto px-6 py-10">
+      <div className="w-full px-4 py-10">
         <h1 className="text-3xl font-bold mb-2">{note.title || slug}</h1>
         <div className="text-sm text-gray-500 mb-4">{note.date} · {note.status}</div>
         {tags.length > 0 && <div className="flex gap-2 mb-8">{tags.map(tag => <span key={tag} className="bg-gray-100 px-2 py-0.5 rounded text-sm">#{tag}</span>)}</div>}
 
         {viewMode === "iframe" ? (
           htmlContent ? (
-            <iframe srcDoc={htmlContent} className="w-full min-h-[70vh] border rounded-lg" />
+            <iframe srcDoc={`<!DOCTYPE html><html><head><meta charset="UTF-8"><script src="https://cdn.tailwindcss.com"></script><style>body{margin:0;padding:20px;background:white;}</style></head><body><div class="w-full">${htmlContent}</div></body></html>`} className="w-full min-h-[70vh] border-0" />
           ) : (
             <div className="text-center py-20 text-gray-500">Click AI Theme to generate</div>
           )
