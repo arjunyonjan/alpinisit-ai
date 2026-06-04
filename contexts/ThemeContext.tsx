@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 export type Theme = "normal" | "next" | "gemini" | "system";
-export type LayoutMode = "document" | "one-col" | "two-col-alt";
+export type LayoutMode = "single" | "two-col";
 
 interface ThemeContextType {
   theme: Theme;

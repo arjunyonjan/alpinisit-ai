@@ -79,7 +79,7 @@ function ReadNotePageContent() {
   return (
     <div className="w-full bg-gray-50">
       <div className="w-full">
-        <div className="bg-white border-b border-gray-200 px-4 py-2 mb-4">
+        <div className="bg-white border-b border-gray-200 px-4 py-2 mb-10">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <button onClick={() => setViewMode("markdown")} className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${viewMode === "markdown" ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-700"}`}><Eye size={14} className="inline mr-1" />Read</button>
@@ -90,38 +90,38 @@ function ReadNotePageContent() {
         </div>
 
         <div className="w-full bg-white">
-          <div className="px-6 pt-8 pb-4 border-b border-gray-100">
-            <h1 className="text-3xl font-bold text-gray-900">{note.title || slug}</h1>
-            <div className="flex items-center gap-3 mt-2 text-sm text-gray-500">
+          <div className="px-6 py-6 border-t border-gray-200">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900">{note.title || slug}</h1>
+            <div className="flex items-center gap-3 mt-6 text-base text-gray-500">
               <span>{note.date}</span>
               <span className="w-1 h-1 rounded-full bg-gray-300" />
               <span className="capitalize">{note.status}</span>
             </div>
             {tags.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-3">
-                {tags.map(tag => <span key={tag} className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-md">#{tag}</span>)}
+              <div className="flex flex-wrap gap-2 mt-6">
+                {tags.map(tag => <span key={tag} className="px-3 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-md">#{tag}</span>)}
               </div>
             )}
           </div>
 
-          <div className="px-6 py-8">
+          <div className="px-8">
             {viewMode === "iframe" ? (
               htmlContent ? (
                 <iframe srcDoc={`<!DOCTYPE html><html><head><meta charset="UTF-8"><script src="https://cdn.tailwindcss.com"></script><style>body{margin:0;padding:20px;background:white;}</style></head><body><div class="max-w-4xl mx-auto">${htmlContent}</div></body></html>`} className="w-full min-h-[600px] border-0 rounded-lg" sandbox="allow-same-origin allow-scripts" />
               ) : (
                 <div className="flex flex-col items-center justify-center py-16 text-center">
-                  <div className="text-6xl mb-4">✨</div>
+                  <div className="text-6xl mb-10">✨</div>
                   <h3 className="text-xl font-semibold text-gray-700 mb-2">No Theme Generated</h3>
                   <p className="text-gray-500">Click the <strong>AI Theme</strong> button to generate.</p>
                 </div>
               )
             ) : layout === "two-col" ? (
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="prose prose-slate max-w-none"><ReactMarkdown>{leftCol}</ReactMarkdown></div>
-                <div className="prose prose-slate max-w-none"><ReactMarkdown>{rightCol}</ReactMarkdown></div>
+              <div className="grid md:grid-cols-2 gap-16">
+                <div className="prose prose-lg max-w-none leading-relaxed text-gray-800 prose-headings:font-bold prose-headings:tracking-tight prose-h1:text-4xl prose-h2:text-2xl prose-h3:text-xl prose-p:mb-5 prose-ul:my-4 prose-li:my-2 prose-code:bg-gray-100 prose-code:px-1 prose-code:rounded"><ReactMarkdown>{leftCol}</ReactMarkdown></div>
+                <div className="prose prose-lg max-w-none leading-relaxed text-gray-800 prose-headings:font-bold prose-headings:tracking-tight prose-h1:text-4xl prose-h2:text-2xl prose-h3:text-xl prose-p:mb-5 prose-ul:my-4 prose-li:my-2 prose-code:bg-gray-100 prose-code:px-1 prose-code:rounded"><ReactMarkdown>{rightCol}</ReactMarkdown></div>
               </div>
             ) : (
-              <div className="prose prose-slate max-w-none"><ReactMarkdown>{markdownContent}</ReactMarkdown></div>
+              <div className="prose prose-lg max-w-none leading-relaxed text-gray-800 prose-headings:font-bold prose-headings:tracking-tight prose-h1:text-4xl prose-h2:text-2xl prose-h3:text-xl prose-p:mb-5 prose-ul:my-4 prose-li:my-2 prose-code:bg-gray-100 prose-code:px-1 prose-code:rounded"><ReactMarkdown>{markdownContent}</ReactMarkdown></div>
             )}
           </div>
         </div>
