@@ -185,3 +185,24 @@ body {
   border-radius: 0.75rem;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
 }
+/* Tailwind-style HR styling */
+
+/* Force HR styling for read page */
+hr {
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+  border: 0 !important;
+  border-top: 1px solid #e5e7eb !important;
+}
+/* Restore heading styles for markdown */
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose h1 { font-size: 2.25rem; font-weight: 700; }
+.prose h2 { font-size: 1.5rem; font-weight: 600; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.25rem; }
+.prose h3 { font-size: 1.25rem; font-weight: 600; }
+.prose p { margin-bottom: 1rem; line-height: 1.6; }
