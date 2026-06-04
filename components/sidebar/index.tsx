@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { sidebarLinks } from "./data";
 import NavItem from "./NavItem";
 
-export default function Sidebar({ isMobile = false, onClose }: { isMobile?: boolean; onClose?: () => void }) {
+export default function Sidebar({ isMobile = false, onClose, onToggle }: { isMobile?: boolean; onClose?: () => void; onToggle?: () => void }) {
   const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
 
@@ -16,8 +16,12 @@ export default function Sidebar({ isMobile = false, onClose }: { isMobile?: bool
   }, []);
 
   const toggleCollapse = () => {
-    setCollapsed(!collapsed);
-    localStorage.setItem("sidebar-collapsed", String(!collapsed));
+    const newState = !collapsed;
+    setCollapsed(newState);
+    localStorage.setItem("sidebar-collapsed", String(newState));
+    if (onToggle) onToggle();
+    // Dispatch event for client-layout
+    window.dispatchEvent(new CustomEvent("sidebar-toggle"));
   };
 
   const sidebarWidth = collapsed ? "w-20" : "w-72";

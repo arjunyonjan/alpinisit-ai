@@ -1,22 +1,52 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, createContext, useContext } from "react"
 import Sidebar from "@/components/sidebar/index"
 import { Menu, X } from "lucide-react"
+
+type SidebarContextType = {
+  collapsed: boolean
+  toggleCollapse: () => void
+}
+
+const SidebarContext = createContext<SidebarContextType | undefined>(undefined)
+
+export function useSidebar() {
+  const context = useContext(SidebarContext)
+  if (!context) throw new Error("useSidebar must be used within ClientLayout")
+  return context
+}
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [contentKey, setContentKey] = useState(0)
 
   useEffect(() => {
     const saved = localStorage.getItem("sidebar-collapsed")
     if (saved === "true") setCollapsed(true)
+    
+    const handleSidebarToggle = () => {
+      const updated = localStorage.getItem("sidebar-collapsed") === "true"
+      setCollapsed(updated)
+      setContentKey(prev => prev + 1) // Force re-render of content
+    }
+    window.addEventListener("sidebar-toggle", handleSidebarToggle)
+    return () => window.removeEventListener("sidebar-toggle", handleSidebarToggle)
   }, [])
 
-  const marginLeft = collapsed ? "lg:ml-20" : "lg:ml-72"
+  const toggleCollapse = () => {
+    const newState = !collapsed
+    setCollapsed(newState)
+    localStorage.setItem("sidebar-collapsed", String(newState))
+    window.dispatchEvent(new CustomEvent("sidebar-toggle"))
+  }
+
+  // Calculate margin based on collapsed state
+  const marginClass = collapsed ? "lg:ml-20" : "lg:ml-72"
 
   return (
-    <>
+    <SidebarContext.Provider value={{ collapsed, toggleCollapse }}>
       {/* Mobile menu button */}
       <button 
         onClick={() => setMobileOpen(true)}
@@ -46,12 +76,18 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
       {/* Desktop sidebar */}
       <div className="hidden lg:block">
-        <Sidebar />
+        <Sidebar onToggle={toggleCollapse} />
       </div>
 
-      <div className={`${marginLeft} transition-all duration-300 w-full`}>
-        {children}
+      {/* Content area - with proper width calculation */}
+      <div 
+        key={contentKey}
+        className={`${marginClass} transition-all duration-300 w-[calc(100%-0px)] lg:w-auto overflow-x-hidden`}
+      >
+        <div className="max-w-full overflow-x-hidden">
+          {children}
+        </div>
       </div>
-    </>
+    </SidebarContext.Provider>
   )
 }
