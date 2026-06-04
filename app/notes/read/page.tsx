@@ -110,7 +110,7 @@ function ReadNotePageContent() {
             )}
           </div>
           <div className="p-0">
-            {viewMode === "iframe" ? (htmlContent ? (<iframe srcDoc={htmlContent} className="w-full min-h-screen border-0 rounded-lg" sandbox="allow-same-origin allow-scripts" />) : (<div className="flex flex-col items-center justify-center py-16 text-center"><div className="text-6xl mb-4">✨</div><h3 className="text-xl font-semibold text-gray-700 mb-2">No Theme Generated</h3><p className="text-gray-500">Click the <strong>AI Theme</strong> button to generate a beautiful HTML version.</p></div>)) : (<div className="prose prose-slate max-w-none"><ReactMarkdown>{markdownContent}</ReactMarkdown></div>)}
+            {viewMode === "iframe" ? (htmlContent ? (<iframe srcDoc={`<!DOCTYPE html><html><head><meta charset="UTF-8"><script src="https://cdn.tailwindcss.com"></script><style>body{margin:0;padding:20px;background:white;}</style></head><body><div class="max-w-4xl mx-auto">${htmlContent}</div></body></html>`} className="w-full min-h-screen border-0 rounded-lg" sandbox="allow-same-origin allow-scripts" />) : (<div className="flex flex-col items-center justify-center py-16 text-center"><div className="text-6xl mb-4">✨</div><h3 className="text-xl font-semibold text-gray-700 mb-2">No Theme Generated</h3><p className="text-gray-500">Click the <strong>AI Theme</strong> button to generate a beautiful HTML version.</p></div>)) : (<div className="prose prose-slate max-w-none"><ReactMarkdown>{markdownContent}</ReactMarkdown></div>)}
           </div>
         </div>
       </div>
