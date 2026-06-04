@@ -105,6 +105,8 @@ function ReadNotePageContent() {
   const [aiPanelOpen, setAiPanelOpen] = useState(false);
   const [markdownContent, setMarkdownContent] = useState("");
   const [htmlContent, setHtmlContent] = useState("");
+    const [sharedCacheAvailable, setSharedCacheAvailable] = useState(false);
+  const [cachedMetadata, setCachedMetadata] = useState<{ cachedAt?: string }>({});
   const [viewMode, setViewMode] = useState<"markdown" | "iframe">("markdown");
   const [appliedStyle, setAppliedStyle] = useState<string | null>(null);
   const [isRestoring, setIsRestoring] = useState(true);

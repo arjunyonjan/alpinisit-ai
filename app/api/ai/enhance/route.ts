@@ -7,9 +7,9 @@ type StyleType = "fun" | "poetic" | "professional";
 
 // Smart token limit management
 const TOKEN_LIMITS = {
-  SAFE_MAX_CHARS: 12000,      // ~3000 tokens (safe for most models)
-  AGGRESSIVE_MAX_CHARS: 20000, // ~5000 tokens (if needed)
-  WARNING_THRESHOLD: 8000,     // Show warning if approaching limit
+  SAFE_MAX_CHARS: 12000,      
+  AGGRESSIVE_MAX_CHARS: 100000,
+  WARNING_THRESHOLD: 8000,     
 };
 
 const styleGuide: Record<StyleType, string> = {
