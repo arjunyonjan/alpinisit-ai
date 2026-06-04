@@ -18,12 +18,12 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     return () => window.removeEventListener("storage", handleStorageChange)
   }, [])
 
-  const marginLeft = collapsed ? "ml-20" : "ml-72"
+  const marginLeft = collapsed ? "lg:ml-20" : "lg:ml-72"
 
   return (
     <>
       <Sidebar />
-      <div className={`${marginLeft} transition-all duration-300 w-full lg:w-auto`}>
+      <div className={`${marginLeft} transition-all duration-300 w-full`}>
         {children}
       </div>
     </>
