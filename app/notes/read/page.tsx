@@ -8,7 +8,7 @@ import LayoutSwitcher from "@/components/LayoutSwitcher";
 import AIThemeButton from "@/components/AIThemeButton";
 import AIPreviewPanel from "@/components/AIPreviewPanel";
 import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
-import { Eye, Sparkles, LayoutTemplate, Sun, Monitor, Zap } from "lucide-react";
+import { Eye, LayoutTemplate } from "lucide-react";
 
 interface NoteData {
   title: string;
@@ -39,6 +39,12 @@ function ReadNotePageContent() {
     if (!slug) return;
     const savedHtml = localStorage.getItem(`ai-html-${slug}`);
     if (savedHtml) setHtmlContent(savedHtml);
+  }, [slug]);
+
+  useEffect(() => {
+    if (!slug) return;
+    setHtmlContent("");
+    setViewMode("markdown");
   }, [slug]);
 
   const saveLayout = (newLayout: string) => {
@@ -73,40 +79,13 @@ function ReadNotePageContent() {
   return (
     <div className="w-full min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto p-6">
-        {/* Header Tools Bar */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-3 mb-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
-            {/* Left: View Toggle */}
             <div className="flex items-center gap-1 bg-gray-100 rounded-xl p-1">
-              <button
-                onClick={() => setViewMode("markdown")}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                  viewMode === "markdown"
-                    ? "bg-white text-indigo-600 shadow-sm"
-                    : "text-gray-600 hover:text-indigo-500"
-                }`}
-              >
-                <Eye size={16} />
-                <span>Read</span>
-              </button>
-              <button
-                onClick={() => setViewMode("iframe")}
-                disabled={!htmlContent}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                  viewMode === "iframe"
-                    ? "bg-white text-indigo-600 shadow-sm"
-                    : "text-gray-600 hover:text-indigo-500"
-                } ${!htmlContent ? "opacity-50 cursor-not-allowed" : ""}`}
-                title={!htmlContent ? "Generate AI theme first" : ""}
-              >
-                <Sparkles size={16} />
-                <span>AI Theme</span>
-              </button>
+              <button onClick={() => setViewMode("markdown")} className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${viewMode === "markdown" ? "bg-white text-indigo-600 shadow-sm" : "text-gray-600 hover:text-indigo-500"}`}><Eye size={16} /><span>Read</span></button>
+              <button onClick={() => setViewMode("iframe")} disabled={!htmlContent} className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${viewMode === "iframe" ? "bg-white text-indigo-600 shadow-sm" : "text-gray-600 hover:text-indigo-500"} ${!htmlContent ? "opacity-50 cursor-not-allowed" : ""}`} title={!htmlContent ? "Generate theme first" : ""}><LayoutTemplate size={16} /><span>Theme View</span></button>
             </div>
-
-            {/* Right: Tools */}
             <div className="flex items-center gap-3 flex-wrap">
-              <div className="h-6 w-px bg-gray-200 hidden sm:block" />
               <AIThemeButton onToggle={() => setAiPanelOpen(!aiPanelOpen)} />
               <div className="h-6 w-px bg-gray-200 hidden sm:block" />
               <ThemeSwitcher />
@@ -116,7 +95,6 @@ function ReadNotePageContent() {
           </div>
         </div>
 
-        {/* Content Area */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="p-6 border-b border-gray-100">
             <h1 className="text-3xl font-bold text-gray-900">{note.title || slug}</h1>
@@ -127,25 +105,19 @@ function ReadNotePageContent() {
             </div>
             {tags.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-3">
-                {tags.map(tag => (
-                  <span key={tag} className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-md">#{tag}</span>
-                ))}
+                {tags.map(tag => <span key={tag} className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-md">#{tag}</span>)}
               </div>
             )}
           </div>
-
           <div className="p-6">
             {viewMode === "iframe" && htmlContent ? (
               <iframe srcDoc={htmlContent} className="w-full min-h-[600px] border-0 rounded-lg" sandbox="allow-same-origin allow-scripts" />
             ) : (
-              <div className="prose prose-slate max-w-none">
-                <ReactMarkdown>{markdownContent}</ReactMarkdown>
-              </div>
+              <div className="prose prose-slate max-w-none"><ReactMarkdown>{markdownContent}</ReactMarkdown></div>
             )}
           </div>
         </div>
       </div>
-
       <AIPreviewPanel isOpen={aiPanelOpen} onClose={() => setAiPanelOpen(false)} originalContent={markdownContent} onApply={handleApplyHtml} />
     </div>
   );
