@@ -5,14 +5,13 @@ import { Sparkles, Copy, X, Check, Loader2, Palette } from "lucide-react";
 
 export default function AIPreviewPanel({ isOpen, onClose, originalContent, onApply }: any) {
   const [html, setHtml] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [style, setStyle] = useState<"fun" | "poetic" | "professional">("fun");
 
   useEffect(() => {
     if (!isOpen || !originalContent) return;
-    
-    
+    setLoading(true);
     fetch("/api/ai/enhance", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -32,7 +31,7 @@ export default function AIPreviewPanel({ isOpen, onClose, originalContent, onApp
   if (!isOpen) return null;
 
   return (
-    <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] max-w-[90vw] bg-white rounded-2xl shadow-2xl border border-indigo-200 z-50 overflow-hidden">
+    <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] max-w-[90vw] bg-white rounded-2xl shadow-2xl border border-indigo-200 z-50 overflow-hidden">
       <div className="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
         <div className="flex items-center gap-2"><Sparkles size={18} /><span className="font-semibold">AI Theme Studio</span></div>
         <button onClick={onClose} className="p-1 hover:bg-white/20 rounded-lg"><X size={18} /></button>
@@ -49,14 +48,15 @@ export default function AIPreviewPanel({ isOpen, onClose, originalContent, onApp
         </div>
       </div>
 
-      <div className="p-5 min-h-[300px] max-h-[400px] overflow-auto bg-gray-50">
+      <div className="p-5 min-h-[320px] max-h-[450px] overflow-auto bg-gray-50">
         {loading ? (
-          <div className="flex flex-col items-center justify-center h-full gap-3 py-12">
-            <Loader2 className="w-8 h-8 text-indigo-500 animate-spin" />
-            <p className="text-sm text-gray-500">AI is creating your theme...</p>
+          <div className="flex flex-col items-center justify-center h-full gap-3 py-16">
+            <Loader2 className="w-10 h-10 text-indigo-500 animate-spin" />
+            <p className="text-sm text-gray-500 font-medium">AI is creating your theme...</p>
+            <p className="text-xs text-gray-400">This may take a few seconds</p>
           </div>
         ) : (
-          <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: html || "✨ Click Apply to generate your theme" }} />
+          <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: html || "✨ Select a style and click Apply to generate your theme" }} />
         )}
       </div>
 
