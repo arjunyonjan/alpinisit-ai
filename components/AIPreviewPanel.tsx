@@ -3,7 +3,17 @@
 import { useState, useEffect } from "react";
 import { Sparkles, Copy, X, Check, Loader2, Palette } from "lucide-react";
 
-export default function AIPreviewPanel({ isOpen, onClose, originalContent, onApply }: any) {
+export default function AIPreviewPanel({ 
+  isOpen, 
+  onClose, 
+  originalContent, 
+  onApply 
+}: { 
+  isOpen: boolean; 
+  onClose: () => void; 
+  originalContent: string; 
+  onApply: (html: string, style: string) => void;  // Add style parameter
+}) {
   const [html, setHtml] = useState("");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -64,9 +74,15 @@ export default function AIPreviewPanel({ isOpen, onClose, originalContent, onApp
         <button onClick={() => { navigator.clipboard.writeText(html); setCopied(true); setTimeout(() => setCopied(false), 2000); }} className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-100 transition">
           {copied ? <Check size={16} /> : <Copy size={16} />}{copied ? "Copied!" : "Copy HTML"}
         </button>
-        <button onClick={() => { onApply(html); onClose(); }} className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition">
-          <Sparkles size={16} /> Apply Theme
-        </button>
+<button 
+  onClick={() => { 
+    onApply(html, style);  // Pass style as second parameter
+    onClose(); 
+  }} 
+  className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition"
+>
+  <Sparkles size={16} /> Apply Theme
+</button>
       </div>
     </div>
   );
