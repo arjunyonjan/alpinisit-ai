@@ -2,18 +2,17 @@
 
 import { FileText, Columns } from "lucide-react";
 
-export type LayoutMode = "document" | "two-col-alt";
+export type LayoutMode = "single" | "two-col";
 
 export default function LayoutSwitcher({ layout, setLayout, disabled = false }: { layout: LayoutMode; setLayout: (layout: LayoutMode) => void; disabled?: boolean }) {
-  const buttons = [
-    { id: "document" as const, icon: FileText, label: "Single" },
-    { id: "two-col-alt" as const, icon: Columns, label: "2 Col" },
-  ];
   return (
-    <div className="flex items-center gap-1 bg-white/80 backdrop-blur-sm rounded-full p-1 shadow-sm border border-gray-200">
-      {buttons.map(({ id, icon: Icon, label }) => (
-        <button key={id} onClick={() => !disabled && setLayout(id)} disabled={disabled} className={`px-2.5 py-1.5 rounded-full text-xs transition-all ${disabled ? "opacity-50 cursor-not-allowed" : ""} ${layout === id ? "bg-indigo-600 text-white shadow-md" : "text-gray-600 hover:bg-gray-100"}`} title={label}><Icon size={12} /><span className="ml-1 hidden sm:inline">{label}</span></button>
-      ))}
+    <div className="flex items-center gap-1 bg-gray-100 rounded-md p-0.5">
+      <button onClick={() => !disabled && setLayout("single")} disabled={disabled} className={`px-3 py-1 rounded text-xs font-medium transition-all ${layout === "single" ? "bg-white text-indigo-600 shadow-sm" : "text-gray-600 hover:text-indigo-500"} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}>
+        <FileText size={12} className="inline mr-1" /> Single
+      </button>
+      <button onClick={() => !disabled && setLayout("two-col")} disabled={disabled} className={`px-3 py-1 rounded text-xs font-medium transition-all ${layout === "two-col" ? "bg-white text-indigo-600 shadow-sm" : "text-gray-600 hover:text-indigo-500"} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}>
+        <Columns size={12} className="inline mr-1" /> 2 Col
+      </button>
     </div>
   );
 }

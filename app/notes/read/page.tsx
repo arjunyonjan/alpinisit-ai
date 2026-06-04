@@ -31,12 +31,6 @@ function ReadNotePageContent() {
 
   useEffect(() => {
     if (!slug) return;
-    const saved = localStorage.getItem(`layout-${slug}`);
-    if (saved === "document" || saved === "one-col" || saved === "two-col-alt") setLayout(saved);
-  }, [slug, setLayout]);
-
-  useEffect(() => {
-    if (!slug) return;
     const savedHtml = localStorage.getItem(`ai-html-${slug}`);
     if (savedHtml) { setHtmlContent(savedHtml); setViewMode("iframe"); }
   }, [slug]);
@@ -46,11 +40,6 @@ function ReadNotePageContent() {
     setHtmlContent("");
     setViewMode("markdown");
   }, [slug]);
-
-  const saveLayout = (newLayout: string) => {
-    setLayout(newLayout as any);
-    if (slug) localStorage.setItem(`layout-${slug}`, newLayout);
-  };
 
   useEffect(() => {
     if (!slug) return;
@@ -76,26 +65,31 @@ function ReadNotePageContent() {
 
   const tags = note.tags || [];
 
+  // Split content for two-column layout
+  const sections = markdownContent.split(/(?=^## )/m);
+  const leftSections: string[] = [];
+  const rightSections: string[] = [];
+  sections.forEach((section, idx) => {
+    if (idx % 2 === 0) leftSections.push(section);
+    else rightSections.push(section);
+  });
+  const leftCol = leftSections.join("");
+  const rightCol = rightSections.join("");
+
   return (
     <div className="w-full bg-gray-50">
       <div className="w-full">
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-3 mb-6">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-1 bg-gray-100 rounded-xl p-1">
-              <button onClick={() => setViewMode("markdown")} className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${viewMode === "markdown" ? "bg-white text-indigo-600 shadow-sm" : "text-gray-600 hover:text-indigo-500"}`}><Eye size={16} /><span>Read</span></button>
-              <button onClick={() => setViewMode("iframe")}  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${viewMode === "iframe" ? "bg-white text-indigo-600 shadow-sm" : "text-gray-600 hover:text-indigo-500"} `} title={!htmlContent ? "No theme generated yet. Click AI Theme button to create one." : ""}><LayoutTemplate size={16} /><span>Theme View</span></button>
+        <div className="bg-white border-b border-gray-200 px-4 py-2 mb-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <button onClick={() => setViewMode("markdown")} className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${viewMode === "markdown" ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-700"}`}><Eye size={14} className="inline mr-1" />Read</button>
+              <button onClick={() => setViewMode("iframe")} className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${viewMode === "iframe" ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-700"}`}><LayoutTemplate size={14} className="inline mr-1" />Theme</button>
             </div>
-            <div className="flex items-center gap-3 flex-wrap">
-              <AIThemeButton onToggle={() => setAiPanelOpen(!aiPanelOpen)} />
-              <div className="h-6 w-px bg-gray-200 hidden sm:block" />
-              <ThemeSwitcher />
-              <div className="h-6 w-px bg-gray-200 hidden sm:block" />
-              <LayoutSwitcher layout={layout} setLayout={saveLayout} disabled={viewMode === "iframe"} />
-            </div>
+            <div className="flex items-center gap-2"><AIThemeButton onToggle={() => setAiPanelOpen(!aiPanelOpen)} /><ThemeSwitcher /><LayoutSwitcher layout={layout} setLayout={setLayout} disabled={viewMode === "iframe"} /></div>
           </div>
         </div>
 
-        <div className="w-full bg-white rounded-lg">
+        <div className="w-full bg-white">
           <div className="px-6 pt-8 pb-4 border-b border-gray-100">
             <h1 className="text-3xl font-bold text-gray-900">{note.title || slug}</h1>
             <div className="flex items-center gap-3 mt-2 text-sm text-gray-500">
@@ -109,8 +103,26 @@ function ReadNotePageContent() {
               </div>
             )}
           </div>
+
           <div className="px-6 py-8">
-            {viewMode === "iframe" ? (htmlContent ? (<iframe srcDoc={`<!DOCTYPE html><html><head><meta charset="UTF-8"><script src="https://cdn.tailwindcss.com"></script><style>body{margin:0;padding:20px;background:white;}</style></head><body><div class="max-w-4xl mx-auto">${htmlContent}</div></body></html>`} className="w-full min-h-[600px] border-0 rounded-lg" sandbox="allow-same-origin allow-scripts" />) : (<div className="flex flex-col items-center justify-center py-16 text-center"><div className="text-6xl mb-4">✨</div><h3 className="text-xl font-semibold text-gray-700 mb-2">No Theme Generated</h3><p className="text-gray-500">Click the <strong>AI Theme</strong> button to generate a beautiful HTML version.</p></div>)) : (<div className="prose prose-slate max-w-none"><ReactMarkdown>{markdownContent}</ReactMarkdown></div>)}
+            {viewMode === "iframe" ? (
+              htmlContent ? (
+                <iframe srcDoc={`<!DOCTYPE html><html><head><meta charset="UTF-8"><script src="https://cdn.tailwindcss.com"></script><style>body{margin:0;padding:20px;background:white;}</style></head><body><div class="max-w-4xl mx-auto">${htmlContent}</div></body></html>`} className="w-full min-h-[600px] border-0 rounded-lg" sandbox="allow-same-origin allow-scripts" />
+              ) : (
+                <div className="flex flex-col items-center justify-center py-16 text-center">
+                  <div className="text-6xl mb-4">✨</div>
+                  <h3 className="text-xl font-semibold text-gray-700 mb-2">No Theme Generated</h3>
+                  <p className="text-gray-500">Click the <strong>AI Theme</strong> button to generate.</p>
+                </div>
+              )
+            ) : layout === "two-col" ? (
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="prose prose-slate max-w-none"><ReactMarkdown>{leftCol}</ReactMarkdown></div>
+                <div className="prose prose-slate max-w-none"><ReactMarkdown>{rightCol}</ReactMarkdown></div>
+              </div>
+            ) : (
+              <div className="prose prose-slate max-w-none"><ReactMarkdown>{markdownContent}</ReactMarkdown></div>
+            )}
           </div>
         </div>
       </div>
