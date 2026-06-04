@@ -38,7 +38,7 @@ function ReadNotePageContent() {
   useEffect(() => {
     if (!slug) return;
     const savedHtml = localStorage.getItem(`ai-html-${slug}`);
-    if (savedHtml) setHtmlContent(savedHtml);
+    if (savedHtml) { setHtmlContent(savedHtml); setViewMode("iframe"); }
   }, [slug]);
 
   useEffect(() => {
