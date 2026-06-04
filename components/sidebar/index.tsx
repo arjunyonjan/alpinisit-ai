@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { sidebarLinks } from "./data";
 import NavItem from "./NavItem";
 
-export default function Sidebar() {
+export default function Sidebar({ isMobile = false, onClose }: { isMobile?: boolean; onClose?: () => void }) {
   const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
 
@@ -21,6 +21,21 @@ export default function Sidebar() {
   };
 
   const sidebarWidth = collapsed ? "w-20" : "w-72";
+
+  if (isMobile) {
+    return (
+      <div className="h-full bg-white overflow-y-auto">
+        <div className="p-4 border-b">
+          <img src="/alpinistlogo.png" alt="Logo" className="h-8 w-auto" />
+        </div>
+        <nav className="p-2 space-y-1">
+          {sidebarLinks.map((link) => (
+            <NavItem key={link.href} item={link} pathname={pathname} onClose={onClose} collapsed={false} />
+          ))}
+        </nav>
+      </div>
+    );
+  }
 
   return (
     <aside className={`fixed left-0 top-0 hidden h-screen ${sidebarWidth} border-r border-gray-200 bg-white lg:flex lg:flex-col overflow-y-auto z-40 transition-all duration-300`}>
