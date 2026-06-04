@@ -2,13 +2,13 @@
 
 import { notFound, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import LayoutSwitcher from "@/components/LayoutSwitcher";
 import AIThemeButton from "@/components/AIThemeButton";
 import AIPreviewPanel from "@/components/AIPreviewPanel";
 import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
+import { Eye, Sparkles, LayoutTemplate, Sun, Monitor, Zap } from "lucide-react";
 
 interface NoteData {
   title: string;
@@ -24,7 +24,6 @@ function ReadNotePageContent() {
   const { layout, setLayout } = useTheme();
   const [note, setNote] = useState<NoteData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [aiPanelOpen, setAiPanelOpen] = useState(false);
   const [markdownContent, setMarkdownContent] = useState("");
   const [htmlContent, setHtmlContent] = useState("");
@@ -33,9 +32,7 @@ function ReadNotePageContent() {
   useEffect(() => {
     if (!slug) return;
     const saved = localStorage.getItem(`layout-${slug}`);
-    if (saved === "document" || saved === "one-col" || saved === "two-col-alt") {
-      setLayout(saved);
-    }
+    if (saved === "document" || saved === "one-col" || saved === "two-col-alt") setLayout(saved);
   }, [slug, setLayout]);
 
   useEffect(() => {
@@ -74,47 +71,78 @@ function ReadNotePageContent() {
   const tags = note.tags || [];
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <div className="p-4 md:p-6 w-full">
-        {/* Desktop Toolbar */}
-        <div className="hidden md:flex justify-between items-center mb-6">
-          <div className="flex gap-2">
-            <button onClick={() => setViewMode("markdown")} className={`px-4 py-2 rounded-full text-sm font-medium ${viewMode === "markdown" ? "bg-indigo-600 text-white" : "bg-white text-gray-700 border"}`}>Markdown</button>
-            <button onClick={() => setViewMode("iframe")} disabled={!htmlContent} className={`px-4 py-2 rounded-full text-sm font-medium ${viewMode === "iframe" ? "bg-indigo-600 text-white" : "bg-white text-gray-700 border"} ${!htmlContent ? "opacity-50" : ""}`}>Theme View</button>
-          </div>
-          <div className="flex gap-2">
-            <AIThemeButton onToggle={() => setAiPanelOpen(!aiPanelOpen)} />
-            <ThemeSwitcher />
-            <LayoutSwitcher layout={layout} setLayout={saveLayout} disabled={viewMode === "iframe"} />
+    <div className="w-full min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto p-6">
+        {/* Header Tools Bar */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-3 mb-6">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            {/* Left: View Toggle */}
+            <div className="flex items-center gap-1 bg-gray-100 rounded-xl p-1">
+              <button
+                onClick={() => setViewMode("markdown")}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  viewMode === "markdown"
+                    ? "bg-white text-indigo-600 shadow-sm"
+                    : "text-gray-600 hover:text-indigo-500"
+                }`}
+              >
+                <Eye size={16} />
+                <span>Read</span>
+              </button>
+              <button
+                onClick={() => setViewMode("iframe")}
+                disabled={!htmlContent}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  viewMode === "iframe"
+                    ? "bg-white text-indigo-600 shadow-sm"
+                    : "text-gray-600 hover:text-indigo-500"
+                } ${!htmlContent ? "opacity-50 cursor-not-allowed" : ""}`}
+                title={!htmlContent ? "Generate AI theme first" : ""}
+              >
+                <Sparkles size={16} />
+                <span>AI Theme</span>
+              </button>
+            </div>
+
+            {/* Right: Tools */}
+            <div className="flex items-center gap-3 flex-wrap">
+              <div className="h-6 w-px bg-gray-200 hidden sm:block" />
+              <AIThemeButton onToggle={() => setAiPanelOpen(!aiPanelOpen)} />
+              <div className="h-6 w-px bg-gray-200 hidden sm:block" />
+              <ThemeSwitcher />
+              <div className="h-6 w-px bg-gray-200 hidden sm:block" />
+              <LayoutSwitcher layout={layout} setLayout={saveLayout} disabled={viewMode === "iframe"} />
+            </div>
           </div>
         </div>
 
-        {/* Mobile Toolbar */}
-        <div className="md:hidden flex justify-between items-center mb-4">
-          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 rounded-lg bg-white shadow-sm border">Menu</button>
-        </div>
-
-        {mobileMenuOpen && (
-          <div className="md:hidden flex flex-col gap-2 bg-white rounded-xl shadow-lg p-3 mb-4">
-            <AIThemeButton onToggle={() => setAiPanelOpen(!aiPanelOpen)} />
-            <ThemeSwitcher />
-            <LayoutSwitcher layout={layout} setLayout={saveLayout} disabled={viewMode === "iframe"} />
-          </div>
-        )}
-
-        {/* Content */}
-        <div className="bg-white/80 rounded-2xl border p-6 w-full">
-          <div className="mb-4">
-            <h1 className="text-2xl font-bold">{note.title || slug}</h1>
-            <div className="text-sm text-gray-500 mt-1">{note.date} · {note.status}</div>
-            {tags.length > 0 && <div className="flex gap-2 mt-2">{tags.map(tag => <span key={tag} className="bg-gray-100 px-2 py-1 rounded-full text-xs">#{tag}</span>)}</div>}
+        {/* Content Area */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <div className="p-6 border-b border-gray-100">
+            <h1 className="text-3xl font-bold text-gray-900">{note.title || slug}</h1>
+            <div className="flex items-center gap-3 mt-2 text-sm text-gray-500">
+              <span>{note.date}</span>
+              <span className="w-1 h-1 rounded-full bg-gray-300" />
+              <span className="capitalize">{note.status}</span>
+            </div>
+            {tags.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-3">
+                {tags.map(tag => (
+                  <span key={tag} className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-md">#{tag}</span>
+                ))}
+              </div>
+            )}
           </div>
 
-          {viewMode === "iframe" && htmlContent ? (
-            <iframe srcDoc={htmlContent} className="w-full h-[600px] border-0" sandbox="allow-same-origin allow-scripts" />
-          ) : (
-            <ReactMarkdown>{markdownContent}</ReactMarkdown>
-          )}
+          <div className="p-6">
+            {viewMode === "iframe" && htmlContent ? (
+              <iframe srcDoc={htmlContent} className="w-full min-h-[600px] border-0 rounded-lg" sandbox="allow-same-origin allow-scripts" />
+            ) : (
+              <div className="prose prose-slate max-w-none">
+                <ReactMarkdown>{markdownContent}</ReactMarkdown>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
