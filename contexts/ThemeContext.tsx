@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-export type Theme = "next" | "gemini";
+export type Theme = "normal" | "next" | "gemini" | "system";
 export type LayoutMode = "document" | "one-col" | "two-col-alt";
 
 interface ThemeContextType {
@@ -15,12 +15,12 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("next");
+  const [theme, setTheme] = useState<Theme>("normal");
   const [layout, setLayout] = useState<LayoutMode>("document");
 
   useEffect(() => {
     const stored = localStorage.getItem("theme") as Theme;
-    if (stored === "next" || stored === "gemini") {
+    if (stored === "normal" || stored === "next" || stored === "gemini" || stored === "system") {
       setTheme(stored);
     }
     const storedLayout = localStorage.getItem("layout") as LayoutMode;
