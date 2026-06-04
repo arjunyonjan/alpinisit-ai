@@ -4,11 +4,11 @@ import { notFound, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import ReactMarkdown from "react-markdown";
-import TwoColumnLayout from "@/components/TwoColumnLayout";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import LayoutSwitcher from "@/components/LayoutSwitcher";
 import AIThemeButton from "@/components/AIThemeButton";
-import { useTheme } from "@/contexts/ThemeContext";
+import AIPreviewPanel from "@/components/AIPreviewPanel";
+import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 
 interface NoteData {
   title: string;
@@ -18,15 +18,18 @@ interface NoteData {
   content: string;
 }
 
-export default function ReadNotePage() {
+function ReadNotePageContent() {
   const searchParams = useSearchParams();
   const slug = searchParams.get("slug");
   const { layout, setLayout } = useTheme();
   const [note, setNote] = useState<NoteData | null>(null);
   const [loading, setLoading] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [aiPanelOpen, setAiPanelOpen] = useState(false);
+  const [markdownContent, setMarkdownContent] = useState("");
+  const [htmlContent, setHtmlContent] = useState("");
+  const [viewMode, setViewMode] = useState<"markdown" | "iframe">("markdown");
 
-  // Load saved layout for this note
   useEffect(() => {
     if (!slug) return;
     const saved = localStorage.getItem(`layout-${slug}`);
@@ -35,12 +38,15 @@ export default function ReadNotePage() {
     }
   }, [slug, setLayout]);
 
-  // Save layout when changed
+  useEffect(() => {
+    if (!slug) return;
+    const savedHtml = localStorage.getItem(`ai-html-${slug}`);
+    if (savedHtml) setHtmlContent(savedHtml);
+  }, [slug]);
+
   const saveLayout = (newLayout: string) => {
     setLayout(newLayout as any);
-    if (slug) {
-      localStorage.setItem(`layout-${slug}`, newLayout);
-    }
+    if (slug) localStorage.setItem(`layout-${slug}`, newLayout);
   };
 
   useEffect(() => {
@@ -49,80 +55,78 @@ export default function ReadNotePage() {
       .then(res => res.json())
       .then(data => {
         setNote(data);
+        setMarkdownContent(data.content);
         setLoading(false);
       })
       .catch(() => setLoading(false));
   }, [slug]);
 
+  const handleApplyHtml = (newHtml: string) => {
+    setHtmlContent(newHtml);
+    localStorage.setItem(`ai-html-${slug}`, newHtml);
+    setViewMode("iframe");
+  };
+
   if (!slug) notFound();
-  if (loading) return <div className="p-10 md:p-12">Loading...</div>;
+  if (loading) return <div className="p-8">Loading...</div>;
   if (!note) notFound();
 
   const tags = note.tags || [];
-  const layoutClass = layout === "one-col" 
-    ? "max-w-4xl mx-auto"
-    : layout === "two-col-alt"
-    ? "w-full"
-    : "max-w-3xl mx-auto";
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 layout-${layout}`}>
-      <div className="p-10 md:p-12 md:p-12">
+    <div className="w-full min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <div className="p-4 md:p-6 w-full">
         {/* Desktop Toolbar */}
-        <div className="hidden md:flex justify-end gap-4 mb-8 flex-wrap">
-          <div className="text-xs text-slate-400 self-center mr-auto bg-slate-100 px-2 py-1 rounded-full">
-            📐 {layout === "document" ? "Document" : layout === "one-col" ? "1 Column" : "2 Column Alternate"}
+        <div className="hidden md:flex justify-between items-center mb-6">
+          <div className="flex gap-2">
+            <button onClick={() => setViewMode("markdown")} className={`px-4 py-2 rounded-full text-sm font-medium ${viewMode === "markdown" ? "bg-indigo-600 text-white" : "bg-white text-gray-700 border"}`}>Markdown</button>
+            <button onClick={() => setViewMode("iframe")} disabled={!htmlContent} className={`px-4 py-2 rounded-full text-sm font-medium ${viewMode === "iframe" ? "bg-indigo-600 text-white" : "bg-white text-gray-700 border"} ${!htmlContent ? "opacity-50" : ""}`}>Theme View</button>
           </div>
-          <AIThemeButton />
-          <div className="theme-selector"><ThemeSwitcher /></div>
-          <LayoutSwitcher layout={layout} setLayout={saveLayout} />
+          <div className="flex gap-2">
+            <AIThemeButton onToggle={() => setAiPanelOpen(!aiPanelOpen)} />
+            <ThemeSwitcher />
+            <LayoutSwitcher layout={layout} setLayout={saveLayout} disabled={viewMode === "iframe"} />
+          </div>
         </div>
 
         {/* Mobile Toolbar */}
-        <div className="md:hidden flex justify-between items-center mb-8">
-          <div className="text-xs text-slate-400 bg-slate-100 px-2 py-1 rounded-full">
-            📐 {layout === "document" ? "Document" : layout === "one-col" ? "1 Column" : "2 Column Alternate"}
-          </div>
-          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 rounded-lg bg-white shadow-sm border border-slate-200">
-            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+        <div className="md:hidden flex justify-between items-center mb-4">
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 rounded-lg bg-white shadow-sm border">Menu</button>
         </div>
 
-        {/* Mobile Menu Dropdown */}
         {mobileMenuOpen && (
-          <div className="md:hidden flex flex-col gap-4 bg-white rounded-xl shadow-lg p-3 mb-8 border border-slate-200">
-            <AIThemeButton />
-            <div className="theme-selector"><ThemeSwitcher /></div>
-            <LayoutSwitcher layout={layout} setLayout={saveLayout} />
+          <div className="md:hidden flex flex-col gap-2 bg-white rounded-xl shadow-lg p-3 mb-4">
+            <AIThemeButton onToggle={() => setAiPanelOpen(!aiPanelOpen)} />
+            <ThemeSwitcher />
+            <LayoutSwitcher layout={layout} setLayout={saveLayout} disabled={viewMode === "iframe"} />
           </div>
         )}
 
         {/* Content */}
-        <div className={layoutClass}>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-10 md:p-12 border border-slate-200 shadow-sm">
-            <div className="mb-8">
-              <h1 className="text-3xl font-bold text-slate-800">{note.title || slug}</h1>
-              <div className="text-sm text-slate-500 mt-3">{note.date} · {note.status}</div>
-              {tags.length > 0 && (
-                <div className="flex flex-wrap gap-4 mt-3">
-                  {tags.map((tag: string) => (
-                    <span key={tag} className="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-full">
-                      #{tag.trim()}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-            {layout === "two-col-alt" ? (
-              <TwoColumnLayout content={note.content} />
-            ) : (
-              <div className="prose prose-slate max-w-none prose-headings:mt-8 prose-headings:mb-4 prose-p:mb-4 prose-ul:my-4 prose-li:my-2">
-                <ReactMarkdown>{note.content}</ReactMarkdown>
-              </div>
-            )}
+        <div className="bg-white/80 rounded-2xl border p-6 w-full">
+          <div className="mb-4">
+            <h1 className="text-2xl font-bold">{note.title || slug}</h1>
+            <div className="text-sm text-gray-500 mt-1">{note.date} · {note.status}</div>
+            {tags.length > 0 && <div className="flex gap-2 mt-2">{tags.map(tag => <span key={tag} className="bg-gray-100 px-2 py-1 rounded-full text-xs">#{tag}</span>)}</div>}
           </div>
+
+          {viewMode === "iframe" && htmlContent ? (
+            <iframe srcDoc={htmlContent} className="w-full h-[600px] border-0" sandbox="allow-same-origin allow-scripts" />
+          ) : (
+            <ReactMarkdown>{markdownContent}</ReactMarkdown>
+          )}
         </div>
       </div>
+
+      <AIPreviewPanel isOpen={aiPanelOpen} onClose={() => setAiPanelOpen(false)} originalContent={markdownContent} onApply={handleApplyHtml} />
     </div>
+  );
+}
+
+export default function ReadNotePage() {
+  return (
+    <ThemeProvider>
+      <ReadNotePageContent />
+    </ThemeProvider>
   );
 }
