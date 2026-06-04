@@ -1,15 +1,16 @@
 "use client"
 
-import { ThemeProvider } from "@/contexts/ThemeContext"
 import Sidebar from "@/components/sidebar/index"
 import { MobileMenuButton } from "@/components/sidebar/MobileMenu"
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   return (
-    <ThemeProvider>
+    <div className="flex">
       <Sidebar />
-      <MobileMenuButton onClick={() => {}} />
-      <div className="lg:ml-72">{children}</div>
-    </ThemeProvider>
+      <div className="flex-1 lg:ml-72">
+        <MobileMenuButton onClick={() => {}} />
+        {children}
+      </div>
+    </div>
   )
 }
