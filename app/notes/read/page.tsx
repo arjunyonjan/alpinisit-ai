@@ -83,7 +83,7 @@ function ReadNotePageContent() {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-1 bg-gray-100 rounded-xl p-1">
               <button onClick={() => setViewMode("markdown")} className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${viewMode === "markdown" ? "bg-white text-indigo-600 shadow-sm" : "text-gray-600 hover:text-indigo-500"}`}><Eye size={16} /><span>Read</span></button>
-              <button onClick={() => setViewMode("iframe")} disabled={!htmlContent} className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${viewMode === "iframe" ? "bg-white text-indigo-600 shadow-sm" : "text-gray-600 hover:text-indigo-500"} ${!htmlContent ? "opacity-50 cursor-not-allowed" : ""}`} title={!htmlContent ? "Generate theme first" : ""}><LayoutTemplate size={16} /><span>Theme View</span></button>
+              <button onClick={() => setViewMode("iframe")}  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${viewMode === "iframe" ? "bg-white text-indigo-600 shadow-sm" : "text-gray-600 hover:text-indigo-500"} `} title={!htmlContent ? "No theme generated yet. Click AI Theme button to create one." : ""}><LayoutTemplate size={16} /><span>Theme View</span></button>
             </div>
             <div className="flex items-center gap-3 flex-wrap">
               <AIThemeButton onToggle={() => setAiPanelOpen(!aiPanelOpen)} />
@@ -110,11 +110,7 @@ function ReadNotePageContent() {
             )}
           </div>
           <div className="p-6">
-            {viewMode === "iframe" && htmlContent ? (
-              <iframe srcDoc={htmlContent} className="w-full min-h-[600px] border-0 rounded-lg" sandbox="allow-same-origin allow-scripts" />
-            ) : (
-              <div className="prose prose-slate max-w-none"><ReactMarkdown>{markdownContent}</ReactMarkdown></div>
-            )}
+            {viewMode === "iframe" ? (htmlContent ? (<iframe srcDoc={htmlContent} className="w-full min-h-[600px] border-0 rounded-lg" sandbox="allow-same-origin allow-scripts" />) : (<div className="flex flex-col items-center justify-center py-16 text-center"><div className="text-6xl mb-4">✨</div><h3 className="text-xl font-semibold text-gray-700 mb-2">No Theme Generated</h3><p className="text-gray-500">Click the <strong>AI Theme</strong> button to generate a beautiful HTML version.</p></div>)) : (<div className="prose prose-slate max-w-none"><ReactMarkdown>{markdownContent}</ReactMarkdown></div>)}
           </div>
         </div>
       </div>
