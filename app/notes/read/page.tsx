@@ -78,7 +78,7 @@ function ReadNotePageContent() {
 
   return (
     <div className="w-full min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto p-6">
+      <div className="w-full p-0">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-3 mb-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-1 bg-gray-100 rounded-xl p-1">
@@ -95,8 +95,8 @@ function ReadNotePageContent() {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-          <div className="p-6 border-b border-gray-100">
+        <div className="w-full min-h-screen bg-white">
+          <div className="p-0 border-b border-gray-100">
             <h1 className="text-3xl font-bold text-gray-900">{note.title || slug}</h1>
             <div className="flex items-center gap-3 mt-2 text-sm text-gray-500">
               <span>{note.date}</span>
@@ -109,8 +109,8 @@ function ReadNotePageContent() {
               </div>
             )}
           </div>
-          <div className="p-6">
-            {viewMode === "iframe" ? (htmlContent ? (<iframe srcDoc={htmlContent} className="w-full min-h-[600px] border-0 rounded-lg" sandbox="allow-same-origin allow-scripts" />) : (<div className="flex flex-col items-center justify-center py-16 text-center"><div className="text-6xl mb-4">✨</div><h3 className="text-xl font-semibold text-gray-700 mb-2">No Theme Generated</h3><p className="text-gray-500">Click the <strong>AI Theme</strong> button to generate a beautiful HTML version.</p></div>)) : (<div className="prose prose-slate max-w-none"><ReactMarkdown>{markdownContent}</ReactMarkdown></div>)}
+          <div className="p-0">
+            {viewMode === "iframe" ? (htmlContent ? (<iframe srcDoc={htmlContent} className="w-full min-h-screen border-0 rounded-lg" sandbox="allow-same-origin allow-scripts" />) : (<div className="flex flex-col items-center justify-center py-16 text-center"><div className="text-6xl mb-4">✨</div><h3 className="text-xl font-semibold text-gray-700 mb-2">No Theme Generated</h3><p className="text-gray-500">Click the <strong>AI Theme</strong> button to generate a beautiful HTML version.</p></div>)) : (<div className="prose prose-slate max-w-none"><ReactMarkdown>{markdownContent}</ReactMarkdown></div>)}
           </div>
         </div>
       </div>
