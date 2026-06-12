@@ -90,8 +90,7 @@ export default function ClientLayout({
 
       {/* Content area - with proper width calculation */}
       <div
-        key={contentKey}
-        className={`${marginClass} transition-all duration-300 w-[calc(100%-0px)] lg:w-auto overflow-x-hidden`}
+        className={`${marginClass} transition-all duration-300 w-full lg:w-auto overflow-x-hidden`}
       >
         <div className="max-w-full overflow-x-hidden">{children}</div>
       </div>
