@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
+import fs from 'fs';
+import path from 'path';
 
 const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY;
 const DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions";
+const THEMES_CACHE_DIR = path.join(process.cwd(), 'public', 'themes-cache');
+
+if (!fs.existsSync(THEMES_CACHE_DIR)) {
+  fs.mkdirSync(THEMES_CACHE_DIR, { recursive: true });
+}
 
 type StyleType = "fun" | "poetic" | "professional";
 
-// Smart token limit management
 const TOKEN_LIMITS = {
   SAFE_MAX_CHARS: 12000,      
   AGGRESSIVE_MAX_CHARS: 100000,
@@ -18,35 +24,34 @@ const styleGuide: Record<StyleType, string> = {
   professional: "Keep clean, formal, structured. Use bullet points, clear headings, professional terminology. No emojis."
 };
 
-// Helper to intelligently truncate content while preserving structure
 function smartTruncate(content: string, maxLength: number): { text: string; truncated: boolean } {
   if (content.length <= maxLength) {
     return { text: content, truncated: false };
   }
-
-  // Try to truncate at paragraph or heading boundaries
   const boundaries = ['\n## ', '\n### ', '\n\n', '. ', '! ', '? ', '\n'];
-  
   for (const boundary of boundaries) {
     const truncatedIndex = content.lastIndexOf(boundary, maxLength);
-    if (truncatedIndex > maxLength * 0.7) { // Keep at least 70% of content
+    if (truncatedIndex > maxLength * 0.7) {
       return {
         text: content.substring(0, truncatedIndex) + '\n\n...[Content truncated due to length]...',
         truncated: true
       };
     }
   }
-  
-  // Fallback: hard truncate
   return {
     text: content.substring(0, maxLength) + '\n\n...[Content truncated due to length]...',
     truncated: true
   };
 }
 
+function getCacheKey(slug: string, style: string): string {
+  const safeSlug = slug.replace(/[^a-z0-9-]/gi, '_');
+  return `${safeSlug}_${style}.html`;
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const { content, style } = await req.json();
+    const { content, style, slug } = await req.json();
     
     if (!content) {
       return NextResponse.json({ error: 'Content required' }, { status: 400 });
@@ -57,11 +62,7 @@ export async function POST(req: NextRequest) {
     }
 
     const styleText = styleGuide[style as StyleType] || styleGuide.professional;
-    
-    // Smart truncation based on content length
     const { text: processedContent, truncated } = smartTruncate(content, TOKEN_LIMITS.AGGRESSIVE_MAX_CHARS);
-    
-    // Add warning header if truncated
     const warningHeader = truncated 
       ? "⚠️ NOTE: Content was truncated due to length. Focus on enhancing the visible portion.\n\n"
       : "";
@@ -76,7 +77,6 @@ RULES:
 - Preserve ALL original information from the provided content
 - Add appropriate spacing and visual hierarchy
 - Keep response concise but complete
-- If content was truncated, focus on enhancing what's shown
 
 CONTENT:
 ${processedContent}
@@ -96,7 +96,7 @@ Return ONLY the HTML div.`;
           { role: "user", content: prompt }
         ],
         temperature: 0.7,
-        max_tokens: 4000  // Keep response size manageable
+        max_tokens: 4000
       })
     });
 
@@ -106,13 +106,18 @@ Return ONLY the HTML div.`;
 
     const data = await response.json();
     let html = data.choices[0].message.content;
-    
-    // Clean up markdown code blocks
     html = html.replace(/^```html?\s*/i, '').replace(/\s*```$/, '');
     
-    // Add truncated metadata if needed
     if (truncated) {
       html = `<!-- ⚠️ AI Theme generated from truncated content (${content.length} → ${processedContent.length} chars) -->\n${html}`;
+    }
+    
+    // Write directly to cache if slug is provided
+    if (slug) {
+      const cacheKey = getCacheKey(slug, style || 'fun');
+      const cachePath = path.join(THEMES_CACHE_DIR, cacheKey);
+      fs.writeFileSync(cachePath, html, 'utf8');
+      console.log(`✅ Theme cached: ${cachePath}`);
     }
     
     return NextResponse.json({ html, truncated });

@@ -8,6 +8,11 @@ import {
 export const sidebarLinks = [
   { name: "Home", href: "/", icon: Home },
   { 
+    name: "Week 3 — Credit Default ML Pipelines", 
+    href: "/week-3-credit-default", 
+    icon: BarChart,
+  },
+  { 
     name: "📝 Notes", 
     href: "/notes", 
     icon: BookOpen,
@@ -16,14 +21,9 @@ export const sidebarLinks = [
   { name: "Deep Learning", href: "/deep-learning/weight-bias-activation", icon: Brain },
   { name: "Chatbot Structure", href: "/llmchat-project-structure", icon: FolderTree },
   { name: "Ollama Cloud", href: "/ollama-cloud", icon: Cloud },
-  { 
-    name: "Week 1 — AI Systems", 
-    href: "/week-one-ai-systems-setup", 
-    icon: Layers3,
-    children: [
-      { name: "T1 — System Architecture", href: "/week-one-t1-system-architecture-project-scaffold", icon: Cpu }
-    ]
-  },
+  // TODO: Update with actual Week topics when defined (e.g. NLP/Transformers)
+
+  // TODO: Update with actual Week 2 topics when defined (e.g. NLP/Transformers)
   { 
     name: "LLM Masterclass", 
     href: "/llm-architecture-masterclass", 

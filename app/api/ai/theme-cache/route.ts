@@ -6,6 +6,7 @@ const THEMES_CACHE_DIR = path.join(process.cwd(), 'public', 'themes-cache');
 
 if (!fs.existsSync(THEMES_CACHE_DIR)) {
   fs.mkdirSync(THEMES_CACHE_DIR, { recursive: true });
+  console.log('Created cache directory:', THEMES_CACHE_DIR);
 }
 
 function getCacheKey(slug: string, style: string): string {
@@ -25,6 +26,8 @@ export async function GET(req: NextRequest) {
   const cacheKey = getCacheKey(slug, style);
   const cachePath = path.join(THEMES_CACHE_DIR, cacheKey);
   
+  console.log('GET cache:', cachePath, 'exists:', fs.existsSync(cachePath));
+  
   if (fs.existsSync(cachePath)) {
     const html = fs.readFileSync(cachePath, 'utf8');
     return NextResponse.json({ html, cached: true });
@@ -32,25 +35,41 @@ export async function GET(req: NextRequest) {
   
   return NextResponse.json({ cached: false });
 }
+
 export async function POST(req: NextRequest) {
   try {
-    const { slug, content, style } = await req.json();
+    const body = await req.json();
+    console.log('POST received body keys:', Object.keys(body));
+    console.log('POST slug:', body.slug);
+    console.log('POST style:', body.style);
+    console.log('POST html length:', body.html?.length || 0);
     
-    if (!slug || !content) {
-      return NextResponse.json({ error: 'Slug and content required' }, { status: 400 });
+    const { slug, style, html } = body;
+    
+    if (!slug) {
+      console.error('Missing slug');
+      return NextResponse.json({ error: 'Slug required' }, { status: 400 });
+    }
+    
+    if (!html) {
+      console.error('Missing html');
+      return NextResponse.json({ error: 'HTML content required' }, { status: 400 });
     }
     
     const cacheKey = getCacheKey(slug, style || 'fun');
     const cachePath = path.join(THEMES_CACHE_DIR, cacheKey);
     
-    const html = `<div class="p-4">Enhanced: ${content.substring(0, 100)}</div>`;
+    console.log('Writing to:', cachePath);
     fs.writeFileSync(cachePath, html, 'utf8');
+    console.log('File written successfully, size:', html.length);
     
-    return NextResponse.json({ html, cached: false });
+    return NextResponse.json({ html, cached: false, path: cacheKey });
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to cache theme' }, { status: 500 });
+    console.error('Cache write error:', error);
+    return NextResponse.json({ error: 'Failed to cache theme: ' + String(error) }, { status: 500 });
   }
 }
+
 export async function DELETE(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -66,6 +85,7 @@ export async function DELETE(req: NextRequest) {
       const cachePath = path.join(THEMES_CACHE_DIR, cacheKey);
       if (fs.existsSync(cachePath)) {
         fs.unlinkSync(cachePath);
+        console.log('Deleted:', cachePath);
       }
     } else {
       const prefix = slug.replace(/[^a-z0-9-]/gi, '_');
@@ -73,12 +93,14 @@ export async function DELETE(req: NextRequest) {
       files.forEach(file => {
         if (file.startsWith(prefix)) {
           fs.unlinkSync(path.join(THEMES_CACHE_DIR, file));
+          console.log('Deleted:', file);
         }
       });
     }
     
     return NextResponse.json({ success: true });
   } catch (error) {
+    console.error('Delete error:', error);
     return NextResponse.json({ error: 'Failed to delete cache' }, { status: 500 });
   }
 }

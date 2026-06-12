@@ -7,12 +7,14 @@ export default function AIPreviewPanel({
   isOpen, 
   onClose, 
   originalContent, 
+  slug,
   onApply 
 }: { 
   isOpen: boolean; 
   onClose: () => void; 
-  originalContent: string; 
-  onApply: (html: string, style: string) => void;  // Add style parameter
+  originalContent: string;
+  slug?: string;
+  onApply: (html: string, style: string) => void;
 }) {
   const [html, setHtml] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,18 +27,22 @@ export default function AIPreviewPanel({
     fetch("/api/ai/enhance", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content: originalContent, style }),
+      body: JSON.stringify({ content: originalContent, style, slug }),
     })
       .then(res => res.json())
       .then(data => {
-        setHtml(data.html || `<div class="p-4">${originalContent}</div>`);
+        const generatedHtml = data.html || `<div class="p-4">${originalContent}</div>`;
+        setHtml(generatedHtml);
         setLoading(false);
+        if (data.truncated) {
+          console.warn("Content was truncated for token limits");
+        }
       })
       .catch(() => {
         setHtml(`<div class="p-4">${originalContent}</div>`);
         setLoading(false);
       });
-  }, [isOpen, originalContent, style]);
+  }, [isOpen, originalContent, style, slug]);
 
   if (!isOpen) return null;
 
@@ -74,15 +80,9 @@ export default function AIPreviewPanel({
         <button onClick={() => { navigator.clipboard.writeText(html); setCopied(true); setTimeout(() => setCopied(false), 2000); }} className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-100 transition">
           {copied ? <Check size={16} /> : <Copy size={16} />}{copied ? "Copied!" : "Copy HTML"}
         </button>
-<button 
-  onClick={() => { 
-    onApply(html, style);  // Pass style as second parameter
-    onClose(); 
-  }} 
-  className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition"
->
-  <Sparkles size={16} /> Apply Theme
-</button>
+        <button onClick={() => onApply(html, style)} className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition">
+          <Sparkles size={16} /> Apply Theme
+        </button>
       </div>
     </div>
   );

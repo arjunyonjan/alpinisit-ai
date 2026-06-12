@@ -1,6 +1,4 @@
 "use client";
-import React from 'react';
-
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -47,28 +45,28 @@ export default function NoteForm({ slug }: NoteFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-3xl mx-auto p-6 space-y-4">
+    <form onSubmit={handleSubmit} className="max-w-5xl mx-auto p-8 space-y-6">
       <h1 className="text-2xl font-bold">{slug ? 'Edit Note' : 'Create Note'}</h1>
       <div>
         <label className="block text-sm font-medium">Title</label>
-        <input type="text" value={title} onChange={e => setTitle(e.target.value)} required className="w-full border rounded-lg p-2" />
+        <input type="text" value={title} onChange={e => setTitle(e.target.value)} required className="w-full border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-transparent" />
       </div>
       <div>
         <label className="block text-sm font-medium">Tags (comma separated)</label>
-        <input type="text" value={tags} onChange={e => setTags(e.target.value)} placeholder="ai, react, nextjs" className="w-full border rounded-lg p-2" />
+        <input type="text" value={tags} onChange={e => setTags(e.target.value)} placeholder="ai, react, nextjs" className="w-full border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-transparent" />
       </div>
       <div>
         <label className="block text-sm font-medium">Status</label>
-        <select value={status} onChange={e => setStatus(e.target.value)} className="w-full border rounded-lg p-2">
+        <select value={status} onChange={e => setStatus(e.target.value)} className="w-full border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
           <option value="draft">Draft</option>
           <option value="published">Published</option>
         </select>
       </div>
       <div>
         <label className="block text-sm font-medium">Content (Markdown)</label>
-        <textarea rows={12} value={content} onChange={e => setContent(e.target.value)} required className="w-full border rounded-lg p-2 font-mono text-sm" />
+        <textarea rows={12} value={content} onChange={e => setContent(e.target.value)} required className="w-full border border-gray-200 rounded-lg p-4 font-mono text-sm focus:ring-2 focus:ring-indigo-500" />
       </div>
-      <button type="submit" disabled={loading} className="bg-blue-600 text-white px-6 py-2 rounded-xl disabled:opacity-50">
+      <button type="submit" disabled={loading} className="bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-indigo-700 transition disabled:opacity-50">
         {loading ? 'Saving...' : slug ? 'Update' : 'Create'}
       </button>
     </form>
